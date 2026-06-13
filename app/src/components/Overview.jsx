@@ -490,6 +490,7 @@ export default function Overview() {
                 세로
               </button>
             </div>
+            <Link to={`/${sessionId}/content`} className={styles.back}>콘텐츠 ☑</Link>
             <Link to={`/${sessionId}/1`} className={styles.present}>발표 모드 →</Link>
           </Panel>
 

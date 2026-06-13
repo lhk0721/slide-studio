@@ -19,6 +19,7 @@ export default function Home() {
             <div className={styles.actions}>
               <Link to={`/${s.id}/1`} className={styles.actionPrimary}>발표 →</Link>
               <Link to={`/${s.id}/overview`} className={styles.action}>개요 ▦</Link>
+              <Link to={`/${s.id}/content`} className={styles.action}>콘텐츠 ☑</Link>
             </div>
           </li>
         ))}

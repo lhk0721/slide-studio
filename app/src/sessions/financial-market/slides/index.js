@@ -4,12 +4,18 @@ import Slide01 from './Slide01'
 //  SLIDE META — 발표 "같은 충격, 다른 실패" (국제시장과 금융기관).
 //  Notion 기획 트래커(발표 슬라이드 DB)에서 이식한 내러티브 메타.
 //  스키마는 inbody-u300/slides/index.js 주석 참고
-//  (group/role/message/evidence/visual/notes).
+//  (group/role/message/evidence/visual/body/notes/assets).
 //
-//  evidence 항목은 문자열 또는 { stat, source?, url?, verify? } 객체.
+//  evidence 항목은 문자열 또는 { stat, source?, url?, verify?, grade? } 객체.
 //  객체면 인스펙터 "자세히 보기" 드로어에서 수치·출처(인용)·검증으로 펼쳐진다.
 //  source는 실제 슬라이드에 적을 각주체 인용구로 충실히 쓰고, url이 있으면
 //  드로어의 출처가 클릭 가능한 링크(↗)가 된다.
+//  grade('strong'|'medium'|'weak')는 Phase 3 콘텐츠 워크벤치의 근거 강도(비대칭
+//  전략)이고, verify가 있으면 "미검증/확인 필요"로 집계된다.
+//
+//  assets[]는 Phase 3에서 그 슬라이드에 필요한 시각/데이터 자산 목록:
+//    { kind, desc, source?, license?, status }  (status: 'have'|'need'|'check')
+//  콘텐츠 워크벤치(/:sessionId/content)에서 출처·라이선스·확보 상태로 집계된다.
 //
 //  `component`는 실제로 만든 슬라이드만 연결한다. 아직 안 만든 장은
 //  메타만 채워 두면 리뷰 UI(Overview·Inspector)에는 보이고,
@@ -32,6 +38,10 @@ const slides = [
       '— 코로나라는 동일한 충격, 미국과 한국 피트니스 시장의 엇갈린 결말',
       '국제시장과 금융기관 | 발표자 이현규',
     ],
+    assets: [
+      { kind: 'chart', desc: '펠로톤 주가/시총 폭락 곡선', source: 'MacroTrends (PTON)', license: '데이터 인용 + 자체 작도', status: 'check' },
+      { kind: 'photo', desc: '한국 헬스장 셔터 내림 사진', source: '미정(스톡/직접 촬영)', license: '상업용 라이선스 확인 필요', status: 'need' },
+    ],
     notes: '발표자 이현규 · 국제시장과 금융기관',
   },
   {
@@ -43,6 +53,7 @@ const slides = [
         stat: '글로벌 피트니스 앱 시장: 2018년 약 24억$ → 2026년 약 209억$ 전망(약 9배)',
         source: 'Grand View Research, 「Fitness App Market Size, Share & Trends Analysis Report」 — 글로벌 피트니스 앱 시장 규모·CAGR 전망',
         url: 'https://www.grandviewresearch.com/industry-analysis/fitness-app-market',
+        grade: 'weak',
         verify:
           '209억$ 수치 1차 출처 불일치 — Grand View 2019년 전망은 2026년 약 109억$(CAGR 21.1%). 209억$의 보고서·기준연도 재확정 필요',
       },
@@ -54,6 +65,10 @@ const slides = [
       '그러나 같은 출발선에서 미국과 한국의 결말은 정반대였다.',
       '미국 — 거대 자본의 거품과 붕괴 / 한국 — 시장의 파편화와 폐업.',
       '왜 같은 충격이 서로 다른 실패로 이어졌는가?',
+    ],
+    assets: [
+      { kind: 'diagram', desc: '공통 충격 → 시장 분기 다이어그램', source: '자체 작도', status: 'have' },
+      { kind: 'data', desc: '글로벌 피트니스 앱 시장 규모 수치(big-number)', source: 'Grand View Research', license: '수치 인용', status: 'check' },
     ],
   },
   {
@@ -72,6 +87,9 @@ const slides = [
       '② 정보 비대칭·레몬시장: 품질 하향과 신뢰 붕괴(Akerlof, 1970).',
       '미국은 자본시장(VC·IPO)이, 한국은 소상공인·콘텐츠가 시장을 주도했다.',
     ],
+    assets: [
+      { kind: 'diagram', desc: '미국 vs 한국 2×2 아이콘 대비', source: '자체 작도', license: '아이콘 라이선스 확인', status: 'check' },
+    ],
     notes: '출처: Akerlof(1970) The Market for Lemons',
   },
   {
@@ -83,11 +101,13 @@ const slides = [
         stat: '펠로톤 시가총액 2021년 1월 정점 약 493억$',
         source: 'MacroTrends, 「Peloton Interactive Market Cap 2018–2025 (PTON)」 — 월별 시가총액 추이',
         url: 'https://www.macrotrends.net/stocks/charts/PTON/peloton-interactive/market-cap',
+        grade: 'strong',
       },
       {
         stat: 'PSR(주가매출비율): IPO 시 7.9배 → 정점 16.7배',
         source: 'stockanalysis.com, 「Peloton Interactive (PTON) — Statistics」 — 시가총액 ÷ 매출로 산출',
         url: 'https://stockanalysis.com/stocks/pton/',
+        grade: 'medium',
         verify: 'PSR 16.7배 산식·기준 시점(분기 매출 연환산 여부) 명확화',
       },
     ],
@@ -99,6 +119,9 @@ const slides = [
       'PSR(주가매출비율) IPO 7.9배 → 정점 16.7배 — 가격이 매출보다 빠르게 팽창.',
       '밸류에이션이 펀더멘털에서 멀어지는 전형적 거품 형성.',
     ],
+    assets: [
+      { kind: 'chart', desc: '펠로톤 시총/PSR 추이 곡선 (급등 음영)', source: 'MacroTrends · stockanalysis', license: '데이터 인용 + 자체 작도', status: 'check' },
+    ],
   },
   {
     id: 5, title: '미국 ② — 거품이 꺼지다',
@@ -109,17 +132,20 @@ const slides = [
         stat: '시총 고점 대비 약 95% 증발 → 2026.6 현재 약 22~25억$ (변동)',
         source: 'stockanalysis.com, 「Peloton Interactive (PTON) — Market Cap」 — 실시간 시가총액',
         url: 'https://stockanalysis.com/stocks/pton/market-cap/',
+        grade: 'strong',
         verify: '현재 시총은 변동이 크므로 발표 직전 재확인',
       },
       {
         stat: '매출: FY2020 약 18억$ 이후 감소세',
         source: 'Peloton Interactive, 「Form 10-K (FY2020, 회계연도 2020.6.30)」, SEC EDGAR',
         url: 'https://www.sec.gov/Archives/edgar/data/1639825/000163982520000122/pton-20200630.htm',
+        grade: 'strong',
       },
       {
         stat: '2022년 전사 약 2,800명 감원',
         source: 'Bloomberg, 「Peloton’s Famous Instructors … Escape Layoffs」 (2022.2.8) — 전사 약 2,800명 감원 발표',
         url: 'https://www.bloomberg.com/news/articles/2022-02-08/peloton-instructors-making-up-to-500-000-a-year-escape-cuts',
+        grade: 'strong',
       },
     ],
     visual: '슬라이드 4 곡선의 붕괴 구간 / 고점↔현재 막대 대비(493억 vs 약 24억)',
@@ -128,6 +154,9 @@ const slides = [
       '시가총액은 고점 대비 약 95% 증발 (2026.6 현재 약 22~25억$).',
       '매출도 FY2020 약 18억$ 이후 감소세로 전환.',
       '2022년 전사 약 2,800명 감원 — 전형적 금융 거품 사이클.',
+    ],
+    assets: [
+      { kind: 'chart', desc: '붕괴 구간 곡선 + 고점↔현재 막대 대비', source: 'stockanalysis · SEC 10-K', license: '데이터 인용 + 자체 작도', status: 'check' },
     ],
   },
   {
@@ -139,16 +168,19 @@ const slides = [
         stat: '스타 강사 연 최대 50만$ 보수',
         source: 'Bloomberg, 「Peloton’s Famous Instructors, Who Can Make Upwards of $500,000 a Year, Escape Layoffs」 (2022.2.8)',
         url: 'https://www.bloomberg.com/news/articles/2022-02-08/peloton-instructors-making-up-to-500-000-a-year-escape-cuts',
+        grade: 'strong',
       },
       {
         stat: '대규모 감원에서 강사진(instructor)은 제외',
         source: 'Bloomberg (2022.2.8) — 강사진은 감원 대상에서 보호되었다고 보도',
         url: 'https://www.bloomberg.com/news/articles/2022-02-08/peloton-instructors-making-up-to-500-000-a-year-escape-cuts',
+        grade: 'strong',
       },
       {
         stat: '감원은 본사·물류 등 비(非)강사 직군에 집중',
         source: 'Bloomberg (2022.2.8) 등 감원 보도 종합',
         url: 'https://www.bloomberg.com/news/articles/2022-02-08/peloton-instructors-making-up-to-500-000-a-year-escape-cuts',
+        grade: 'medium',
         verify: '“엔지니어링 집중” 등 직군별 구성은 보도마다 상이 — 감원 직군 구성 재확인',
       },
     ],
@@ -159,6 +191,9 @@ const slides = [
       '대규모 감원에서도 강사진은 감원 대상에서 제외됐다.',
       '이유: 강사는 구독 가치의 원천 — 비용이 아니라 핵심 자산이기 때문.',
       '(한국 사례와의 대비를 위한 복선)',
+    ],
+    assets: [
+      { kind: 'diagram', desc: 'Asset vs Cost 구조도 + 강사 보수 콜아웃', source: '자체 작도 / Bloomberg 인용', status: 'have' },
     ],
     notes: '한국 대비를 위한 복선',
   },
@@ -171,11 +206,13 @@ const slides = [
         stat: '홈트레이닝 상표출원: 약 48% 개인 / 39% 기업(그중 33% 중소기업)',
         source: '특허청 KIPRIS 특허정보검색서비스 — 「홈트」 관련 상표출원 출원인 유형별 집계',
         url: 'https://www.kipris.or.kr/kportal/search/search_trademark.do',
+        grade: 'medium',
         verify: '검색식(키워드·기간)과 출원인 유형 비율 재현·확정',
       },
       {
         stat: '무료 운동 유튜버(김계란·핏블리 등) 부상',
         source: 'YouTube 채널 구독자·조회수 공개 데이터(보강 근거) — 대표 채널 집계',
+        grade: 'weak',
         verify: '대표 채널·구독자 수치와 캡처 시점 명기',
       },
     ],
@@ -187,6 +224,9 @@ const slides = [
       '무료 운동 유튜버(김계란·핏블리 등)로 콘텐츠가 분산.',
       '거품 대신 “파편화”가 일어났다.',
     ],
+    assets: [
+      { kind: 'chart', desc: '상표출원 출원인 유형 도넛 + 분포 대비', source: '특허청 KIPRIS', license: '데이터 인용 + 자체 작도', status: 'check' },
+    ],
   },
   {
     id: 8, title: '한국 ② — 과당경쟁과 오프라인 붕괴',
@@ -197,11 +237,13 @@ const slides = [
         stat: '서울 체력단련장 폐업: 2019년 141개 → 2021년 259개',
         source: '서울 열린데이터광장, 「서울시 체력단련장업 인허가 정보」(OA-16142) — 인허가·폐업일 기준 집계',
         url: 'https://data.seoul.go.kr/dataList/datasetView.do?serviceKind=1&currentPageNo=1&srvType=A&infId=OA-16142',
+        grade: 'strong',
         verify: '폐업 집계 기준(폐업일자 필터)·연도 합계 재계산',
       },
       {
         stat: '선불 멤버십 구조·박리다매·‘먹튀’ 리스크(정성 근거)',
         source: '국내 언론 보도 종합(헬스장 선불 환불·폐업 피해)',
+        grade: 'weak',
         verify: '대표 보도 1~2건의 출처 링크 확정',
       },
     ],
@@ -211,6 +253,9 @@ const slides = [
       '선불 멤버십 구조 + 출혈 경쟁 + “먹튀” 리스크.',
       '서울 체력단련장 폐업: 2019년 141개 → 2021년 259개.',
       '오프라인은 대규모 폐업으로 — 소상공인 시장의 구조적 취약성.',
+    ],
+    assets: [
+      { kind: 'chart', desc: '서울 체력단련장 폐업 추이 막대그래프', source: '서울 열린데이터광장 OA-16142', license: '공공데이터(자유 이용)', status: 'have' },
     ],
   },
   {
@@ -229,6 +274,9 @@ const slides = [
       '미국이 강사를 핵심 자산으로 보호한 것과 정반대의 결과.',
       '(정량은 폐업·이직 등 방증으로 정직하게 보강)',
     ],
+    assets: [
+      { kind: 'diagram', desc: '자산(US) vs 비용(KR) 대비 도식 + 화살표', source: '자체 작도', status: 'have' },
+    ],
     notes: '정량 근거는 폐업/이직 등 주변 지표로 보강(정직하게 제시)',
   },
   {
@@ -246,6 +294,9 @@ const slides = [
       '한국: 소상공인 과당경쟁·폐업 / 트레이너는 비용으로 레몬화.',
       '시장실패의 “형태”와 인적자본의 “운명”이 모두 구조에서 갈렸다.',
     ],
+    assets: [
+      { kind: 'diagram', desc: '전체 분기 다이어그램 풀버전(좌/우 대칭)', source: '자체 작도', status: 'have' },
+    ],
     notes: '앞 슬라이드(4~9) 핵심 수치·근거 압축',
   },
   {
@@ -262,6 +313,9 @@ const slides = [
       '동일 산업도 자본 조달 방식이 다르면 정책 처방도 달라야 한다.',
       '미국형 — 자본시장 규율 / 한국형 — 소상공인 보호·계약 투명성.',
       '인적자본은 “자산으로 인식되는 구조”에서만 보호된다.',
+    ],
+    assets: [
+      { kind: 'image', desc: '3개 시사점 아이콘 카드', source: '자체 작도', license: '아이콘 라이선스 확인', status: 'check' },
     ],
   },
   {
