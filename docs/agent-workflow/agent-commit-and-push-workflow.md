@@ -72,8 +72,9 @@
 - After commit, remove the temporary file if it is no longer needed.
 - To enable the repository pre-commit check, set `git config core.hooksPath .githooks`.
 
-## Windows Shell & UTF-8 (external CLIs, non-ASCII content)
+## Windows Shell, UTF-8 & Notion CLI (`ntn`)
 
+- **Notion access = the `ntn` CLI** (official Notion CLI, Beta), installed as an npm-global bin named **`ntn`** — NOT `notion`/`notion-cli`, so a search for "notion" misses it; **search and invoke as `ntn`**. Auth via `ntn login` (OS keychain) or the `NOTION_API_TOKEN` env var; verify with `ntn whoami`. Each target page/DB must be **shared with the integration** in Notion (page ••• → Connections) or calls return `404 object_not_found`. Read: `ntn pages get <id>` (page) / `ntn datasources resolve|query <id>` (database); write: `ntn pages update <id> < file.md`.
 - Windows PowerShell (5.1) corrupts non-ASCII text (e.g., Korean) when piping it to a native executable (`... | & tool`) or passing it as a multi-line argument: it re-encodes the stream to the console code page and writes mojibake (깨진 `?` 글자) to the target.
 - `.cmd`/batch shims (e.g., npm-installed CLIs like `ntn`) additionally mangle multi-line argument values such as `--content "<multi-line>"`, which can leave the tool waiting on stdin or sending broken text.
 - Rule: to send non-ASCII content to an external CLI, write it to a **UTF-8 (no BOM) file** and feed that file via **Git Bash with raw stdin redirection** — `tool subcommand <id> < content.md` — not via a PowerShell pipe or an inline multi-line argument.
