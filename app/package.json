@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dagrejs/dagre": "^3.0.0",
+    "@xyflow/react": "^12.11.0",
     "html-to-image": "^1.11.13",
     "jszip": "^3.10.1",
     "react": "^18.3.1",
