@@ -296,29 +296,19 @@
   border-left: 3px solid var(--group-color, var(--accent));
 }
 
-/* ③ 시각 계획 — 이미지 자리 */
+/* ③ 시각 계획 — 콘텐츠 구조 실루엣(흰 슬라이드 캔버스) */
 .imgFrame {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   aspect-ratio: 16 / 9;
   border-radius: 0.6rem;
   border: 1.5px dashed var(--border-soft);
-  background:
-    repeating-linear-gradient(45deg, transparent 0 10px, rgba(var(--ink-rgb), .025) 10px 20px),
-    var(--bg2);
-  color: var(--muted);
+  background: #fff;
+  overflow: hidden;
 }
-.imgIcon {
-  width: 30px;
-  height: 30px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.55;
+.wf {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .posChip {
   position: absolute;
@@ -337,6 +327,37 @@
   line-height: 1.45;
   word-break: keep-all;
   margin: 0;
+}
+
+/* ③-2 페이지 내용 — 실제 슬라이드 본문 초안 */
+.bodyList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.bodyItem {
+  position: relative;
+  padding-left: 0.95rem;
+  font-size: var(--fs-body);
+  color: var(--text);
+  line-height: 1.55;
+  word-break: keep-all;
+}
+.bodyItem::before {
+  content: '';
+  position: absolute;
+  left: 0.1rem;
+  top: 0.62em;
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  background: var(--group-color, var(--muted));
+}
+.bodyItem:first-child {
+  font-weight: var(--fw-semibold);
 }
 
 /* ④ 근거·통계 요약 */
@@ -479,3 +500,34 @@
   word-break: keep-all;
 }
 .evVerify .evMetaLabel { color: var(--accent); }
+
+/* 클릭 가능한 출처 인용 — 실제 슬라이드 각주체 인용구 */
+.evCite {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.3rem;
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: var(--accent);
+  text-decoration: none;
+  word-break: keep-all;
+  border-bottom: 1px solid transparent;
+}
+.evCiteText {
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.evCite:hover .evCiteText {
+  border-bottom-color: var(--accent);
+}
+.evExt {
+  flex: 0 0 auto;
+  width: 0.85em;
+  height: 0.85em;
+  margin-top: 0.18em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.8;
+}

@@ -26,9 +26,12 @@ import Slide17 from './Slide17'
 //   role      function in the storyline (one line)
 //   message   the single claim the slide makes (one line)
 //   evidence  supporting points/data (optional). Each item is a
-//             string OR { stat, source?, verify? }; objects expand
+//             string OR { stat, source?, url?, verify? }; objects expand
 //             into 수치·출처·검증 in the inspector "자세히 보기" drawer.
+//             source는 슬라이드 각주체 인용구로, url이 있으면 출처가 링크가 된다.
 //   visual    key visual element note (optional)
+//   body      실제 슬라이드에 들어갈 본문/문구 초안 (선택, string[]).
+//             각 항목이 한 줄/불릿으로 인스펙터 "페이지 내용" 섹션에 표시된다.
 //   notes     speaker note (optional)
 //   next      flow-diagram edges: id[] this slide points to. Omit for
 //             linear order (→ id+1); set only for branches/merges.

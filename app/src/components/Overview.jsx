@@ -67,6 +67,191 @@ function visualPosition(visual) {
   return hits.length ? hits.join('·') : null
 }
 
+// ── 시각 계획 와이어프레임 ──────────────────────────────────────
+//  visual 메모에서 콘텐츠 구조의 "실루엣"을 추론해 저해상도로 그린다.
+//   · 글        → 흰 배경 위 회색 줄
+//   · 인포그래픽 → 무채색 도형(막대/선/도넛/도식/그리드)
+//   · 사진 영역  → 빗금친 네모박스 + 사진 글리프
+const WF = { w: 160, h: 90 } // 16:9 viewBox
+
+// visual 텍스트에서 등장 순서대로 도형 종류를 수집(텍스트는 기본값).
+function scanKinds(t) {
+  const defs = [
+    ['photo', /(증명\s*사진|전경|셔터|사진|로고)/],
+    ['donut', /도넛/],
+    ['bar', /막대/],
+    ['line', /(곡선|꺾은선|추세선)/],
+    ['grid', /(매트릭스|2\s*[×xX]\s*2|아이콘\s*카드|카드|아이콘|2칸)/],
+    ['diagram', /(다이어그램|도식|구조도|분기|플로우|화살표)/],
+  ]
+  const found = []
+  for (const [k, re] of defs) {
+    const m = re.exec(t)
+    if (m) found.push([k, m.index])
+  }
+  found.sort((a, b) => a[1] - b[1])
+  return found.map((x) => x[0])
+}
+
+// 하나의 콘텐츠 도형을 (x,y,w,h) 영역 안에 무채색으로 그린다.
+function WfElement({ kind, x, y, w, h }) {
+  switch (kind) {
+    case 'photo':
+      return (
+        <g>
+          <rect x={x} y={y} width={w} height={h} rx={3} fill="url(#wfHatch)" stroke="#b4bcc2" strokeWidth={1.2} />
+          <g stroke="#8b939b" strokeWidth={1.6} fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx={x + w * 0.32} cy={y + h * 0.34} r={Math.min(w, h) * 0.06} fill="#8b939b" stroke="none" />
+            <path
+              d={`M ${x + w * 0.14} ${y + h * 0.8} L ${x + w * 0.4} ${y + h * 0.48} L ${x + w * 0.56} ${y + h * 0.66} L ${x + w * 0.74} ${y + h * 0.42} L ${x + w * 0.88} ${y + h * 0.8}`}
+            />
+          </g>
+        </g>
+      )
+    case 'bar': {
+      const n = 4
+      const base = y + h - 4
+      const slot = w / n
+      const bw = slot * 0.5
+      const hs = [0.5, 0.82, 0.6, 0.95]
+      return (
+        <g>
+          <line x1={x} y1={base} x2={x + w} y2={base} stroke="#c4ccd2" strokeWidth={1} />
+          {hs.map((f, i) => {
+            const bh = (h - 8) * f
+            return <rect key={i} x={x + slot * i + (slot - bw) / 2} y={base - bh} width={bw} height={bh} rx={1.5} fill="#9aa3ab" />
+          })}
+        </g>
+      )
+    }
+    case 'line': {
+      const vals = [0.74, 0.5, 0.62, 0.32, 0.16]
+      const pts = vals.map((v, i) => `${x + (w * i) / (vals.length - 1)},${y + h * v}`).join(' ')
+      return (
+        <g fill="none">
+          <line x1={x} y1={y + h - 3} x2={x + w} y2={y + h - 3} stroke="#c4ccd2" strokeWidth={1} />
+          <polyline points={pts} stroke="#8b939b" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      )
+    }
+    case 'donut': {
+      const cx = x + w / 2
+      const cy = y + h / 2
+      const r = Math.min(w, h) * 0.32
+      const sw = r * 0.6
+      const circ = 2 * Math.PI * r
+      return (
+        <g fill="none">
+          <circle cx={cx} cy={cy} r={r} stroke="#dde2e6" strokeWidth={sw} />
+          <circle
+            cx={cx}
+            cy={cy}
+            r={r}
+            stroke="#9aa3ab"
+            strokeWidth={sw}
+            strokeDasharray={`${circ * 0.35} ${circ}`}
+            transform={`rotate(-90 ${cx} ${cy})`}
+          />
+        </g>
+      )
+    }
+    case 'grid': {
+      const g = 6
+      const cw = (w - g) / 2
+      const ch = (h - g) / 2
+      const cells = [[0, 0], [1, 0], [0, 1], [1, 1]]
+      return (
+        <g>
+          {cells.map(([cxi, cyi], i) => (
+            <rect
+              key={i}
+              x={x + cxi * (cw + g)}
+              y={y + cyi * (ch + g)}
+              width={cw}
+              height={ch}
+              rx={2}
+              fill="#eef1f3"
+              stroke="#aab2b9"
+              strokeWidth={1}
+            />
+          ))}
+        </g>
+      )
+    }
+    case 'diagram': {
+      const bw = w * 0.32
+      const bh = Math.min(h * 0.5, 26)
+      const by = y + (h - bh) / 2
+      const rx2 = x + w - bw
+      return (
+        <g>
+          <rect x={x} y={by} width={bw} height={bh} rx={3} fill="#eef1f3" stroke="#aab2b9" strokeWidth={1} />
+          <rect x={rx2} y={by} width={bw} height={bh} rx={3} fill="#eef1f3" stroke="#aab2b9" strokeWidth={1} />
+          <g stroke="#9aa3ab" strokeWidth={1.5} fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <line x1={x + bw} y1={by + bh / 2} x2={rx2 - 3} y2={by + bh / 2} />
+            <path d={`M ${rx2 - 6} ${by + bh / 2 - 3} L ${rx2 - 2} ${by + bh / 2} L ${rx2 - 6} ${by + bh / 2 + 3}`} />
+          </g>
+        </g>
+      )
+    }
+    case 'text':
+    default: {
+      const ws = [1, 0.86, 0.62]
+      return (
+        <g>
+          {ws.map((f, i) => (
+            <rect key={i} x={x} y={y + 6 + i * 10} width={w * f} height={4.5} rx={2.25} fill={i === 0 ? '#cfd5da' : '#e0e4e8'} />
+          ))}
+        </g>
+      )
+    }
+  }
+}
+
+// 16:9 캔버스에 제목 줄 + 콘텐츠(1~2열) 실루엣을 그린다.
+function Wireframe({ visual, pos }) {
+  const full = /(배경|전면|풀\s*블리드|풀\s*스크린|full)/i.test(`${pos || ''} ${visual}`)
+  const kinds = scanKinds(visual)
+  const cols = kinds.length ? kinds.slice(0, 2) : ['text']
+  const P = 8
+  const gap = 8
+  const cTop = 30
+  const cBot = WF.h - P
+  const cL = P
+  const cR = WF.w - P
+  return (
+    <svg className={styles.wf} viewBox={`0 0 ${WF.w} ${WF.h}`} role="img" aria-label="슬라이드 콘텐츠 구조 미리보기">
+      <defs>
+        <pattern id="wfHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="6" height="6" fill="#f0f2f4" />
+          <line x1="0" y1="0" x2="0" y2="6" stroke="#c6ced4" strokeWidth="1.3" />
+        </pattern>
+      </defs>
+      <rect x="0" y="0" width={WF.w} height={WF.h} fill="#fff" />
+
+      {full ? (
+        <>
+          <WfElement kind="photo" x={3} y={3} w={WF.w - 6} h={WF.h - 6} />
+          <rect x={P} y={WF.h - 24} width={92} height={6} rx={3} fill="#fff" opacity="0.9" />
+          <rect x={P} y={WF.h - 14} width={56} height={4} rx={2} fill="#fff" opacity="0.75" />
+        </>
+      ) : (
+        <>
+          {/* 제목·본문 = 회색 줄 */}
+          <rect x={P} y={10} width={96} height={6} rx={3} fill="#cfd5da" />
+          <rect x={P} y={20} width={58} height={4} rx={2} fill="#e0e4e8" />
+          {/* 콘텐츠: 1열 채움 또는 2열 분할 */}
+          {cols.map((kind, i) => {
+            const cw = cols.length === 2 ? (cR - cL - gap) / 2 : cR - cL
+            const cx = cL + i * (cw + gap)
+            return <WfElement key={i} kind={kind} x={cx} y={cTop} w={cw} h={cBot - cTop} />
+          })}
+        </>
+      )}
+    </svg>
+  )
+}
+
 // One edge per `next` target; default to the next slide number when omitted.
 function buildEdges(slides) {
   const ids = new Set(slides.map((s) => s.id))
@@ -350,7 +535,21 @@ export default function Overview() {
                   {it.source && (
                     <div className={styles.evMeta}>
                       <span className={styles.evMetaLabel}>출처</span>
-                      <span className={styles.evMetaText}>{it.source}</span>
+                      {it.url ? (
+                        <a
+                          className={styles.evCite}
+                          href={it.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          <span className={styles.evCiteText}>{it.source}</span>
+                          <svg className={styles.evExt} viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" />
+                          </svg>
+                        </a>
+                      ) : (
+                        <span className={styles.evMetaText}>{it.source}</span>
+                      )}
                     </div>
                   )}
                   {it.verify && (
@@ -400,19 +599,27 @@ export default function Overview() {
             </section>
           )}
 
-          {/* ③ 시각 계획 — 무슨 이미지가 어디에 */}
+          {/* ③ 시각 계획 — 콘텐츠 구조 실루엣(와이어프레임) + 위치·설명 */}
           {selSlide.visual && (
             <section className={styles.block}>
               <h3 className={styles.blockLabel}>시각 계획</h3>
               <div className={styles.imgFrame}>
-                <svg className={styles.imgIcon} viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="3" y="5" width="18" height="14" rx="2" />
-                  <circle cx="8.5" cy="10" r="1.8" />
-                  <path d="M21 17l-5-5-4 4-2-2-7 7" />
-                </svg>
+                <Wireframe visual={selSlide.visual} pos={selPos} />
                 {selPos && <span className={styles.posChip}>{selPos}</span>}
               </div>
               <p className={styles.imgCaption}>{selSlide.visual}</p>
+            </section>
+          )}
+
+          {/* ③-2 페이지 내용 — 실제 슬라이드에 들어갈 본문 초안 */}
+          {selSlide.body?.length > 0 && (
+            <section className={styles.block}>
+              <h3 className={styles.blockLabel}>페이지 내용</h3>
+              <ul className={styles.bodyList} style={{ '--group-color': selColor }}>
+                {selSlide.body.map((line, i) => (
+                  <li key={i} className={styles.bodyItem}>{line}</li>
+                ))}
+              </ul>
             </section>
           )}
 
