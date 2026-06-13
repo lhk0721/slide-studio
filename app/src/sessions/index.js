@@ -20,8 +20,8 @@ const sessions = [
   },
   {
     id: 'financial-market',
-    title: '금융시장·금융기관 발표',
-    description: '금융시장과 금융기관 구조·역할 발표자료 (작성 예정).',
+    title: '같은 충격, 다른 실패 — 미·한 피트니스 시장 비교',
+    description: '국제시장과 금융기관 발표. 동일한 코로나 충격이 자본 조달 구조 차이로 서로 다른 시장실패에 이른 과정을 미국·한국 피트니스 시장으로 비교.',
     slides: financialSlides,
   },
 ]
