@@ -25,9 +25,13 @@ import Slide17 from './Slide17'
 //   group     narrative section — lanes in the flow diagram
 //   role      function in the storyline (one line)
 //   message   the single claim the slide makes (one line)
-//   evidence  supporting points/data (string[], optional)
+//   evidence  supporting points/data (optional). Each item is a
+//             string OR { stat, source?, verify? }; objects expand
+//             into 수치·출처·검증 in the inspector "자세히 보기" drawer.
 //   visual    key visual element note (optional)
 //   notes     speaker note (optional)
+//   next      flow-diagram edges: id[] this slide points to. Omit for
+//             linear order (→ id+1); set only for branches/merges.
 // ─────────────────────────────────────────────────────────────
 const slides = [
   {
