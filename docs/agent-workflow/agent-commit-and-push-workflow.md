@@ -72,6 +72,15 @@
 - After commit, remove the temporary file if it is no longer needed.
 - To enable the repository pre-commit check, set `git config core.hooksPath .githooks`.
 
+## Windows Shell & UTF-8 (external CLIs, non-ASCII content)
+
+- Windows PowerShell (5.1) corrupts non-ASCII text (e.g., Korean) when piping it to a native executable (`... | & tool`) or passing it as a multi-line argument: it re-encodes the stream to the console code page and writes mojibake (깨진 `?` 글자) to the target.
+- `.cmd`/batch shims (e.g., npm-installed CLIs like `ntn`) additionally mangle multi-line argument values such as `--content "<multi-line>"`, which can leave the tool waiting on stdin or sending broken text.
+- Rule: to send non-ASCII content to an external CLI, write it to a **UTF-8 (no BOM) file** and feed that file via **Git Bash with raw stdin redirection** — `tool subcommand <id> < content.md` — not via a PowerShell pipe or an inline multi-line argument.
+- Always **read the result back** and confirm the non-ASCII text is intact before treating the write as done.
+- Same principle as `git commit -F <message-file>`: prefer file + stdin over inline multi-line args.
+- Concrete case (Notion CLI `ntn`, used for the Notion workflow tracker): update a page with Korean content via `ntn pages update <id> < page.md` **in Git Bash**. Do NOT use `Get-Content page.md | & ntn ...` or `ntn ... --content $multilineString` in PowerShell — both corrupted the page in practice.
+
 ## Push Rules
 
 - Confirm the checked-out branch is the intended work branch.

@@ -22,6 +22,7 @@
 - For management-document updates and cleanup logging rules, read `docs/agent-workflow/documentation-rules.md`.
 - For issue, branch, commit, PR, and management-document templates, read `docs/agent-workflow/templates.md`.
 - Before editing deck slide components (`app/src/sessions/<id>/slides/SlideNN.jsx`/`.module.css`), read `docs/agent-workflow/slides-jsx-convention.md`.
+- When starting a brand-new deck (clarifying topic/goal before slides exist), read `docs/agent-workflow/deck-discovery.md` — the Phase-1 discovery spec.
 
 ## Pre-Execution Gate
 
