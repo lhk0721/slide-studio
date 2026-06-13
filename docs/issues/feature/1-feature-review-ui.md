@@ -51,3 +51,7 @@ type: feature
 - **financial-market**: 1장 placeholder 메타.
 - **진입 링크**: Home 카드와 Deck 상단바에 "개요" 링크 추가, Overview에서 "발표 모드" 링크.
 - 문서: `deck-workflow.md`에 메타 스키마가 Phase 2(Structure) outline의 코드상 산출물 위치임을 명기, `README.md` Read Order에 리뷰 UI 항목 추가.
+
+### 2026-06-13 — Continue 핸드오프 파일 추가
+
+새 세션에서 이어서 작업할 수 있도록 `docs/HANDOFF.md`(현 상태 브리핑) 신규. 시작 절차·레포 구조·현재 브랜치/커밋·리뷰 UI 작업 내역·확정 방향·다음 후보를 한 파일에 정리(항상 최신만 유지).
