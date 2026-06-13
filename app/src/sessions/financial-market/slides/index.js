@@ -50,18 +50,16 @@ const slides = [
     message: '코로나는 전 세계 피트니스 수요를 똑같이 끌어올렸지만, 미국과 한국의 결과는 갈렸다 — 왜?',
     evidence: [
       {
-        stat: '글로벌 피트니스 앱 시장: 2018년 약 24억$ → 2026년 약 209억$ 전망(약 9배)',
-        source: 'Grand View Research, 「Fitness App Market Size, Share & Trends Analysis Report」 — 글로벌 피트니스 앱 시장 규모·CAGR 전망',
-        url: 'https://www.grandviewresearch.com/industry-analysis/fitness-app-market',
+        stat: '글로벌 피트니스 앱 시장은 팬데믹 이후 급성장 — 2026년 전망 기관별 약 $14B(Grand View)~$22B(TBRC)로 편차',
+        source: 'Grand View Research 「Fitness App Market Report」(2026 약 $13.9B) · The Business Research Company 「Fitness App Global Market Report 2026」(약 $22B) — 기관별 전망 상이',
+        url: 'https://www.thebusinessresearchcompany.com/report/fitness-app-global-market-report',
         grade: 'weak',
-        verify:
-          '209억$ 수치 1차 출처 불일치 — Grand View 2019년 전망은 2026년 약 109억$(CAGR 21.1%). 209억$의 보고서·기준연도 재확정 필요',
       },
     ],
     visual: '공통 충격 → 시장 구조 분기 (다이어그램 상단 2칸, big-number 훅)',
     body: [
       '코로나19는 전 세계 피트니스 수요를 동시에 끌어올렸다.',
-      '글로벌 피트니스 앱 시장은 2018년 약 24억$ → 2026년 약 209억$, 약 9배 성장 전망.',
+      '글로벌 피트니스 앱 시장은 팬데믹 이후 급성장(2026년 전망 기관별 약 $14~22B).',
       '그러나 같은 출발선에서 미국과 한국의 결말은 정반대였다.',
       '미국 — 거대 자본의 거품과 붕괴 / 한국 — 시장의 파편화와 폐업.',
       '왜 같은 충격이 서로 다른 실패로 이어졌는가?',
@@ -104,11 +102,10 @@ const slides = [
         grade: 'strong',
       },
       {
-        stat: 'PSR(주가매출비율): IPO 시 7.9배 → 정점 16.7배',
-        source: 'stockanalysis.com, 「Peloton Interactive (PTON) — Statistics」 — 시가총액 ÷ 매출로 산출',
+        stat: 'PSR(주가매출비율): IPO 시 7.9배 → 정점 약 16.7배',
+        source: 'stockanalysis.com 「PTON Statistics」 — 정점 시총 약 493억$ ÷ 당시 TTM 매출 약 29.5억$ ≈ 16.7배 (FY2021 연매출 $4.02B 기준이면 약 12배)',
         url: 'https://stockanalysis.com/stocks/pton/',
         grade: 'medium',
-        verify: 'PSR 16.7배 산식·기준 시점(분기 매출 연환산 여부) 명확화',
       },
     ],
     visual: '시총 또는 PSR 추이 곡선 (급등 구간 음영 강조)',
@@ -177,11 +174,10 @@ const slides = [
         grade: 'strong',
       },
       {
-        stat: '감원은 본사·물류 등 비(非)강사 직군에 집중',
-        source: 'Bloomberg (2022.2.8) 등 감원 보도 종합',
-        url: 'https://www.bloomberg.com/news/articles/2022-02-08/peloton-instructors-making-up-to-500-000-a-year-escape-cuts',
-        grade: 'medium',
-        verify: '“엔지니어링 집중” 등 직군별 구성은 보도마다 상이 — 감원 직군 구성 재확인',
+        stat: '감원은 본사 직군(약 20%)·마케팅·물류(창고 축소→3PL)에 집중, 강사진은 제외',
+        source: 'CNN 「Peloton is replacing its CEO and cutting 2,800 jobs」 (2022.2.8) — 본사 약 20% 감축·물류 창고 축소($800M 절감), 공동창업자 John Foley 주주서한',
+        url: 'https://www.cnn.com/2022/02/08/business/peloton-layoffs-new-ceo',
+        grade: 'strong',
       },
     ],
     visual: '"비용↓ 핵심자산 보호" 구조도(Asset vs Cost) + 강사 보수 콜아웃',
@@ -241,10 +237,10 @@ const slides = [
         verify: '폐업 집계 기준(폐업일자 필터)·연도 합계 재계산',
       },
       {
-        stat: '선불 멤버십 구조·박리다매·‘먹튀’ 리스크(정성 근거)',
-        source: '국내 언론 보도 종합(헬스장 선불 환불·폐업 피해)',
-        grade: 'weak',
-        verify: '대표 보도 1~2건의 출처 링크 확정',
+        stat: '선불 멤버십 ‘먹튀’ 피해 — 폐업 관련 선불거래 피해구제 2020~2025.8 약 987건(피해액 약 2.1억원), 체육시설업 70%+(헬스장 35.6%·필라테스 33.8%), 92%가 해지·환불 분쟁',
+        source: '한국소비자원(폐업 선불거래 피해구제 통계) · 서울경제 「선불 받더니 폐업 ‘먹튀’…헬스장·필라테스 최다」 보도',
+        url: 'https://www.sedaily.com/NewsView/2GZ6BUUBFT',
+        grade: 'medium',
       },
     ],
     visual: '폐업 추이 막대그래프(2019→2020→2021)',
@@ -339,8 +335,8 @@ const slides = [
       },
       {
         stat: '강사 보수·감원 보도',
-        source: 'Bloomberg, 「Peloton’s Famous Instructors … Escape Layoffs」 (2022.2.8)',
-        url: 'https://www.bloomberg.com/news/articles/2022-02-08/peloton-instructors-making-up-to-500-000-a-year-escape-cuts',
+        source: 'Bloomberg 「Peloton’s Famous Instructors … Escape Layoffs」(강사 보수) · CNN 「Peloton is replacing its CEO and cutting 2,800 jobs」(감원·CEO 교체) (2022.2.8)',
+        url: 'https://www.cnn.com/2022/02/08/business/peloton-layoffs-new-ceo',
       },
       {
         stat: '서울 체력단련장 폐업 통계',
@@ -354,8 +350,13 @@ const slides = [
       },
       {
         stat: '글로벌 피트니스 앱 시장 전망',
-        source: 'Grand View Research, 「Fitness App Market Report」',
+        source: 'Grand View Research / The Business Research Company 「Fitness App Market Report」 (2026 전망, 기관별 상이)',
         url: 'https://www.grandviewresearch.com/industry-analysis/fitness-app-market',
+      },
+      {
+        stat: '헬스장 선불 멤버십 피해 통계',
+        source: '한국소비자원(폐업 선불거래 피해구제) · 서울경제 보도 (체육시설업 ‘먹튀’ 피해)',
+        url: 'https://www.sedaily.com/NewsView/2GZ6BUUBFT',
       },
       {
         stat: '정보 비대칭·레몬시장 이론',
@@ -364,7 +365,7 @@ const slides = [
       },
     ],
     notes:
-      '검증: ① 글로벌 209억$ 출처 재확정(Grand View 2019 전망은 109억$) ② PSR 16.7배 산식 재계산 ③ 현재 시총 발표 직전 재확인',
+      '검증(잔여 4): ① 현재 시총 발표 직전 재확인 ② 상표출원 비율 KIPRIS 재현 ③ 서울 폐업 수치 데이터셋 재집계 ④ 유튜버 구독자 스냅샷 시점 명기. (글로벌 시장·PSR 산식·감원 구성·선불 피해는 검증 완료)',
   },
 ]
 
