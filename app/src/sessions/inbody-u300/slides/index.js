@@ -32,8 +32,12 @@ import Slide17 from './Slide17'
 //             grade('strong'|'medium'|'weak')는 Phase 3 콘텐츠 워크벤치의
 //             근거 강도, verify가 있으면 미검증으로 집계된다.
 //   assets    Phase 3 필요 자산 목록 (optional, []). 각 항목은
-//             { kind, desc, source?, license?, status }
-//             (status: 'have'|'need'|'check'). 콘텐츠 워크벤치에서 집계.
+//             { kind, desc, source?, license?, status }. 콘텐츠 워크벤치에서 집계.
+//             status: 'need'(미확보) | 'check'(출처·라이선스·수치 확인필요)
+//                   | 'data-ready'(데이터·소재 확보·확정, 작도만 Phase 4에 남음)
+//                   | 'have'(완전 확보/제작완료).
+//             게이트는 data-ready·have를 "콘텐츠 완료"로 통과시키고
+//             need·check만 차단한다(data-ready ≠ render-ready, insight #6).
 //   visual    key visual element note (optional)
 //   body      실제 슬라이드에 들어갈 본문/문구 초안 (선택, string[]).
 //             각 항목이 한 줄/불릿으로 인스펙터 "페이지 내용" 섹션에 표시된다.

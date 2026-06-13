@@ -14,8 +14,12 @@ import Slide01 from './Slide01'
 //  전략)이고, verify가 있으면 "미검증/확인 필요"로 집계된다.
 //
 //  assets[]는 Phase 3에서 그 슬라이드에 필요한 시각/데이터 자산 목록:
-//    { kind, desc, source?, license?, status }  (status: 'have'|'need'|'check')
-//  콘텐츠 워크벤치(/:sessionId/content)에서 출처·라이선스·확보 상태로 집계된다.
+//    { kind, desc, source?, license?, status }
+//    status: 'need'(미확보) | 'check'(출처·라이선스·수치 확인필요)
+//          | 'data-ready'(데이터·소재 확보·확정, 작도만 Phase 4에 남음)
+//          | 'have'(완전 확보/제작완료).
+//  콘텐츠 워크벤치(/:sessionId/content)에서 집계되며, 게이트는 data-ready·have를
+//  "콘텐츠 완료"로 통과시키고 need·check만 차단한다(data-ready ≠ render-ready, insight #6).
 //
 //  `component`는 실제로 만든 슬라이드만 연결한다. 아직 안 만든 장은
 //  메타만 채워 두면 리뷰 UI(Overview·Inspector)에는 보이고,
@@ -39,7 +43,7 @@ const slides = [
       '국제시장과 금융기관 | 발표자 이현규',
     ],
     assets: [
-      { kind: 'chart', desc: '펠로톤 주가/시총 폭락 곡선', source: 'MacroTrends (PTON)', license: '데이터 인용 + 자체 작도', status: 'check' },
+      { kind: 'chart', desc: '펠로톤 주가/시총 폭락 곡선', source: 'MacroTrends (PTON)', license: '데이터 인용 + 자체 작도', status: 'data-ready' },
       { kind: 'photo', desc: '한국 헬스장 셔터 내림 사진', source: '미정(스톡/직접 촬영)', license: '상업용 라이선스 확인 필요', status: 'need' },
     ],
     notes: '발표자 이현규 · 국제시장과 금융기관',
@@ -59,14 +63,14 @@ const slides = [
     visual: '공통 충격 → 시장 구조 분기 (다이어그램 상단 2칸, big-number 훅)',
     body: [
       '코로나19는 전 세계 피트니스 수요를 동시에 끌어올렸다.',
-      '글로벌 피트니스 앱 시장은 팬데믹 이후 급성장(2026년 전망 기관별 약 $14~22B).',
+      '글로벌 피트니스 앱 시장 약 $13.9B(2026, GVR)로 급성장 — 기관별 약 $14~22B.',
       '그러나 같은 출발선에서 미국과 한국의 결말은 정반대였다.',
       '미국 — 거대 자본의 거품과 붕괴 / 한국 — 시장의 파편화와 폐업.',
       '왜 같은 충격이 서로 다른 실패로 이어졌는가?',
     ],
     assets: [
-      { kind: 'diagram', desc: '공통 충격 → 시장 분기 다이어그램', source: '자체 작도', status: 'have' },
-      { kind: 'data', desc: '글로벌 피트니스 앱 시장 규모 수치(big-number)', source: 'Grand View Research', license: '수치 인용', status: 'check' },
+      { kind: 'diagram', desc: '공통 충격 → 시장 분기 다이어그램', source: '자체 작도', status: 'data-ready' },
+      { kind: 'data', desc: '시장 규모 big-number — 약 $13.9B (2026, GVR 기준)', source: 'Grand View Research 「Fitness App Market」: 2026 약 $13.92B·CAGR 13.4%(→2033 $33.58B). 발표용 단일 수치로 GVR 채택, 상한 TBRC 약 $22B는 각주 범위 표기', license: '수치 인용', status: 'data-ready' },
     ],
   },
   {
@@ -86,7 +90,7 @@ const slides = [
       '미국은 자본시장(VC·IPO)이, 한국은 소상공인·콘텐츠가 시장을 주도했다.',
     ],
     assets: [
-      { kind: 'diagram', desc: '미국 vs 한국 2×2 아이콘 대비', source: '자체 작도', license: '아이콘 라이선스 확인', status: 'check' },
+      { kind: 'diagram', desc: '미국 vs 한국 2×2 아이콘 대비', source: '자체 작도', license: 'Lucide 아이콘 (ISC, 무료 상업 이용·출처표기 불필요)', status: 'data-ready' },
     ],
     notes: '출처: Akerlof(1970) The Market for Lemons',
   },
@@ -117,7 +121,7 @@ const slides = [
       '밸류에이션이 펀더멘털에서 멀어지는 전형적 거품 형성.',
     ],
     assets: [
-      { kind: 'chart', desc: '펠로톤 시총/PSR 추이 곡선 (급등 음영)', source: 'MacroTrends · stockanalysis', license: '데이터 인용 + 자체 작도', status: 'check' },
+      { kind: 'chart', desc: '펠로톤 시총/PSR 추이 곡선 (급등 음영)', source: 'MacroTrends · stockanalysis', license: '데이터 인용 + 자체 작도', status: 'data-ready' },
     ],
   },
   {
@@ -152,7 +156,7 @@ const slides = [
       '2022년 전사 약 2,800명 감원 — 전형적 금융 거품 사이클.',
     ],
     assets: [
-      { kind: 'chart', desc: '붕괴 구간 곡선 + 고점↔현재 막대 대비', source: 'stockanalysis · SEC 10-K', license: '데이터 인용 + 자체 작도', status: 'check' },
+      { kind: 'chart', desc: '붕괴 구간 곡선 + 고점↔현재 막대 대비', source: 'stockanalysis · SEC 10-K', license: '데이터 인용 + 자체 작도', status: 'data-ready' },
     ],
   },
   {
@@ -188,7 +192,7 @@ const slides = [
       '(한국 사례와의 대비를 위한 복선)',
     ],
     assets: [
-      { kind: 'diagram', desc: 'Asset vs Cost 구조도 + 강사 보수 콜아웃', source: '자체 작도 / Bloomberg 인용', status: 'have' },
+      { kind: 'diagram', desc: 'Asset vs Cost 구조도 + 강사 보수 콜아웃', source: '자체 작도 / Bloomberg 인용', status: 'data-ready' },
     ],
     notes: '한국 대비를 위한 복선',
   },
@@ -219,13 +223,13 @@ const slides = [
       '거품 대신 “파편화”가 일어났다.',
     ],
     assets: [
-      { kind: 'chart', desc: '상표출원 출원인 유형 도넛 + 분포 대비', source: '특허청 KIPRIS', license: '데이터 인용 + 자체 작도', status: 'check' },
+      { kind: 'chart', desc: '상표출원 출원인 유형 도넛 + 분포 대비', source: '특허청 KIPRIS', license: '데이터 인용 + 자체 작도', status: 'data-ready' },
     ],
   },
   {
-    id: 8, title: '한국 ② — 과당경쟁과 오프라인 붕괴',
-    group: '한국 사례', role: '과당경쟁·오프라인 붕괴',
-    message: '분산된 시장은 박리다매·과당경쟁으로, 오프라인은 대규모 폐업으로 — 소상공인 시장의 취약성',
+    id: 8, title: '한국 ② — 과잉경쟁과 오프라인 붕괴',
+    group: '한국 사례', role: '과잉경쟁·오프라인 붕괴',
+    message: '분산된 시장은 박리다매·과잉경쟁으로, 오프라인은 대규모 폐업으로 — 소상공인 시장의 취약성',
     evidence: [
       {
         stat: '서울 체력단련장 폐업: 2019년 141개 → 2021년 259개 (코로나 전후 급증)',
@@ -242,13 +246,13 @@ const slides = [
     ],
     visual: '폐업 추이 막대그래프(2019→2020→2021)',
     body: [
-      '분산된 시장은 박리다매·과당경쟁으로 흘렀다.',
+      '분산된 시장은 박리다매·과잉경쟁으로 흘렀다.',
       '선불 멤버십 구조 + 출혈 경쟁 + “먹튀” 리스크.',
       '서울 체력단련장 폐업: 2019년 141개 → 2021년 259개.',
       '오프라인은 대규모 폐업으로 — 소상공인 시장의 구조적 취약성.',
     ],
     assets: [
-      { kind: 'chart', desc: '서울 체력단련장 폐업 추이 막대그래프', source: '서울 열린데이터광장 OA-16142', license: '공공데이터(자유 이용)', status: 'have' },
+      { kind: 'chart', desc: '서울 체력단련장 폐업 추이 막대그래프', source: '서울 열린데이터광장 OA-16142', license: '공공데이터(자유 이용)', status: 'data-ready' },
     ],
   },
   {
@@ -268,7 +272,7 @@ const slides = [
       '(정량은 폐업·이직 등 방증으로 정직하게 보강)',
     ],
     assets: [
-      { kind: 'diagram', desc: '자산(US) vs 비용(KR) 대비 도식 + 화살표', source: '자체 작도', status: 'have' },
+      { kind: 'diagram', desc: '자산(US) vs 비용(KR) 대비 도식 + 화살표', source: '자체 작도', status: 'data-ready' },
     ],
     notes: '정량 근거는 폐업/이직 등 주변 지표로 보강(정직하게 제시)',
   },
@@ -278,17 +282,17 @@ const slides = [
     message: '같은 충격·같은 산업인데 자본 조달 구조가 실패의 형태와 인적자본의 운명을 갈랐다',
     evidence: [
       '미국: 자본시장 거품·붕괴 / 트레이너 보호',
-      '한국: 소상공인 과당경쟁·폐업 / 트레이너 레몬화',
+      '한국: 소상공인 과잉경쟁·폐업 / 트레이너 레몬화',
     ],
     visual: '전체 분기 다이어그램 풀버전 — 공통 충격 → (미/한) 구조 분기 → 서로 다른 시장실패 (좌/우 대칭)',
     body: [
       '같은 충격, 같은 산업 — 그러나 자본 조달 구조가 운명을 갈랐다.',
       '미국: 자본시장 거품·붕괴 / 강사는 자산으로 보호.',
-      '한국: 소상공인 과당경쟁·폐업 / 트레이너는 비용으로 레몬화.',
+      '한국: 소상공인 과잉경쟁·폐업 / 트레이너는 비용으로 레몬화.',
       '시장실패의 “형태”와 인적자본의 “운명”이 모두 구조에서 갈렸다.',
     ],
     assets: [
-      { kind: 'diagram', desc: '전체 분기 다이어그램 풀버전(좌/우 대칭)', source: '자체 작도', status: 'have' },
+      { kind: 'diagram', desc: '전체 분기 다이어그램 풀버전(좌/우 대칭)', source: '자체 작도', status: 'data-ready' },
     ],
     notes: '앞 슬라이드(4~9) 핵심 수치·근거 압축',
   },
@@ -308,7 +312,7 @@ const slides = [
       '인적자본은 “자산으로 인식되는 구조”에서만 보호된다.',
     ],
     assets: [
-      { kind: 'image', desc: '3개 시사점 아이콘 카드', source: '자체 작도', license: '아이콘 라이선스 확인', status: 'check' },
+      { kind: 'image', desc: '3개 시사점 아이콘 카드', source: '자체 작도', license: 'Lucide 아이콘 (ISC, 무료 상업 이용·출처표기 불필요)', status: 'data-ready' },
     ],
   },
   {
