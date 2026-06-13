@@ -22,7 +22,7 @@ slide-studio에서 **발표자료(덱)를 만드는 공통 절차**. 모든 세�
 | Phase | 단계 | 목적 | 산출물 (위치) | 규칙 문서 | 구체화 상태 |
 | --- | --- | --- | --- | --- | --- |
 | 1 | **Discovery** | 반복 대화로 주제·목표 명확화 → 메시지 도출 | Deck Brief `docs/sessions/<id>/brief.md` | `deck-discovery.md` | ✅ 확정(스펙) |
-| 2 | **Structure** | 메시지에서 스토리라인(슬라이드별 한 줄) 도출 | Brief의 storyline 표 / outline | (Discovery에 포함, archetype) | 🟡 초안(Discovery에 흡수됨) |
+| 2 | **Structure** | 메시지에서 스토리라인(슬라이드별 한 줄) 도출 | Brief의 storyline 표 → 코드상은 `app/src/sessions/<id>/slides/index.js`의 슬라이드 메타(`group`/`role`/`message`) | (Discovery에 포함, archetype) | 🟡 초안(Discovery에 흡수됨) |
 | 3 | **Content** | 슬라이드별 근거·데이터·자산 저해상도로 채움 | Brief의 evidence + 자산 목록 | — | ⬜ 미정 |
 | 4 | **Design** | 토큰(색·타이포·여백) 확정 후 슬라이드 디자인 | `app/src/tokens.css`·`shared.css`, `SlideNN.module.css` | `slides-jsx-convention.md` | 🟡 초안(토큰/규칙 존재) |
 | 5 | **Build** | 슬라이드 컴포넌트 구현 | `app/src/sessions/<id>/slides/SlideNN.jsx` | `slides-jsx-convention.md` | 🟡 초안 |
@@ -48,6 +48,16 @@ Discovery(brief) → Structure(outline) → [scaffold] → Build(SlideNN.jsx) �
 
 - 1~3단계 산출물은 `docs/sessions/<id>/`(추적·기획)에, 4~5단계는 `app/src/sessions/<id>/`(코드)에 산다.
 - 단계 진행 중의 개별 작업은 이슈 단위로 `docs/issues/`에 로그한다.
+
+## 리뷰 UI (검토)
+
+발표 모드(한 장씩)와 별개로, **기획·검토용 리뷰 UI**가 앱 안에 있다. 검토는 사용자가 직접 해야 하므로 화면으로 제공한다.
+
+- **슬라이드 메타**: 각 slide 엔트리(`slides/index.js`)에 렌더용 `component`/`title` 외에 검토용 메타 — `group`(내러티브 섹션), `role`(스토리 내 기능 한 줄), `message`(핵심 주장 한 줄), 선택적으로 `evidence[]`/`visual`/`notes` — 를 둔다. 발표 렌더와 검토 메타가 **단일 소스**다.
+- **흐름 뷰 (`/:sessionId/overview`)**: `group` 순서를 레인으로 묶고 노드(번호·role·메시지)를 화살표로 이어 **스키마틱 내러티브 흐름**을 도식화. 지금 기획 단계에선 썸네일이 아니라 논리 흐름이 중요하다(썸네일 스토리보드는 편집 단계 과제).
+- **인스펙터**: 흐름 뷰에서 노드를 클릭하면 우측 패널에 해당 슬라이드의 전체 메타가 펼쳐진다(Notion DB 행을 펼쳐 보는 것과 같은 역할).
+- 데이터 소스는 **레포 내 메타**로 시작한다. Notion 등 외부는 탐험용이며, 동기화가 필요해지면 별도 과제로 붙인다.
+- 슬라이드 컴포넌트 작성 규칙: `slides-jsx-convention.md`.
 
 ## 파일럿 메모
 

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 import Home from './components/Home'
 import Deck from './components/Deck'
+import Overview from './components/Overview'
 
 // `/:sessionId` with no slide → jump to the first slide of that deck.
 function DeckIndexRedirect() {
@@ -13,6 +14,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/:sessionId" element={<DeckIndexRedirect />} />
+      <Route path="/:sessionId/overview" element={<Overview />} />
       <Route path="/:sessionId/:slideId" element={<Deck />} />
     </Routes>
   )

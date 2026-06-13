@@ -1,0 +1,221 @@
+/* Review UI — schematic narrative flow + slide inspector.
+   Escapes the centered fixed-frame body layout with its own
+   full-viewport scroll surface. */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  background: var(--page);
+  color: var(--text);
+}
+
+.main {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: auto;
+  padding: 1.5rem 2.5rem 4rem;
+}
+
+/* ── header ── */
+.head {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0.75rem 0 1.25rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(var(--page) 78%, rgba(231, 233, 235, 0));
+}
+.titleWrap { flex: 1 1 auto; min-width: 0; }
+.title {
+  font-size: var(--fs-title);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.sub {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: var(--fs-caption);
+  color: var(--muted);
+}
+.back,
+.present {
+  flex: 0 0 auto;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border-soft);
+  background: var(--glass);
+  color: var(--sub);
+  white-space: nowrap;
+}
+.present {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── flow ── */
+.flow {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.lane {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+}
+.laneLabel {
+  flex: 0 0 6.5rem;
+  align-self: center;
+  text-align: right;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+.nodes {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.node {
+  flex: 1 1 13rem;
+  min-width: 11rem;
+  max-width: 20rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-soft);
+  background: var(--bg);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: border-color .12s, box-shadow .12s, transform .12s;
+}
+.node:hover {
+  box-shadow: var(--shadow-pop);
+  transform: translateY(-1px);
+}
+.nodeSel {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow-pop);
+}
+.num {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-extrabold);
+  color: var(--accent);
+}
+.role {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--muted);
+}
+.msg {
+  font-size: 0.9375rem;
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.arrow {
+  align-self: center;
+  color: var(--hint);
+  font-size: 1.1rem;
+  font-weight: var(--fw-bold);
+}
+.down {
+  text-align: center;
+  color: var(--hint);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.4rem 0;
+  margin-left: 7.5rem; /* align under the node column, past the lane label */
+}
+
+/* ── inspector ── */
+.inspector {
+  flex: 0 0 22rem;
+  overflow: auto;
+  padding: 1.5rem 1.5rem 3rem;
+  background: var(--bg);
+  border-left: 1px solid var(--rule);
+  box-shadow: -8px 0 24px rgba(var(--ink-rgb), .06);
+}
+.inspHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.inspNum {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-extrabold);
+  color: var(--accent);
+}
+.close {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.4rem;
+  line-height: 1;
+}
+.close:hover { background: var(--bg2); color: var(--text); }
+.inspTitle {
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-bold);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+  word-break: keep-all;
+}
+.meta { display: flex; flex-direction: column; gap: 0.85rem; }
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.fieldLabel {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--muted);
+}
+.fieldValue {
+  font-size: var(--fs-body);
+  color: var(--text);
+  line-height: 1.45;
+  word-break: keep-all;
+}
+.evidence {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.openSlide {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+  color: var(--accent);
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--accent);
+}
+.openSlide:hover { background: var(--accent-soft); }

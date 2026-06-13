@@ -42,6 +42,7 @@ export default function Deck() {
       <div className={styles.topbar}>
         <Link to="/" className={styles.back}>← 세션 목록</Link>
         <span className={styles.deckTitle}>{session.title}</span>
+        <Link to={`/${sessionId}/overview`} className={styles.back}>개요 ▦</Link>
       </div>
 
       <div className={styles.navWrap}>

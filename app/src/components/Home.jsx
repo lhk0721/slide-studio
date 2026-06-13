@@ -12,12 +12,14 @@ export default function Home() {
 
       <ul className={styles.list}>
         {sessions.map((s) => (
-          <li key={s.id}>
-            <Link to={`/${s.id}/1`} className={styles.card}>
-              <span className={styles.cardTitle}>{s.title}</span>
-              <span className={styles.cardDesc}>{s.description}</span>
-              <span className={styles.cardMeta}>{s.slides.length} slides · /{s.id}</span>
-            </Link>
+          <li key={s.id} className={styles.card}>
+            <span className={styles.cardTitle}>{s.title}</span>
+            <span className={styles.cardDesc}>{s.description}</span>
+            <span className={styles.cardMeta}>{s.slides.length} slides · /{s.id}</span>
+            <div className={styles.actions}>
+              <Link to={`/${s.id}/1`} className={styles.actionPrimary}>발표 →</Link>
+              <Link to={`/${s.id}/overview`} className={styles.action}>개요 ▦</Link>
+            </div>
           </li>
         ))}
       </ul>
