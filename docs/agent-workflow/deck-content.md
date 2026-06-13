@@ -7,6 +7,7 @@
 - Parent: `docs/agent-workflow/deck-workflow.md` (6단계 파이프라인의 Phase 3)
 - 선행: `deck-discovery.md`(Phase 1~2 Brief/Structure) — Brief의 `pillars`/`evidence`가 입력
 - 후행: `slides-jsx-convention.md`(Phase 4~5 디자인/빌드)
+- 인사이트 참고(사례 관찰·시스템 설계 고려사항, 규칙 아님): `docs/agent-workflow/deck-content-insights.md`
 - 코드 산출물: `app/src/sessions/<id>/slides/index.js` slide 메타, 워크벤치 `app/src/components/Content.jsx`
 
 ## 핵심 원리

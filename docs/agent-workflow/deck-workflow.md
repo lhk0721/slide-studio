@@ -63,4 +63,4 @@ Discovery(brief) → Structure(outline) → [scaffold] → Build(SlideNN.jsx) �
 ## 파일럿 메모
 
 - 현재 워크플로는 `financial-market` 세션을 실제로 만들어보며 구체화하는 중이다. 파일럿에서 "이 단계엔 이런 산출물·규칙이 필요하다"가 드러나면 위 표의 상태를 올리고 해당 단계 문서를 신설/갱신한다.
-- 파일럿 과정에서 나온 일반화 가능한 관찰은 단계 문서의 "인사이트 참고자료"로 분리해 둔다(예: `deck-discovery-insights.md`). 규칙과 사례 관찰을 섞지 않는다.
+- 파일럿 과정에서 나온 일반화 가능한 관찰은 단계 문서의 "인사이트 참고자료"로 분리해 둔다(예: `deck-discovery-insights.md`, `deck-content-insights.md`). 규칙과 사례 관찰을 섞지 않는다.
