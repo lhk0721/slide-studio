@@ -1,0 +1,102 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+.layout {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+  align-content: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+/* 우측 컬럼: 좌측과 동일하게 상단 정렬·자연 흐름으로 맞춰 수직 균형 유지 */
+.colRings {
+  align-self: start;
+  gap: 4.875rem;
+}
+.colCat {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.094rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── left: growth ── */
+.metricRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+.metricBlock { display: flex; flex-direction: column; }
+.metricYear {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.0625rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+.metricVal {
+  font-size: 2.5rem;
+  font-weight: var(--fw-extrabold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.metricVal.accent { color: var(--accent); }
+.metricArrow { font-size: 1.5rem; color: var(--ghost); padding-bottom: 0.375rem; }
+.cagr {
+  margin-left: auto;
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.3;
+}
+.cagr strong {
+  display: block;
+  font-size: var(--fs-heading);
+  color: var(--accent);
+  font-weight: var(--fw-extrabold);
+}
+
+/* ── SVG bar chart (font-size/stroke in viewBox user-space → keep px) ── */
+.chart { width: 100%; height: auto; }
+.axis { stroke: var(--rule); stroke-width: 1; }
+.axisZero { fill: var(--muted); font-size: 11px; }
+.barSolid { fill: var(--accent); }
+.barSoft { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 2; }
+.barYear { fill: var(--muted); font-size: 11px; }
+.barVal { fill: var(--text); font-size: 11px; font-weight: var(--fw-bold); }
+.src { font-size: var(--fs-caption); color: var(--muted); }
+
+/* ── right: rings (SVG; font-size/stroke in user-space → keep px) ── */
+.rings { width: 100%; height: auto; max-height: 18.75rem; }
+.ringOuter { fill: var(--bg2); stroke: var(--rule); stroke-width: 1.2; }
+.ringMid { fill: var(--ghost); fill-opacity: .25; stroke: var(--ghost); stroke-width: 1.2; }
+.ringInner { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
+.ringCore { fill: var(--accent); font-size: 14px; font-weight: var(--fw-extrabold); }
+.ringCoreSub { fill: var(--accent); font-size: 11px; }
+.lead { stroke: var(--muted); stroke-width: .8; opacity: .6; }
+.ringLbl { fill: var(--text); font-size: 14px; font-weight: var(--fw-bold); }
+.ringLblAccent { fill: var(--accent); font-size: 14px; font-weight: var(--fw-bold); }
+.ringLblSub { fill: var(--muted); font-size: 12px; }
+
+.gtm {
+  font-size: var(--fs-body);
+  color: var(--sub);
+  font-weight: var(--fw-semibold);
+}
+.gtm strong { color: var(--accent); font-weight: var(--fw-extrabold); }
+.gtmArrow { color: var(--ghost); margin: 0 0.25rem; }

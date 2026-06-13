@@ -1,0 +1,145 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+.layout {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  align-content: center;
+  padding: 0.5rem 0;
+}
+
+/* ── demo ── */
+.demoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+  justify-content: center;
+}
+/* 캡션: Slide02 figcaption 스타일에 맞춤 (pill 태그 + 설명), 한 줄 좌측 정렬 */
+.demoTag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+}
+.demoTagBadge {
+  font-size: 0.6875rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.03125rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 62.4375rem;
+  padding: 0.0625rem 0.5rem;
+}
+.demoTagDesc {
+  font-size: var(--fs-caption);
+  line-height: 1.55;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.demoFrame {
+  border-radius: 0.625rem;
+  overflow: hidden;
+  background: var(--bg2);
+  max-height: 26.25rem;
+}
+.demoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── tech cards ── */
+.techCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.375rem;
+}
+.techCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.techBadge {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.094rem;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.techTitle {
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-bold);
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.techEn {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.0625rem;
+  color: var(--muted);
+}
+.techDesc {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--sub);
+  margin-top: 0.25rem;
+  white-space: pre-line;
+}
+.techMaps {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  margin-top: 0.125rem;
+}
+.mapsArrow { margin-right: 0.5rem; }
+
+/* ── measurement axes ── */
+.axesRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.25rem;
+  padding-top: 1.125rem;
+  border-top: 1px solid var(--rule);
+}
+.axesLbl {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.094rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.axesItems { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.axisChip {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.3125rem 0.8125rem;
+  border-radius: 61.25rem;
+}
+
+/* ── bottom convergence ── */
+.converge {
+  flex-shrink: 0;
+  margin: 0 var(--gx);
+  padding: 1.125rem 0 1.75rem;
+  font-size: var(--fs-heading);
+  color: var(--muted);
+  text-align: center;
+  font-weight: var(--fw-semibold);
+}
+.converge strong { color: var(--accent); font-weight: var(--fw-black); }

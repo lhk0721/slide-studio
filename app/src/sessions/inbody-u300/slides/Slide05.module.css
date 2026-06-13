@@ -1,0 +1,216 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+.layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.5rem 0 0;
+}
+
+/* ── 세 주체 카드 (결함 → 전환 → 결과의 색 낙차) ── */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2.5rem;
+  flex: 1;
+  min-height: 0;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cardHd {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.num {
+  font-size: 2rem;
+  font-weight: var(--fw-black);
+  color: var(--accent);
+  line-height: 1;
+}
+.who { display: flex; flex-direction: column; }
+.person {
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-bold);
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.en {
+  font-size: calc(var(--fs-caption) * 0.85);
+  letter-spacing: 0.09rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* 결함 — dim, 03의 결함을 짧게 환기 (BEFORE) */
+.flaw {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+  padding-bottom: 0.875rem;
+  margin-bottom: 0.875rem;
+  border-bottom: 1px solid var(--rule);
+}
+.flawMark {
+  color: var(--ghost);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+.flawText {
+  font-size: calc(var(--fs-body) * 0.9);
+  line-height: 1.5;
+  color: var(--muted);
+  white-space: pre-line;
+}
+
+/* 전환 — 데이터로 푸는 기전 (본문) */
+.shift {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  list-style: none;
+  flex: 1;
+}
+.shift li {
+  display: flex;
+  gap: 0.5rem;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--sub);
+  align-items: flex-start;
+  white-space: pre-line;
+}
+.shift li::before {
+  content: '';
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+}
+
+/* 결과 — accent payoff (AFTER) */
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  border-top: 2px solid var(--accent);
+}
+.resultMain {
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  letter-spacing: -0.01em;
+  white-space: pre-line;
+}
+.resultSub {
+  font-size: var(--fs-caption);
+  color: var(--sub);
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+/* ── 악순환 차단 장치 (Slide03 .loopRow/.loopReturn과 대구) ── */
+.breakLoop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  padding: 0.875rem 1.25rem;
+  background: var(--bg2);
+  border-radius: var(--radius);
+}
+.blDiagram {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.blTag {
+  font-size: calc(var(--fs-caption) * 0.85);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.09rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.blChain {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.blNode { display: flex; align-items: center; gap: 0.5rem; }
+.blNum {
+  font-size: calc(var(--fs-caption) * 0.85);
+  font-weight: var(--fw-extrabold);
+  color: var(--ghost);
+}
+.blText {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.blArrow { color: var(--ghost); font-size: var(--fs-caption); }
+/* 닫던 ↺ 반환 화살표를 절단 — 루프가 끊긴 표시 */
+.blReturn {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  margin-left: 0.35rem;
+}
+.blArrowOut {
+  color: var(--accent);
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-bold);
+}
+.blOpen {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.blCap {
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  text-align: right;
+  flex-shrink: 0;
+  max-width: 17rem;
+  line-height: 1.4;
+}
+.blCap strong { color: var(--accent); font-weight: var(--fw-bold); }
+
+/* ── 하단 캡션 (유지) ── */
+.converge {
+  flex-shrink: 0;
+  margin: 0 var(--gx);
+  padding: 1.125rem 0 1.75rem;
+  font-size: var(--fs-heading);
+  color: var(--muted);
+  text-align: center;
+  font-weight: var(--fw-semibold);
+}
+.converge strong { color: var(--accent); font-weight: var(--fw-black); }

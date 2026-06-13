@@ -1,0 +1,103 @@
+.slide {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, var(--bg) 0%, var(--bg2) 60%, var(--bg3) 100%);
+}
+
+.deco {
+  width: 23.75rem;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  /* 테마 통일: 컬러/네온 글로우 제거(grayscale) + 라이트 슬라이드에서 글로우가
+     튀지 않도록 살짝 dim(brightness↓) + 형태 또렷하게(contrast↑) */
+  filter: grayscale(100%) brightness(0.92) contrast(1.06);
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 5rem 4rem 3.5rem;
+}
+
+.eyebrow {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.1875rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: var(--fw-semibold);
+  margin-bottom: 1.5rem;
+}
+
+.main {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-black);
+  line-height: 1.05;
+  letter-spacing: -0.09375rem;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.rule {
+  width: 3rem;
+  height: 3px;
+  background: var(--accent);
+  margin: 1.75rem 0;
+}
+
+.sub {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 1.25rem;
+  font-weight: var(--fw-regular);
+  color: var(--muted);
+  letter-spacing: 0.01875rem;
+  line-height: 1.5;
+}
+
+.accent{
+    font-weight: var(--fw-bold);
+    color: var(--accent);
+}
+
+.meta {
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  font-weight: var(--fw-light);
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.metaLbl {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.0625rem;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.metaVal {
+  font-size: var(--fs-caption);
+  color: var(--sub);
+}

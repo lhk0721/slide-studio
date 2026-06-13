@@ -1,0 +1,142 @@
+.slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+.layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 0.5rem 0 0;
+}
+
+/* ── two sides ── */
+.sides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+.side {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0.75rem;
+}
+.sideTag {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.094rem;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.sideHead {
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.sideBody {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--sub);
+}
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+.statVal {
+  font-size: 2.875rem;
+  font-weight: var(--fw-extrabold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+.statLbl {
+  font-size: var(--fs-caption);
+  color: var(--muted);
+}
+.sources {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  text-align: right;
+  font-size: calc(var(--fs-caption) * 0.78);
+  line-height: 1.4;
+  color: var(--ghost);
+  letter-spacing: 0.005em;
+}
+
+/* ── self-reinforcing loop ── */
+.loopWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.loopCap {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.094rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.loopRow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.loopNode {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+.loopNum {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-extrabold);
+  color: var(--accent);
+  letter-spacing: 0.03125rem;
+}
+.loopText {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  white-space: nowrap;
+}
+.loopArrow {
+  flex: 1;
+  text-align: center;
+  color: var(--ghost);
+  font-size: 1.125rem;
+}
+.loopReturn {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.625rem;
+}
+.loopReturnLbl {
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  letter-spacing: 0.0125rem;
+}
+
+/* ── bottom convergence ── */
+.converge {
+  flex-shrink: 0;
+  margin: 0 var(--gx);
+  padding: 1.125rem 0 1.75rem;
+  font-size: var(--fs-heading);
+  color: var(--muted);
+  text-align: center;
+  font-weight: var(--fw-semibold);
+}
+.converge strong { color: var(--accent); font-weight: var(--fw-black); }

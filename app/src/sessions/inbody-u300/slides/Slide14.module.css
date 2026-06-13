@@ -1,0 +1,167 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+.layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* ── 좌: SMPL 메쉬 ── */
+.figWrap {
+  flex-shrink: 0;
+  width: 19rem;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  justify-content: center;
+}
+.figImg {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+.figCap {
+  flex-shrink: 0;
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  line-height: 1.4;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ── 우: 작동 원리 ── */
+.right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.875rem;
+}
+
+.roadmap {
+  align-self: flex-start;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.0625rem;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.3125rem 0.75rem;
+  border-radius: 61.25rem;
+}
+
+.lead {
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--sub);
+  word-break: keep-all;
+}
+.lead strong { color: var(--accent); font-weight: var(--fw-bold); }
+
+.steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.step {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.stepNum {
+  flex-shrink: 0;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(0.15rem);
+}
+.stepText {
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--text);
+  word-break: keep-all;
+}
+
+.summary {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 0.375rem 0.375rem 0;
+  padding: 0.625rem 0.875rem;
+  font-size: var(--fs-body);
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.45;
+  word-break: keep-all;
+}
+.summary strong { font-style: normal; color: var(--accent); font-weight: var(--fw-bold); }
+
+.expandWrap {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+.expandCat {
+  flex-shrink: 0;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.094rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.expandList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.expandList li {
+  position: relative;
+  padding-left: 0.75rem;
+  font-size: var(--fs-caption);
+  color: var(--sub);
+  word-break: keep-all;
+}
+.expandList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.converge {
+  flex-shrink: 0;
+  margin: 0 var(--gx);
+  padding: 1.125rem 0 1.75rem;
+  font-size: var(--fs-heading);
+  color: var(--muted);
+  text-align: center;
+  font-weight: var(--fw-semibold);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.converge strong { color: var(--accent); font-weight: var(--fw-black); }
