@@ -93,3 +93,60 @@ financial-market의 `verify`(미검증) 8건 중 웹으로 확인 가능한 4건
 
 - `deck-content.md`·`deck-workflow.md`(파일럿 메모)에서 인사이트 문서 링크.
 - 처음엔 잔여 작업을 financial-market 세션 한정 TODO로 적었으나, 사용자 의도(=시스템 설계 노트)에 맞춰 **자산·조사 항목까지 전부 일반화**해 인사이트 문서로 이관(고려사항 9·10 추가: 조달 주체 분류·준비도 자동 전파, 단일 수치 선택·근거 보강). 관리문서의 세션 TODO 섹션은 인사이트 문서 + 워크벤치 게이트를 가리키는 포인터로 교체. 세션 작업목록의 mis-scoped 항목(#5~#12)도 정리.
+
+### 2026-06-14 — 게이트 보완 목록을 슬라이드 단위→구체 항목 단위로 세분화
+
+대시보드 게이트가 슬라이드마다 "자산 미확보"로 뭉뚱그려 보여줘서, **무엇이 어떻게 부족한지** 파악이 안 된다는 피드백. 슬라이드 7장에 흩어진 자산 8건(확보 필요 1 + 확인 필요 7)이 7줄로만 보이던 문제.
+
+- **`Content.jsx`**: per-slide `blockers`를 항목 단위 `todos`로 교체(`slideTodos(s, r)`가 본문 미작성·`status!=='have'` 자산·미검증 근거를 개별 항목으로 펼침). 카테고리 4그룹(본문 미작성 / 자산·확보 필요(need) / 자산·확인 필요(check) / 미검증 근거)으로 묶어 각 그룹에 건수 + "무엇을 어떻게" 한 줄 안내(`TODO_HINT`, 항목 단위 과한 추정은 피하고 카테고리 수준). 각 항목은 p번호·종류·설명·출처·라이선스를 그대로 노출.
+- **게이트 배너**: "N개 슬라이드 보완 필요" → "N개 슬라이드 · 할 일 M건", 부제는 `자산 확보 필요 / 자산 확인 필요 / 미검증 근거 / 본문 미작성`을 분리 표기(8을 1+7로 분해).
+- **CSS**: `.blockers*` 제거, `.todos`/`.todoGroup`/`.todoTag(_body/need/check/ev)`/`.todoItem` 등 추가. 항목이 늘어 사이드바 21rem→24rem.
+- 검증: `npm run build` 통과, 헤드리스로 보완 목록(확보 필요 1·확인 필요 7, 각 출처·라이선스 노출)·게이트 문구 정상 확인.
+- 설계 연결: 항목별 "조달 주체(에이전트/사람)" 자동 라우팅·준비도 자동 전파는 `deck-content-insights.md` 고려사항 #9로 일반화돼 있음(현재는 status/출처 텍스트로 사람이 판단). 항목 클릭→해소는 #3.
+
+#### 후속: 보완 목록 ↔ 슬라이드 행 연결 (항목 클릭 → 스크롤·강조)
+
+좌측 보완 목록(`.todos`)과 우측 슬라이드 행 리스트(`.list`)가 분리돼 있어, 사이드바 항목을 행에서 대조·확인할 수 없다는 피드백. 두 패널을 연결.
+
+- **`Content.jsx`**: 보완 항목을 `<button>`으로 만들어 클릭 시 `jumpTo(id)` — 해당 행을 `scrollIntoView({block:'center'})`로 가져오고 `flashId` 상태로 1.6s 강조. 각 행에 `id="row-{id}"` 부여, `flashId` 일치 시 `.rowFlash` 클래스. (`useEffect`로 강조 타이머 정리.)
+- **CSS**: `.todoItem`을 버튼으로(hover 배경·focus-visible 아웃라인), `.rowFlash` 키프레임(accent box-shadow → soft).
+- 검증: 헤드리스로 보완 항목 8개 = 자산 8건 일치, p11 클릭 시 row-11 중앙 스크롤·강조 적용 확인. build 통과.
+
+#### 후속: 워크벤치 ↔ 개요 인스펙터 연결 (`?slide=N` 딥링크)
+
+콘텐츠 워크벤치와 개요 인스펙터(`/overview`의 `aside`)도 따로 놀아, 같은 슬라이드의 시각 계획·근거 인용·페이지 내용을 보려면 개요로 가서 노드를 다시 찾아 눌러야 했다(상단 "개요 ▦" 링크는 선택 슬라이드를 안 들고 감). 인스펙터 선택이 URL이 아니라 로컬 상태라 딥링크 불가였던 게 원인.
+
+- **`Overview.jsx`**: 선택 상태를 URL 쿼리(`?slide=N`)와 동기화. `useSearchParams`로 `sel` 초기화(딥링크 진입 시 인스펙터 자동 오픈), `syncSelParam(id)` 헬퍼로 노드 클릭/닫기 시 URL 갱신(`replace`). HashRouter에서도 동작.
+- **`Content.jsx`**: 각 슬라이드 행 헤더에 `개요 ↗` 링크(`/:sessionId/overview?slide={id}`) 추가 — 그 슬라이드의 인스펙터(시각 계획·본문·근거)로 바로 점프.
+- **CSS**: `.rowLink`(행 헤더 보조 링크) 추가.
+- 검증: 헤드리스로 ① `/overview?slide=7` 직접 진입 시 인스펙터 "슬라이드 7" 오픈, ② 콘텐츠 행 12개 모두 링크, row-11 클릭 시 `?slide=11`로 이동·인스펙터 "시사점 & 결론" 오픈 확인. build 통과.
+- 결과: `보완 목록 → 슬라이드 행 → 개요 인스펙터(시각·본문·근거 전체)`가 한 줄로 이어짐.
+
+#### 후속: 조치 팝오버 + 이미지 업로드 (보완 항목 인라인 해소의 첫 조각)
+
+보완 항목/자산을 클릭하면 **조치 UI가 뜨는 팝오버**를 추가. 향후 텍스트·출처·Agent 지시 등이 들어갈 자리로, 지금은 **이미지 업로드만 구현**.
+
+- **트리거**: 슬라이드 행의 **자산 항목**(li, `role=button`) 클릭 시 팝오버 오픈 — 조치는 자산이 있는 그 자리에서. (대시보드 보완 목록 클릭은 해당 행 강조/이동으로 유지 — 같은 자산을 행에서 클릭하면 되므로 팝오버는 행 쪽에만 둔다.)
+- **떠 있는 팝오버**(`Content.jsx`): `position:fixed`로 클릭 요소 rect 기준 배치(뷰포트 클램프), **레이아웃을 밀지 않음**(헤드리스로 list scrollHeight 불변 확인). 백드롭 클릭·Esc로 닫힘. 헤더에 대상 라벨 + "행으로 ↘"(jumpTo).
+- **조치 탭**: 이미지(활성) / 텍스트·출처·Agent 지시(자리표시, aria-disabled "준비 중").
+- **이미지 업로드**: 자산 항목 대상. 파일 선택 → `fileToDataUrl`로 긴 변 1600px·JPEG 0.85 축소 → `localStorage`(`slide-studio:asset-images:<sessionId>`, 키 `slideId:assetIdx`)에 보관. 미리보기·다시 업로드·제거. 첨부 시 행 자산에 썸네일·보완 목록 항목에 🖼 표시. **메타(status)는 자동 변경 안 함**(메타는 코드 소유, 워크벤치 read-only — 안내문 명시).
+- **CSS**: `.popBackdrop/.popover/.popTabs/.popDrop/.popPreview/...`, 자산 li 클릭 가능(hover/focus), `.assetThumb`.
+- 검증: build 통과, 헤드리스로 자산 클릭→팝오버(fixed)·이미지 업로드→미리보기·localStorage 키 생성·행 썸네일·무리플로우·todo 버튼 트리거 모두 확인.
+- 비고: 텍스트/출처/Agent 지시 조치, 그리고 첨부로 status 자동 해소(예: 사진 업로드 시 need→have 제안)는 후속(#3 인앱 해소 플로우와 연계).
+
+#### 후속: 이미지 드롭존 드래그&드롭 (영역 밖 드롭 + 화면 dim)
+
+이미지 업로드를 드래그&드롭으로도 받게 함.
+
+- **window 레벨 수신**(`Content.jsx`): 자산 팝오버가 열린 동안 `dragenter/over/leave/drop`을 window에서 듣는다. 파일 드래그면 `dragging` on → **드롭존(팝오버)만 위로 띄우고 화면 전체를 dim**(`.dragDim` z45 pointer-events:none, 팝오버 z50). enter/leave는 depth 카운터로 플리커 방지.
+- **영역 밖 드롭 허용**: window `drop`에서 받으므로 드롭존 밖 어디에 놓아도 현재 자산(`slideId:assetIdx`)에 업로드. 이미지 타입만 허용.
+- 드래그 중 드롭존 강조(`.popDropActive`)·문구 전환("여기에 놓으세요 — 화면 어디에 놓아도 됩니다"). 저장은 함수형 setState로 바꿔 window 핸들러 stale closure 방지.
+- 검증: build 통과, 헤드리스로 합성 DragEvent(File)로 dragenter→dim·드롭존 active, (드롭존 밖)drop→미리보기·dim 해제·localStorage 키 생성 확인.
+
+#### 후속: 업로드 이미지 그레이스케일 옵션 (무채색 톤)
+
+업로드 이미지를 무채색 와이어프레임 톤에 맞춰 **그레이스케일(회색조, 1비트 흑백 아님)** 로 넣는 임시 옵션.
+
+- **변환**(`Content.jsx`): `fileToDataUrl(file, { grayscale })`가 캔버스 `ctx.filter='grayscale(1)'`로 변환(8비트 회색조). 기존 dataURL용 `dataUrlToGrayscale`도 추가(되돌리기 불가).
+- **UI**: 팝오버에 "흑백(그레이스케일)로 넣기" 체크박스(기본 켬). 클릭 업로드·드롭·다시 업로드 모두 적용. 기존 이미지엔 "흑백 변환" 버튼. 드롭 핸들러는 `grayscaleRef`로 최신값 참조(window stale closure 방지).
+- 검증: build 통과, 헤드리스로 빨강(255,0,0) 업로드 시 켬→[54,54,54](r=g=b, 2진 아님)·끔→[255,0,0] 색 유지 확인.

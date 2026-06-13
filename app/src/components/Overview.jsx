@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
-import { useParams, Navigate, Link } from 'react-router-dom'
+import { useParams, useSearchParams, Navigate, Link } from 'react-router-dom'
 import {
   ReactFlow,
   Background,
@@ -378,7 +378,9 @@ const nodeTypes = { slide: SlideNode, section: SectionNode }
 export default function Overview() {
   const { sessionId } = useParams()
   const session = getSession(sessionId)
-  const [sel, setSel] = useState(null)
+  // 선택 슬라이드를 URL(?slide=N)에 실어 콘텐츠 워크벤치 등에서 딥링크로 인스펙터를 연다.
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [sel, setSel] = useState(() => searchParams.get('slide'))
   const [detail, setDetail] = useState(false) // 근거 자세히보기 드로어
   const [dir, setDir] = useState('LR') // 'LR' 가로 · 'TB' 세로
   const mainRef = useRef(null)
@@ -397,16 +399,35 @@ export default function Overview() {
     [baseNodes, sel]
   )
 
-  const onNodeClick = useCallback((_e, node) => {
-    if (node.type !== 'slide') return
-    setSel(node.id)
-    setDetail(false) // 슬라이드를 새로 고르면 드로어는 접고 시작
-  }, [])
+  const syncSelParam = useCallback(
+    (id) =>
+      setSearchParams(
+        (prev) => {
+          const p = new URLSearchParams(prev)
+          if (id) p.set('slide', id)
+          else p.delete('slide')
+          return p
+        },
+        { replace: true },
+      ),
+    [setSearchParams],
+  )
+
+  const onNodeClick = useCallback(
+    (_e, node) => {
+      if (node.type !== 'slide') return
+      setSel(node.id)
+      setDetail(false) // 슬라이드를 새로 고르면 드로어는 접고 시작
+      syncSelParam(node.id)
+    },
+    [syncSelParam],
+  )
 
   const closeInspector = useCallback(() => {
     setSel(null)
     setDetail(false)
-  }, [])
+    syncSelParam(null)
+  }, [syncSelParam])
 
   // Frame the graph: flow axis starts at the lead edge, cross axis centered.
   const onInit = useCallback(
