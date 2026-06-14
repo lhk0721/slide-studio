@@ -16,6 +16,7 @@
   - `docs/agent-workflow/deck-discovery-insights.md`
   - `docs/agent-workflow/deck-content.md`
   - `docs/agent-workflow/deck-design.md`
+  - `docs/agent-workflow/deck-build-insights.md`
 - If you change scope, ownership, or cross-document rules here, update the child docs together.
 
 ## Purpose
