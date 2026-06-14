@@ -1,6 +1,7 @@
 import '../tokens.css' // deck design tokens, scoped to [data-theme="financial-market"]
 import Slide01 from './Slide01'
 import Slide02 from './Slide02'
+import Slide03 from './Slide03'
 import Slide04 from './Slide04'
 import Slide05 from './Slide05'
 import Slide06 from './Slide06'
@@ -8,6 +9,8 @@ import Slide07 from './Slide07'
 import Slide08 from './Slide08'
 import Slide09 from './Slide09'
 import Slide10 from './Slide10'
+import Slide11 from './Slide11'
+import Slide12 from './Slide12'
 
 // ─────────────────────────────────────────────────────────────
 //  SLIDE META — 발표 "같은 충격, 다른 실패" (국제시장과 금융기관).
@@ -73,9 +76,9 @@ const slides = [
     body: [
       '코로나19는 전 세계 피트니스 수요를 동시에 끌어올렸다.',
       '글로벌 피트니스 앱 시장 약 $13.9B(2026, GVR)로 급성장 — 기관별 약 $14~22B.',
-      '그러나 같은 출발선에서 미국과 한국의 결말은 정반대였다.',
+      '그러나 같은 출발선에서 미국과 한국의 결말은 다른 양상이었다.',
       '미국 — 거대 자본의 거품과 붕괴 / 한국 — 시장의 파편화와 폐업.',
-      '왜 같은 충격이 서로 다른 실패로 이어졌는가?',
+      '왜 같은 충격이 서로 다른 양상의 실패로 이어졌는가?',
     ],
     assets: [
       { kind: 'diagram', desc: '공통 충격 → 시장 분기 다이어그램', source: '자체 작도', status: 'data-ready' },
@@ -83,7 +86,7 @@ const slides = [
     ],
   },
   {
-    id: 3, title: '분석 틀 — 시장실패와 자본 조달', next: [4, 7],
+    id: 3, title: '분석 틀 — 시장실패와 자본 조달', next: [4, 7], component: Slide03,
     group: '분석 틀', role: '분석 틀',
     message: "시장실패(자원의 비효율적 배분)를 '자본이 어떤 구조로 조달·배분됐는가'로 해석한다",
     evidence: [
@@ -306,7 +309,7 @@ const slides = [
     notes: '앞 슬라이드(4~9) 핵심 수치·근거 압축',
   },
   {
-    id: 11, title: '시사점 & 결론',
+    id: 11, title: '시사점 & 결론', component: Slide11,
     group: '결론', role: '시사점·결론',
     message: '시장실패는 하나의 형태가 아니라 구조의 함수다',
     evidence: [
@@ -325,7 +328,7 @@ const slides = [
     ],
   },
   {
-    id: 12, title: '참고자료',
+    id: 12, title: '참고자료', component: Slide12,
     group: '부록', role: '참고자료',
     message: '출처 정리 및 발표 전 검증 체크리스트',
     body: [

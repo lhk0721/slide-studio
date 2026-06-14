@@ -1,7 +1,7 @@
 import styles from './Slide02.module.css'
 import DivergenceFlow from '../components/DivergenceFlow'
 
-// 문제 제기 — 같은 출발(코로나 충격·거대 시장), 정반대의 결말. "왜?"로 분석을 연다.
+// 문제 제기 — 같은 출발(코로나 충격·거대 시장), 다른 양상의 결말. "왜?"로 분석을 연다.
 // 패턴: 분기 흐름도(DivergenceFlow, 부분 — 충격→두 결말) + 출처 캡션(.s-source).
 const outcomes = [
   '거대 자본의 거품 → 붕괴',   // 미국 (좌)
@@ -36,8 +36,8 @@ export default function Slide02() {
           </div>
 
           <div className={styles.ask}>
-            <span className={styles.askLead}>같은 출발선, 정반대의 결말</span>
-            <span className={styles.askBig}>왜 같은 충격이 서로 다른 실패로 이어졌는가?</span>
+            <span className={styles.askLead}>같은 출발선, 다른 양상의 결말</span>
+            <span className={styles.askBig}>왜 같은 충격이 서로 다른 양상의 실패로 이어졌는가?</span>
           </div>
         </div>
       </div>
