@@ -2,6 +2,8 @@ import '../tokens.css' // deck design tokens, scoped to [data-theme="financial-m
 import Slide01 from './Slide01'
 import Slide02 from './Slide02'
 import Slide04 from './Slide04'
+import Slide05 from './Slide05'
+import Slide06 from './Slide06'
 import Slide10 from './Slide10'
 
 // ─────────────────────────────────────────────────────────────
@@ -129,7 +131,7 @@ const slides = [
     ],
   },
   {
-    id: 5, title: '미국 ② — 거품이 꺼지다',
+    id: 5, title: '미국 ② — 거품이 꺼지다', component: Slide05,
     group: '미국 사례', role: '거품 붕괴',
     message: '금리 정상화로 밸류에이션이 붕괴, 대규모 구조조정 — 전형적 금융 거품 사이클',
     evidence: [
@@ -164,7 +166,7 @@ const slides = [
     ],
   },
   {
-    id: 6, title: '미국 ③ — 그런데 트레이너는 살아남았다', next: [10],
+    id: 6, title: '미국 ③ — 그런데 트레이너는 살아남았다', next: [10], component: Slide06,
     group: '미국 사례', role: '반전 — 트레이너 보호',
     message: '극심한 비용 압박에도 트레이너는 보호 — 구독 가치의 원천(핵심 자산)이기 때문',
     evidence: [
