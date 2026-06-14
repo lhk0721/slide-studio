@@ -4,6 +4,9 @@ import Slide02 from './Slide02'
 import Slide04 from './Slide04'
 import Slide05 from './Slide05'
 import Slide06 from './Slide06'
+import Slide07 from './Slide07'
+import Slide08 from './Slide08'
+import Slide09 from './Slide09'
 import Slide10 from './Slide10'
 
 // ─────────────────────────────────────────────────────────────
@@ -203,7 +206,7 @@ const slides = [
     notes: '한국 대비를 위한 복선',
   },
   {
-    id: 7, title: '한국 ① — 거품 대신 파편화',
+    id: 7, title: '한국 ① — 거품 대신 파편화', component: Slide07,
     group: '한국 사례', role: '파편화',
     message: '진입장벽이 낮아 자본이 한 곳에 모이지 못하고 개인사업자·중소기업·유튜버로 분산됐다',
     evidence: [
@@ -233,7 +236,7 @@ const slides = [
     ],
   },
   {
-    id: 8, title: '한국 ② — 과잉경쟁과 오프라인 붕괴',
+    id: 8, title: '한국 ② — 과잉경쟁과 오프라인 붕괴', component: Slide08,
     group: '한국 사례', role: '과잉경쟁·오프라인 붕괴',
     message: '분산된 시장은 박리다매·과잉경쟁으로, 오프라인은 대규모 폐업으로 — 소상공인 시장의 취약성',
     evidence: [
@@ -262,7 +265,7 @@ const slides = [
     ],
   },
   {
-    id: 9, title: '한국 ③ — 트레이너는 비용으로 남았다', next: [10],
+    id: 9, title: '한국 ③ — 트레이너는 비용으로 남았다', next: [10], component: Slide09,
     group: '한국 사례', role: '트레이너 = 비용(레몬화)',
     message: '트레이너를 핵심 자산으로 안을 거대 자본 플랫폼이 없어, 박리다매 압력이 인력시장으로 전이 → 저임금·고이직·품질 하향(레몬시장)',
     evidence: [

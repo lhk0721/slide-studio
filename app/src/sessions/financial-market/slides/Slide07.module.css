@@ -1,0 +1,67 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+.layout {
+  display: flex;
+  align-items: center;
+  gap: 3.25rem;
+  width: 100%;
+  height: 100%;
+}
+.chart {
+  flex: 1.25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  min-width: 0;
+}
+.chart svg { display: block; width: 64%; max-width: 17rem; height: auto; }
+.side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  min-width: 0;
+}
+.take {
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  word-break: keep-all;
+}
+
+/* ── 도넛 (출원인 유형 분산) ── */
+.seg { fill: none; stroke-width: 34; }
+.segA { stroke: var(--accent); }
+.segB { stroke: var(--sub); }
+.segC { stroke: var(--ghost); }
+.donutBig { fill: var(--accent); font-size: 46px; font-weight: 800; }
+.donutSm { fill: var(--muted); font-size: 16px; font-weight: 600; }
+
+/* 범례 */
+.legend {
+  display: flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  color: var(--sub);
+}
+.legend i { width: 0.7rem; height: 0.7rem; border-radius: 3px; flex-shrink: 0; }
+.dotA { background: var(--accent); }
+.dotB { background: var(--sub); }
+.dotC { background: var(--ghost); }
