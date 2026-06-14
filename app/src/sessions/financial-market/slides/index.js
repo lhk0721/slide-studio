@@ -1,6 +1,7 @@
 import '../tokens.css' // deck design tokens, scoped to [data-theme="financial-market"]
 import Slide01 from './Slide01'
 import Slide02 from './Slide02'
+import Slide04 from './Slide04'
 import Slide10 from './Slide10'
 
 // ─────────────────────────────────────────────────────────────
@@ -98,7 +99,7 @@ const slides = [
     notes: '출처: Akerlof(1970) The Market for Lemons',
   },
   {
-    id: 4, title: '미국 ① — 자본이 몰리다',
+    id: 4, title: '미국 ① — 자본이 몰리다', component: Slide04,
     group: '미국 사례', role: '자본 집중(거품 형성)',
     message: 'VC·공모시장 자본이 펠로톤·ClassPass에 집중되며 밸류에이션이 펀더멘털과 분리됐다',
     evidence: [

@@ -24,9 +24,12 @@ try {
     viewport: { width: 1400, height: 840 },
     deviceScaleFactor: 2,
   })
-  await page.goto(`${base}/#/${route}`, { waitUntil: 'networkidle' })
+  // 'commit' (not load/networkidle) — Vite's HMR websocket keeps the network
+  // busy so load/networkidle can hang. We only need navigation committed; the
+  // frame selector below gates actual render-readiness.
+  await page.goto(`${base}/#/${route}`, { waitUntil: 'commit' })
   const deck = page.locator('[data-deck-frame]') // stable hook on the 1280×720 frame
-  await deck.waitFor({ state: 'visible', timeout: 10000 })
+  await deck.waitFor({ state: 'visible', timeout: 45000 })
   await page.evaluate(() => document.fonts && document.fonts.ready)
   await page.waitForTimeout(400) // let layout/fonts settle
   await deck.screenshot({ path: out })
