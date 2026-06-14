@@ -1,37 +1,78 @@
 .cover {
+  position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  background: var(--text);
+}
+
+/* 폐업 헬스장 — 그레이스케일 풀블리드 */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  filter: grayscale(1) contrast(1.03);
+}
+/* 좌측이 어두운 스크림 — 좌하단 타이틀 가독성 */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(16, 24, 32, 0.88) 0%,
+    rgba(16, 24, 32, 0.66) 42%,
+    rgba(16, 24, 32, 0.28) 100%
+  );
+}
+
+.content {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 0 var(--gx);
-  background: var(--bg);
 }
-
+.accentBar {
+  width: 2.75rem;
+  height: 0.25rem;
+  border-radius: 2px;
+  background: var(--accent);
+  margin-bottom: 1.1rem;
+}
 .eyebrow {
   font-size: var(--fs-caption);
   font-weight: var(--fw-bold);
   letter-spacing: 0.18rem;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.1rem;
 }
-
 .title {
   font-size: var(--fs-display);
   font-weight: var(--fw-black);
-  line-height: 1.08;
+  line-height: 1.06;
   letter-spacing: -0.03em;
-  color: var(--text);
+  color: #fff;
   word-break: keep-all;
 }
-
 .sub {
-  margin-top: 1.5rem;
+  margin-top: 1.4rem;
+  max-width: 38rem;
   font-size: var(--fs-heading);
   font-weight: var(--fw-regular);
   line-height: 1.5;
-  color: var(--sub);
+  color: rgba(255, 255, 255, 0.82);
   word-break: keep-all;
   white-space: pre-line;
+}
+.by {
+  margin-top: 1.6rem;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
 }
