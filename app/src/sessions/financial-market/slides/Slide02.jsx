@@ -4,8 +4,8 @@ import DivergenceFlow from '../components/DivergenceFlow'
 // 문제 제기 — 같은 출발(코로나 충격·거대 시장), 다른 양상의 결말. "왜?"로 분석을 연다.
 // 패턴: 분기 흐름도(DivergenceFlow, 부분 — 충격→두 결말) + 출처 캡션(.s-source).
 const outcomes = [
-  '거대 자본의 거품 → 붕괴',   // 미국 (좌)
-  '시장의 파편화 → 폐업',       // 한국 (우)
+  '트레이너 — 핵심 자산으로 보호 → 생존',   // 미국 (좌)
+  '트레이너 — 수익 압박 → 임금 하락·이탈',   // 한국 (우)
 ]
 
 export default function Slide02() {
@@ -36,8 +36,8 @@ export default function Slide02() {
           </div>
 
           <div className={styles.ask}>
-            <span className={styles.askLead}>같은 출발선, 다른 양상의 결말</span>
-            <span className={styles.askBig}>왜 같은 충격이 서로 다른 양상의 실패로 이어졌는가?</span>
+            <span className={styles.askLead}>같은 시장, 같은 충격 — 다른 영향</span>
+            <span className={styles.askBig}>{'같은 공급자(트레이너),\n왜 두 나라에서 다른 결말로 갈렸는가?'}</span>
           </div>
         </div>
       </div>

@@ -45,7 +45,7 @@ export default function Slide07() {
               <span className="metric-val">약 300만</span>
               <span className="metric-lbl">무료 운동 유튜버 김계란 구독자 — 콘텐츠로도 분산</span>
             </div>
-            <p className={styles.take}>거대 자본 플랫폼이 형성되지 못하고, 개인·중소기업·유튜버로 분산. 거품 대신 ‘파편화’가 일어났다.</p>
+            <p className={styles.take}>{'거대 자본 플랫폼이 형성되지 못하고,\n개인·중소기업·유튜버로 분산.\n거품 대신 ‘파편화’가 일어났다.'}</p>
           </div>
 
         </div>

@@ -37,6 +37,7 @@
   font-weight: var(--fw-semibold);
   color: var(--text);
   word-break: keep-all;
+  white-space: pre-line;
 }
 
 /* ── 차트 요소 (클래스 기반 SVG — 내보내기 시 inline 보존) ── */

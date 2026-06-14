@@ -36,6 +36,7 @@
   font-weight: var(--fw-semibold);
   color: var(--text);
   word-break: keep-all;
+  white-space: pre-line;
 }
 
 /* ── 도넛 (출원인 유형 분산) ── */

@@ -73,5 +73,6 @@
   line-height: 1.4;
   color: var(--muted);
   word-break: keep-all;
+  white-space: pre-line;
 }
 .verdict strong { color: var(--accent); font-weight: var(--fw-black); }

@@ -21,6 +21,7 @@
   line-height: 1.5;
   color: var(--sub);
   word-break: keep-all;
+  white-space: pre-line;
 }
 .intro strong { color: var(--text); font-weight: var(--fw-bold); }
 
@@ -36,37 +37,42 @@
   padding: 1.6rem 1.65rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 0.45rem;
 }
 .lensK {
-  font-size: calc(var(--fs-caption) * 0.9);
+  font-size: calc(var(--fs-body) * 0.95);
   font-weight: var(--fw-bold);
   letter-spacing: 0.06rem;
   text-transform: uppercase;
   color: var(--muted);
 }
 .lensBig {
-  font-size: calc(var(--fs-title) * 0.82);
+  font-size: calc(var(--fs-title) * 0.95);
   font-weight: var(--fw-extrabold);
   letter-spacing: -0.01em;
   color: var(--accent);
 }
 .lensDesc {
-  font-size: var(--fs-body);
+  font-size: calc(var(--fs-heading) * 0.98);
   line-height: 1.45;
   color: var(--sub);
   word-break: keep-all;
 }
 
-/* 미국 ↔ 한국 설정 (이 틀로 두 시장을 본다) */
+/* 미국 ↔ 한국 설정 — 각 라벨이 대응 렌즈 카드(①→미국 / ②→한국) 아래에 정렬되도록
+   .lenses 와 동일한 2열 그리드로 맞춘다 */
 .map {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.4rem;
-  font-size: var(--fs-body);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  font-size: calc(var(--fs-heading) * 0.92);
   color: var(--sub);
   word-break: keep-all;
 }
+.mapItem {
+  text-align: center;
+  padding: 0 1.65rem;
+}
 .mapItem strong { color: var(--text); font-weight: var(--fw-bold); }
-.mapDot { width: 0.35rem; height: 0.35rem; border-radius: 50%; background: var(--ghost); flex-shrink: 0; }

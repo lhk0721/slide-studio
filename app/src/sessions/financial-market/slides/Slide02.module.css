@@ -67,4 +67,5 @@
   line-height: 1.25;
   color: var(--accent);
   word-break: keep-all;
+  white-space: pre-line;
 }

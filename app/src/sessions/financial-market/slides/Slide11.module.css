@@ -49,6 +49,7 @@
   line-height: 1.45;
   color: var(--sub);
   word-break: keep-all;
+  white-space: pre-line;
 }
 
 /* 클로징 한 줄 */

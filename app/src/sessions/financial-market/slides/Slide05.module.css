@@ -30,6 +30,7 @@
   font-weight: var(--fw-semibold);
   color: var(--text);
   word-break: keep-all;
+  white-space: pre-line;
 }
 
 /* ── 막대 차트 (정점↔현재) ── */

@@ -40,7 +40,7 @@ export default function Slide08() {
               <span className="metric-val">987건</span>
               <span className="metric-lbl">폐업 선불거래 피해구제 (2020~25.8) — 체육시설 70%+</span>
             </div>
-            <p className={styles.take}>선불 멤버십 + 출혈 경쟁 + ‘먹튀’ 리스크. 소상공인 시장의 구조적 취약성이 대규모 폐업으로 드러났다.</p>
+            <p className={styles.take}>{'선불 멤버십 + 출혈 경쟁 + ‘먹튀’ 리스크.\n소상공인 시장의 구조적 취약성이\n대규모 폐업으로 드러났다.'}</p>
           </div>
 
         </div>

@@ -23,7 +23,7 @@ export default function Slide03() {
         <div className={styles.layout}>
 
           <p className={styles.intro}>
-            시장실패 = 자원의 비효율적 배분. 그 원인을 <strong>자본이 어떤 구조로 조달·배분됐는가</strong>로 해석한다.
+            시장실패 = 자원의 비효율적 배분.{'\n'}그 원인을 <strong>자본이 어떤 구조로 조달·배분됐는가</strong>로 해석한다.
           </p>
 
           <div className={styles.lenses}>
@@ -38,7 +38,6 @@ export default function Slide03() {
 
           <div className={styles.map}>
             <span className={styles.mapItem}><strong>미국</strong> = 자본시장 주도 (VC·IPO)</span>
-            <span className={styles.mapDot} />
             <span className={styles.mapItem}><strong>한국</strong> = 소상공인·콘텐츠 주도</span>
           </div>
 

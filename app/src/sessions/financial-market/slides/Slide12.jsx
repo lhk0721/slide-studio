@@ -37,7 +37,7 @@ export default function Slide12() {
           </div>
 
           <p className={styles.note}>
-            <strong>검증</strong> — 2026-06-14 기준 전 항목 1차/2차 출처 대조 완료. 시점 의존 수치(현재 시총·유튜버 구독자)는 발표 시점에 재확인 권장.
+            <strong>검증</strong> — 2026-06-14 기준 전 항목 1차/2차 출처 대조 완료.{'\n'}시점 의존 수치(현재 시총·유튜버 구독자)는 발표 시점에 재확인 권장.
           </p>
 
         </div>

@@ -40,7 +40,7 @@ export default function Slide05() {
               <span className="metric-val">2,800명</span>
               <span className="metric-lbl">2022년 전사 감원 (CNN·Bloomberg)</span>
             </div>
-            <p className={styles.take}>2022년 금리 정상화와 함께 밸류에이션이 붕괴. 매출도 FY2020 약 18억$ 이후 감소세 — 전형적 금융 거품 사이클.</p>
+            <p className={styles.take}>{'2022년 금리 정상화와 함께 밸류에이션이 붕괴.\n매출도 FY2020 약 18억$ 이후 감소세\n— 전형적 금융 거품 사이클.'}</p>
           </div>
 
         </div>

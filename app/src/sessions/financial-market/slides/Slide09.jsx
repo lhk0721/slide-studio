@@ -39,7 +39,7 @@ export default function Slide09() {
       </div>
 
       <div className={styles.verdict}>
-        미국이 트레이너를 자산으로 보호한 것과 <strong>정반대 — 구조가 만든 레몬시장</strong>. (정량은 폐업·이직 등 방증으로 보강)
+        미국이 트레이너를 자산으로 보호한 것과 <strong>정반대 — 구조가 만든 레몬시장</strong>.{'\n'}(정량은 폐업·이직 등 방증으로 보강)
       </div>
 
       <div className="s-source">

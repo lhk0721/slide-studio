@@ -49,7 +49,7 @@ export default function Slide10() {
       </div>
 
       <div className={styles.verdict}>
-        같은 충격, 같은 산업. 그러나 <strong>자본 조달 구조가 실패의 형태와 인적자본의 운명을 갈랐다.</strong>
+        같은 충격, 같은 산업.{'\n'}그러나 <strong>자본 조달 구조가 실패의 형태와 인적자본의 운명을 갈랐다.</strong>
       </div>
 
       <div className="s-source">

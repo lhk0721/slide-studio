@@ -42,7 +42,7 @@ export default function Slide04() {
               <span className="metric-val">7.9 → 16.7배</span>
               <span className="metric-lbl">PSR(주가매출비율): IPO → 정점 — 가격이 매출과 분리</span>
             </div>
-            <p className={styles.take}>VC·공모시장이 ‘팬데믹 = 구조적 전환’ 서사에 베팅. 가격이 매출보다 빠르게 팽창하며 밸류에이션이 펀더멘털에서 멀어지는 전형적 거품 형성.</p>
+            <p className={styles.take}>{'VC·공모시장이 ‘팬데믹 = 구조적 전환’ 서사에 베팅.\n가격이 매출보다 빠르게 팽창하며\n밸류에이션이 펀더멘털에서 멀어지는 전형적 거품 형성.'}</p>
           </div>
 
         </div>

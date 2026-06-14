@@ -44,5 +44,6 @@
   line-height: 1.5;
   color: var(--sub);
   word-break: keep-all;
+  white-space: pre-line;
 }
 .note strong { color: var(--accent); font-weight: var(--fw-bold); }

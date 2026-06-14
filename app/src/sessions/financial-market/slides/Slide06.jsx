@@ -38,7 +38,7 @@ export default function Slide06() {
       </div>
 
       <div className={styles.verdict}>
-        트레이너는 비용이 아니라 <strong>구독 가치의 원천 — 핵심 자산</strong>이기 때문.
+        트레이너는 비용이 아니라{'\n'}<strong>구독 가치의 원천 — 핵심 자산</strong>이기 때문.
       </div>
 
       <div className="s-source">

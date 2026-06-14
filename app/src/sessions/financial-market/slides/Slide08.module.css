@@ -29,6 +29,7 @@
   font-weight: var(--fw-semibold);
   color: var(--text);
   word-break: keep-all;
+  white-space: pre-line;
 }
 
 /* ── 폐업 추이 막대 (상승) ── */
