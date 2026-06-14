@@ -1,3 +1,4 @@
+import '../tokens.css' // deck design tokens, scoped to [data-theme="inbody-u300"]
 import Slide01 from './Slide01'
 import Slide02 from './Slide02'
 import Slide03 from './Slide03'

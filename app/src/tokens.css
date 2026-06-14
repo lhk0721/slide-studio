@@ -1,15 +1,16 @@
 /* ═══════════════════════════════════════════
-   DESIGN TOKENS — InBody 3-color light theme
-   Ink  : InBody Black #101820 (+ 2 neutral grays)
-   Accent: InBody Red  #971B2F (the single emphasis color)
-   Surface: White #FFFFFF / off-white #F3F4F5
-   Apple-keynote discipline: 1 message / slide, whitespace > borders,
-   one accent, large type, no decorative boxes.
+   APP-SHELL FALLBACK TOKENS — session-less surfaces only
+   These defaults serve the surfaces that live OUTSIDE any deck and so
+   carry no `data-theme`: the page canvas (<body>) and the Home session
+   picker. Deck design tokens are NOT owned here — each deck ships its own
+   full set in `sessions/<id>/tokens.css`, scoped to `[data-theme="<id>"]`,
+   which Deck/Overview/Content roots and the export stage carry. A deck
+   subtree therefore overrides every value below via attribute proximity;
+   nothing here leaks into a deck. (A new session MUST ship its own
+   tokens file — it does not inherit a deck theme from this fallback.)
 
-   Units: 1rem = 16px (root default). All sizing/spacing in rem so the
-   whole 1280×720 frame is one coherent, globally-scalable system.
-   Exceptions kept in px: hairline borders, box-shadow/blur radii, and
-   SVG <text>/stroke values (those live in viewBox user-space).
+   Values below currently mirror the InBody base so the shell looks
+   unchanged. Units: 1rem = 16px; all sizing/spacing in rem.
 ═══════════════════════════════════════════ */
 :root {
   /* ── surfaces ── */

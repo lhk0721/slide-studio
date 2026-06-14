@@ -467,7 +467,7 @@ export default function Overview() {
   const drawerOpen = !!(selSlide && detail && evidence.length > 0)
 
   return (
-    <div className={styles.screen}>
+    <div className={styles.screen} data-theme={sessionId}>
       <main className={styles.main} ref={mainRef}>
         <ReactFlow
           key={dir}

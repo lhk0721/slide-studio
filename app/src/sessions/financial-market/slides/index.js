@@ -1,3 +1,4 @@
+import '../tokens.css' // deck design tokens, scoped to [data-theme="financial-market"]
 import Slide01 from './Slide01'
 
 // ─────────────────────────────────────────────────────────────

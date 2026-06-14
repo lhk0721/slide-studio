@@ -4,7 +4,7 @@ import styles from './ExportControls.module.css'
 
 const PIXEL_RATIO = 3 // 1280×720 → 3840×2160 (4K) PPT background
 
-export default function ExportControls({ slides, cur, total, zipName = 'slides.zip' }) {
+export default function ExportControls({ slides, cur, total, zipName = 'slides.zip', theme }) {
   const [busy, setBusy] = useState(null) // 'one' | 'all' | null
   const [progress, setProgress] = useState('')
 
@@ -13,7 +13,7 @@ export default function ExportControls({ slides, cur, total, zipName = 'slides.z
     setBusy('one')
     setProgress('')
     try {
-      await downloadSlide(slides, cur - 1, { pixelRatio: PIXEL_RATIO })
+      await downloadSlide(slides, cur - 1, { pixelRatio: PIXEL_RATIO, theme })
     } catch (e) {
       console.error(e)
       setProgress('내보내기 실패 — 콘솔 확인')
@@ -30,6 +30,7 @@ export default function ExportControls({ slides, cur, total, zipName = 'slides.z
       await downloadAllSlides(slides, {
         pixelRatio: PIXEL_RATIO,
         zipName,
+        theme,
         onProgress: (done, t) => setProgress(`${done} / ${t}`),
       })
       setProgress('완료 — ZIP 저장됨')

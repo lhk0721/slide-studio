@@ -174,3 +174,15 @@ financial-market의 `verify`(미검증) 8건 중 웹으로 확인 가능한 4건
 #### 용어 수정: 과당경쟁 → 과잉경쟁
 
 `financial-market` 콘텐츠 용어 통일. 슬라이드 8(제목·role·message·body)과 종합/결론(슬라이드 10·11 body) 등 6곳 일괄 치환. build 통과.
+
+### 2026-06-14 — Phase 4(Design) 진입: 세션별 토큰 override 아키텍처 도입 (디자인 시스템 단계 1·2)
+
+콘텐츠가 준비돼 Phase 4(Design)로 넘어가며, 그 첫 결정인 **세션별 테마 override 아키텍처**를 잠그고 코드 훅을 깔았다. 사용자 선택 = **세션별 토큰 파일 완전 분리**(shared.css만 공유). 단 "분리해도 두 덱이 `:root` 충돌하므로 scope는 여전히 필요" 보정을 반영해, 각 세션 토큰을 `[data-theme="<id>"]` 로 스코프하고 그 속성을 슬라이드가 렌더되는 모든 곳에 스탬프했다. 디자인 결정(색·폰트 등)은 없이 회귀 위험만 있는 순수 구조 작업으로 한정.
+
+- **세션 토큰 분리**: 전역 `tokens.css`의 `:root` 디자인 토큰 전체를 세션별 파일로 이전 — `sessions/inbody-u300/tokens.css`(`[data-theme="inbody-u300"]`), `sessions/financial-market/tokens.css`(`[data-theme="financial-market"]`). **두 파일 모두 현재는 base의 verbatim 복사**라 화면 변화 0. financial-market 파일에는 "accent·surface·font·density만 디자인 단계에서 *여기서* 결정, 타이포 스케일·여백·그리드·radius는 base와 동일 유지(불변)" 규율을 주석으로 박음.
+- **base = 앱-셸 폴백**: `src/tokens.css`의 `:root`는 세션 없는 표면(`<body>` 캔버스 · Home 세션 피커) 전용 폴백으로 재정의(값 불변 → 회귀 0). 헤더 주석에 "덱 디자인 토큰은 각 세션 파일이 소유, 새 세션은 자기 토큰 파일을 반드시 ship해야 하며 폴백에서 덱 테마를 상속하지 않는다" 명시.
+- **data-theme 스탬프**: `Deck.jsx`(`.wrapper`)·`Overview.jsx`(`.screen`)·`Content.jsx`(`.screen`) 루트에 `data-theme={sessionId}` — 덱·개요·콘텐츠 chrome 및 콘텐츠 팝오버(`.screen` 자손)까지 CSS 변수 **인접 상속**으로 해당 세션 토큰을 해석. 두 덱은 서로의 토큰을 보지 않는다.
+- **export 경로**: 오프스크린 stage엔 `.deck` 조상이 없어 `var(--…)`가 셸 폴백으로 새는 문제 → `exportSlides.jsx`의 `withOffscreenSlide`/`slideToPngBlob`/`downloadSlide`/`downloadAllSlides`에 `theme` 인자를 스레딩해 `stage.dataset.theme` 설정. `ExportControls`·`Deck`에서 `theme={sessionId}` 전달.
+- **로딩**: 각 세션 `slides/index.js` 상단에 co-located `import '../tokens.css'`(세션 모듈 로드 시 전역 부착, 속성으로만 적용).
+- 검증: `npm run build` 통과(CSS 93.67kB — 토큰 세트 중복으로 증가, 정상). 값이 원본 verbatim 복사라 회귀 0(이 환경에 헤드리스 브라우저 없어 런타임 캡처는 생략 — 변경 성격상 정적 보장: 인접 상속으로 덱은 세션 파일에서, 셸은 폴백에서 동일 값 해석).
+- **다음 단계**(이번 커밋 아님): 3) financial-market 실제 테마 값 결정(accent 1개 등) · 4) 이 덱의 반복 패턴 카탈로그 확정 · 산출물 `docs/sessions/financial-market/design.md`(잠근 토큰 델타 + 패턴 + 변수 계약).

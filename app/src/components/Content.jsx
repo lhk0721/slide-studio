@@ -306,7 +306,7 @@ export default function Content() {
   ].filter(Boolean).join(' · ')
 
   return (
-    <div className={styles.screen}>
+    <div className={styles.screen} data-theme={sessionId}>
       <header className={styles.top}>
         <div className={styles.nav}>
           <Link to="/" className={styles.back}>← 세션 목록</Link>

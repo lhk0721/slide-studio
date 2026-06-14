@@ -1,0 +1,69 @@
+/* ═══════════════════════════════════════════
+   SESSION TOKENS — financial-market
+   Self-contained deck design tokens, scoped to this deck only via the
+   `[data-theme="financial-market"]` attribute that Deck/Overview/Content
+   roots (and the export stage) carry. The deck never relies on the
+   app-shell fallback in `src/tokens.css` — every variable it needs is
+   defined here.
+
+   ⚠ DESIGN-SYSTEM PHASE PLACEHOLDER
+   These values are currently an exact copy of the neutral base so this
+   deck renders identically to before. The actual theme decisions for
+   this deck — single accent, surface, font, density — are made in the
+   design-system phase and changed HERE only. Keep the invariant tokens
+   (type scale · spacing · grid · radius) identical to the base unless a
+   divergence is deliberately recorded in `docs/sessions/financial-market`.
+═══════════════════════════════════════════ */
+[data-theme="financial-market"] {
+  /* ── surfaces ── */
+  --bg:      #ffffff;
+  --bg2:     #F3F4F5;
+  --bg3:     #ECEEF1;
+  --card:    #F3F4F5;
+  --page:    #E7E9EB;   /* canvas behind the deck */
+
+  /* ── ink: + two neutral grays ── */
+  --text:    #101820;
+  --sub:     #44505A;
+  --muted:   #5A636D;
+  --rule:    #E3E5E8;
+  --ghost:   #C5CAD0;
+
+  --ink-rgb: 16, 24, 32;
+
+  /* ── single accent (TO BE DECIDED in the design-system phase) ── */
+  --accent:      #971B2F;
+  --accent-soft: #F4E7E9;
+
+  /* ── translucency & elevation (composed from ink) ── */
+  --glass:        rgba(255, 255, 255, .8);
+  --border-soft:  rgba(var(--ink-rgb), .08);
+  --border-hair:  rgba(var(--ink-rgb), .06);
+  --hint:         rgba(var(--ink-rgb), .28);
+  --vignette-mid:  rgba(var(--ink-rgb), .18);
+  --vignette-edge: rgba(var(--ink-rgb), .5);
+  --shadow-soft: 0 1px 3px rgba(var(--ink-rgb), .08);
+  --shadow-pop:  0 4px 12px rgba(var(--ink-rgb), .12);
+  --shadow-deck: 0 30px 80px rgba(var(--ink-rgb), .14), 0 8px 24px rgba(var(--ink-rgb), .08);
+
+  /* ── 5-step type scale (invariant — keep == base) ── */
+  --fs-display: 4rem;
+  --fs-title:   2.375rem;
+  --fs-heading: 1.375rem;
+  --fs-body:    1rem;
+  --fs-caption: 0.8125rem;
+
+  /* ── font weights (invariant) ── */
+  --fw-light:     300;
+  --fw-regular:   400;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-extrabold: 800;
+  --fw-black:     900;
+
+  /* ── layout (invariant — keep == base) ── */
+  --W: 80rem;
+  --H: 45rem;
+  --gx: 3.5rem;
+  --radius: 1.125rem;
+}

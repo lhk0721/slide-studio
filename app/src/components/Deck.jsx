@@ -38,7 +38,7 @@ export default function Deck() {
   const SlideComponent = slides[cur - 1]?.component
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-theme={sessionId}>
       <div className={styles.topbar}>
         <Link to="/" className={styles.back}>← 세션 목록</Link>
         <span className={styles.deckTitle}>{session.title}</span>
@@ -74,6 +74,7 @@ export default function Deck() {
         cur={cur}
         total={N}
         zipName={`${sessionId}-slides.zip`}
+        theme={sessionId}
       />
     </div>
   )

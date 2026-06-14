@@ -1,0 +1,67 @@
+/* ═══════════════════════════════════════════
+   SESSION TOKENS — inbody-u300 (InBody 3-color light theme)
+   Self-contained deck design tokens, scoped to this deck only via the
+   `[data-theme="inbody-u300"]` attribute that Deck/Overview/Content roots
+   (and the export stage) carry. The app-shell fallback lives in
+   `src/tokens.css`; the deck never relies on it — every variable the deck
+   needs is (re)defined here.
+
+   Ink  : InBody Black #101820 (+ 2 neutral grays)
+   Accent: InBody Red  #971B2F (the single emphasis color)
+   Surface: White #FFFFFF / off-white #F3F4F5
+═══════════════════════════════════════════ */
+[data-theme="inbody-u300"] {
+  /* ── surfaces ── */
+  --bg:      #ffffff;
+  --bg2:     #F3F4F5;
+  --bg3:     #ECEEF1;   /* deepest off-white (gradient stops) */
+  --card:    #F3F4F5;
+  --page:    #E7E9EB;   /* canvas behind the deck */
+
+  /* ── ink: InBody Black + two neutral grays ── */
+  --text:    #101820;   /* titles · primary body */
+  --sub:     #44505A;   /* secondary body (AA on white) */
+  --muted:   #5A636D;   /* captions · labels (AA on white) */
+  --rule:    #E3E5E8;   /* hairlines (use sparingly) */
+  --ghost:   #C5CAD0;   /* silhouette / diagram fill (neutral) */
+
+  /* InBody Black as raw channels → compose translucent ink (borders,
+     shadows, overlays) from one source instead of scattered literals. */
+  --ink-rgb: 16, 24, 32;
+
+  /* ── single accent: InBody Red ── */
+  --accent:      #971B2F;   /* brand · key numbers · the one emphasis */
+  --accent-soft: #F4E7E9;   /* rare light-red fill (≈8% red on white) */
+
+  /* ── translucency & elevation (composed from ink) ── */
+  --glass:        rgba(255, 255, 255, .8);            /* nav button fill */
+  --border-soft:  rgba(var(--ink-rgb), .08);          /* nav button edge */
+  --border-hair:  rgba(var(--ink-rgb), .06);          /* deck edge */
+  --hint:         rgba(var(--ink-rgb), .28);          /* faint helper text */
+  --vignette-mid:  rgba(var(--ink-rgb), .18);         /* figure vignette */
+  --vignette-edge: rgba(var(--ink-rgb), .5);
+  --shadow-soft: 0 1px 3px rgba(var(--ink-rgb), .08);
+  --shadow-pop:  0 4px 12px rgba(var(--ink-rgb), .12);
+  --shadow-deck: 0 30px 80px rgba(var(--ink-rgb), .14), 0 8px 24px rgba(var(--ink-rgb), .08);
+
+  /* ── 5-step type scale (1280×720 → projects 30pt+) ── */
+  --fs-display: 4rem;       /* 64px — cover · one-line statement */
+  --fs-title:   2.375rem;   /* 38px — slide title */
+  --fs-heading: 1.375rem;   /* 22px — card / column heading */
+  --fs-body:    1rem;       /* 16px — body */
+  --fs-caption: 0.8125rem;  /* 13px — labels · sources (lower bound) */
+
+  /* ── font weights (Pretendard variable axis) ── */
+  --fw-light:     300;   /* faint helper / meta */
+  --fw-regular:   400;   /* body */
+  --fw-semibold:  600;   /* labels · emphasis body */
+  --fw-bold:      700;   /* headings · key labels */
+  --fw-extrabold: 800;   /* metrics · strong emphasis */
+  --fw-black:     900;   /* cover statement · the loudest number */
+
+  /* ── layout ── */
+  --W: 80rem;      /* 1280px */
+  --H: 45rem;      /* 720px */
+  --gx: 3.5rem;    /* 56px — page side margin (generous whitespace) */
+  --radius: 1.125rem;  /* 18px */
+}
