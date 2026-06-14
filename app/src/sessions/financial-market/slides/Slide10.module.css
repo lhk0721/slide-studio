@@ -6,53 +6,18 @@
   background: var(--bg);
 }
 
-/* 본문: 공통 충격 → 분기 → 대칭 2단 비교 (세로 중앙 정렬) */
+/* 본문: 분기 흐름도(DivergenceFlow) + 대칭 2단 비교 (세로 중앙 정렬) */
 .layout {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
-/* ── 공통 충격 (상단 중앙 노드) ── */
-.shock {
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-  text-align: center;
-}
-.shockK {
-  font-size: calc(var(--fs-caption) * 0.9);
-  font-weight: var(--fw-bold);
-  letter-spacing: 0.14rem;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.shockT {
-  font-size: var(--fs-heading);
-  font-weight: var(--fw-extrabold);
-  letter-spacing: -0.01em;
-  color: var(--text);
-  word-break: keep-all;
-}
-
-/* ── 분기 커넥터 (중앙 충격 → 두 컬럼 중심, 단일 accent 스파인) ── */
-.fork { width: 100%; }
-.fork svg { display: block; width: 100%; height: auto; }
-.forkPath {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.forkDot { fill: var(--accent); }
-
-/* ── 대칭 2단 비교 그리드 (행 라벨은 가운데 스팬 → 좌우 행 정렬 보장) ── */
+/* ── 대칭 2단 비교 그리드 (행 라벨은 가운데 스팬 → 좌우 행 정렬 보장) ──
+   DivergenceFlow 헤드와 동일한 1fr 1fr column-gap 3.5rem 라 컬럼이 정렬된다. */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -60,9 +25,6 @@
   row-gap: 0.5rem;
   align-items: start;
 }
-
-/* 컬럼 헤드 — 컬럼 중심에 정렬되어 분기선 끝과 만난다 (col-cat accent 재사용) */
-.head { text-align: center; }
 
 /* 단계 라벨 — 두 컬럼을 가로지르는 중앙 축 */
 .kicker {

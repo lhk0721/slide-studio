@@ -1,5 +1,6 @@
 import '../tokens.css' // deck design tokens, scoped to [data-theme="financial-market"]
 import Slide01 from './Slide01'
+import Slide02 from './Slide02'
 import Slide10 from './Slide10'
 
 // ─────────────────────────────────────────────────────────────
@@ -51,7 +52,7 @@ const slides = [
     notes: '발표자 이현규 · 국제시장과 금융기관',
   },
   {
-    id: 2, title: '문제 제기 — 같은 출발, 다른 결말',
+    id: 2, title: '문제 제기 — 같은 출발, 다른 결말', component: Slide02,
     group: '문제 제기', role: '문제 제기',
     message: '코로나는 전 세계 피트니스 수요를 똑같이 끌어올렸지만, 미국과 한국의 결과는 갈렸다 — 왜?',
     evidence: [

@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
 import styles from './Slide10.module.css'
+import DivergenceFlow from '../components/DivergenceFlow'
 
 // 종합(클라이맥스) — 같은 충격이 자본 조달 구조 차이를 거쳐 서로 다른 시장실패로.
-// 패턴: 분기 흐름도(충격→구조→실패→운명) + 대칭 2단 대조(US/KR) + 출처 캡션(.s-source).
-//  ※ 흐름도는 s2(부분)와 공유 예정 — 두 번째 소비자(s2) 빌드 시 DivergenceFlow로 추출.
+// 패턴: 분기 흐름도(DivergenceFlow, 풀) + 대칭 2단 대조(US/KR) + 출처 캡션(.s-source).
 // 행 라벨(구조·시장실패·운명)은 두 컬럼을 가로지르는 중앙 축으로 두어 좌우 행을 정렬한다.
 const rows = [
   { k: '구조', us: '자본시장 주도 — 펠로톤·ClassPass에 집중', kr: '소상공인·콘텐츠 주도 — 개인·중소·유튜버로 분산' },
@@ -25,28 +25,14 @@ export default function Slide10() {
 
       <div className="s-body">
         <div className={styles.layout}>
+          <DivergenceFlow
+            shockKicker="공통 충격"
+            shockText="코로나19 — 전 세계 피트니스 수요 급증"
+            heads={['미국', '한국']}
+          />
 
-          {/* 공통 충격 */}
-          <div className={styles.shock}>
-            <span className={styles.shockK}>공통 충격</span>
-            <span className={styles.shockT}>코로나19 — 전 세계 피트니스 수요 급증</span>
-          </div>
-
-          {/* 분기 커넥터: 중앙 → 두 컬럼 중심(240·760 / 1000) */}
-          <div className={styles.fork}>
-            <svg viewBox="0 0 1000 48" preserveAspectRatio="none" aria-hidden="true">
-              <path className={styles.forkPath} d="M500 2 L500 18 M500 18 L240 46 M500 18 L760 46" />
-              <circle className={styles.forkDot} cx="500" cy="2" r="5" />
-              <circle className={styles.forkDot} cx="240" cy="46" r="5" />
-              <circle className={styles.forkDot} cx="760" cy="46" r="5" />
-            </svg>
-          </div>
-
-          {/* 대칭 2단 비교 */}
+          {/* 대칭 2단 비교 — DivergenceFlow 헤드와 같은 1fr 1fr 그리드라 컬럼 정렬 */}
           <div className={styles.grid}>
-            <div className={`col-cat accent ${styles.head}`}>미국</div>
-            <div className={`col-cat accent ${styles.head}`}>한국</div>
-
             {rows.map((r) => (
               <Fragment key={r.k}>
                 <div className={styles.kicker}>{r.k}</div>
@@ -59,7 +45,6 @@ export default function Slide10() {
             <span className={styles.fate}>{fate.us}</span>
             <span className={styles.fate}>{fate.kr}</span>
           </div>
-
         </div>
       </div>
 
