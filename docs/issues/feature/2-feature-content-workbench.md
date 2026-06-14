@@ -186,3 +186,13 @@ financial-market의 `verify`(미검증) 8건 중 웹으로 확인 가능한 4건
 - **로딩**: 각 세션 `slides/index.js` 상단에 co-located `import '../tokens.css'`(세션 모듈 로드 시 전역 부착, 속성으로만 적용).
 - 검증: `npm run build` 통과(CSS 93.67kB — 토큰 세트 중복으로 증가, 정상). 값이 원본 verbatim 복사라 회귀 0(이 환경에 헤드리스 브라우저 없어 런타임 캡처는 생략 — 변경 성격상 정적 보장: 인접 상속으로 덱은 세션 파일에서, 셸은 폴백에서 동일 값 해석).
 - **다음 단계**(이번 커밋 아님): 3) financial-market 실제 테마 값 결정(accent 1개 등) · 4) 이 덱의 반복 패턴 카탈로그 확정 · 산출물 `docs/sessions/financial-market/design.md`(잠근 토큰 델타 + 패턴 + 변수 계약).
+
+### 2026-06-14 — Phase 4 단계 시스템화 + financial-market accent(Oxblood) 결정·기록
+
+디자인 시스템 단계를 **재사용 가능한 명세**로 박고, 그 첫 적용(단일 accent)을 **제시한 선택지까지 포함해** 기록했다. "이 과정을 새 라우트포인트의 시스템으로" 요청 반영 — 즉흥 결정이 아니라 *선택지 제시 → 사용자 확정 → provenance 기록*을 재현 가능한 단계로 고정.
+
+- **단계 명세 신설**: `docs/agent-workflow/deck-design.md`(Phase 4 "헌법") — 결정 항목 순서, override 아키텍처(전역 1회 결정), 변수 계약·불변 블록, **결정 메커니즘(선택지로 되돌려준다)**, 패턴 카탈로그, 산출물/exit gate, `design.md` 템플릿. 향후 디자인 워크벤치 라우트(`/:sessionId/design`) 가능성 메모.
+- **세션 결정 기록**: `docs/sessions/financial-market/design.md` 신설 — D1(override 아키텍처: 선택지 3개 중 "완전 분리" 채택 + 보정)·D2(accent: Petrol Teal·Slate Navy·Amber·**Oxblood** 4개 중 Oxblood 채택, 탈락지 포함) 결정 로그, 잠근 토큰 델타 표, 변수 계약, 패턴 카탈로그(후보), 상태.
+- **accent 적용**: `sessions/financial-market/tokens.css` `--accent: #7A2230`/`--accent-soft: #F1E3E5`(Oxblood). 불변 토큰 그대로. 표지 eyebrow·deckTitle·워크벤치 chrome에 반영. build 통과.
+- **레지스트리 갱신**: `deck-workflow.md`(Phase 4 행·요약·관계를 `deck-design.md`로), `agent-workflow/README.md`(child docs + read order에 `deck-content.md`·`deck-design.md` 등록), `docs/sessions/README.md`(financial-market 상태), `docs/sessions/financial-market/README.md`(stale placeholder → 현재 상태: 콘텐츠 완료·디자인 진행).
+- **남은 단계**: 패턴 카탈로그 확정(2단 대조·타임라인·출처 캡션) → `design.md` 패턴/계약 마감 → Phase 5 개별 슬라이드.

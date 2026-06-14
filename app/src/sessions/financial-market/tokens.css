@@ -31,9 +31,11 @@
 
   --ink-rgb: 16, 24, 32;
 
-  /* ── single accent (TO BE DECIDED in the design-system phase) ── */
-  --accent:      #971B2F;
-  --accent-soft: #F4E7E9;
+  /* ── single accent: Oxblood (decided 2026-06-14, design-system phase) ──
+     Serious/academic red — deliberately a deep oxblood, not InBody Red
+     (#971B2F), to fit the market-failure tone while staying its own deck. */
+  --accent:      #7A2230;   /* brand · key numbers · the one emphasis */
+  --accent-soft: #F1E3E5;   /* rare light fill (chips · soft backgrounds) */
 
   /* ── translucency & elevation (composed from ink) ── */
   --glass:        rgba(255, 255, 255, .8);
