@@ -54,7 +54,7 @@ export default function Deck() {
           &#8249;
         </button>
 
-        <div className={styles.deck}>
+        <div className={styles.deck} data-deck-frame>
           {SlideComponent && <SlideComponent />}
         </div>
 

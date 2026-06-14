@@ -168,6 +168,20 @@
   opacity: .5;
 }
 
+/* ── slide source caption (footnote) ──
+   The one recurring "출처 한 줄" every evidence slide needs. Place as a
+   direct child of the slide root (bottom); it carries its own side inset.
+   Uses only existing tokens (no new variable contract). */
+.s-source {
+  flex-shrink: 0;
+  padding: 0.6rem var(--gx) 1.4rem;
+  font-size: calc(var(--fs-caption) * 0.85);
+  line-height: 1.45;
+  color: var(--muted);
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
 /* ── footer strip ── */
 .s-foot {
   height: 3.25rem;

@@ -207,3 +207,15 @@ step 4(이 덱 반복 패턴 + shared 승격 여부 결정)를 `design.md`에 D3
 - metric/차트+캡션 → 기존 `.metric` + 아키타입 조합.
 - **승격 결론**: app-wide 신규는 `.s-source` 1개뿐(시스템에도 "보더보다 여백" — 클래스 남발 금지). **구현은 build-first**: s10(종합)부터 톤 확립 후 승격, speculative 선작성 금지.
 - `design.md` status `tokens-locked`→`patterns-locked`. 승인 게이트 통과 → Phase 5 착수(s10부터).
+
+### 2026-06-14 — Phase 5 첫 슬라이드 s10(종합) + 헤드리스 자가검수 루프 도입
+
+Phase 5(Build) 착수. 가장 정의적인 s10(종합)부터 만들어 세 패턴(분기 흐름도·2단 대조·출처 캡션)을 확립. 동시에, "만들고 끝내지 않고 렌더를 캡처해 스스로 트집 잡는" **자가검수 루프**를 도구+규칙으로 시스템화(사용자 요청).
+
+- **s10 슬라이드**: `Slide10.jsx`/`.module.css` 신규, index.js에 `component` 연결. 구조 = 공통 충격(중앙) → accent 분기선 → 대칭 2단 비교(미국/한국) → 트레이너 운명 페이오프 pill → 결론 한 줄 → 출처. 단일 강조(oxblood: 분기·페이오프·결론), 보더 없음.
+  - **정렬 1차 결함→수정**: 처음엔 분기선이 컬럼 중심을 가리키는데 텍스트는 좌측정렬, 두 레인이 독립이라 행 미정렬. → 공유 그리드(행 라벨을 `grid-column:1/-1` 중앙 축)로 재설계해 분기선↔헤드, 좌우 단계 행을 정렬.
+- **`.s-source` 승격**(D3 카탈로그 실행): inbody 슬라이드들이 매번 중복하던 출처 각주를 app-wide `shared.css .s-source` 1개로. 기존 토큰만 사용 → 변수 계약 변화 0.
+- **A. 헤드리스 캡처 도구**: `playwright`(devDep) + `app/scripts/shot.mjs`(`npm run shot <session>/<slide>`) — Vite 개발서버를 스스로 띄워 `[data-deck-frame]`(1280×720 프레임)만 PNG 캡처. `Deck.jsx` 프레임에 `data-deck-frame` 훅 추가. 산출물 `shot-*.png`는 `.gitignore`.
+  - 실제로 s10을 캡처·확인하여 위 정렬 수정을 검증(추론이 아니라 렌더 대조). **흐름도 컴포넌트 추출(`DivergenceFlow`)은 두 번째 소비자 s2 빌드 시** (build-first).
+- **B. 자가검수 규칙**: `slides-jsx-convention.md`에 "Build→렌더 캡처→체크리스트→수정" 루프 + 체크리스트(정렬·단일 강조·보더보다 여백·프레임 오버플로우·`\n`·export 패리티) 신설. "검증 못 했으면 명시" 정직성 규칙 포함.
+- 남은 작업: s2(분기 흐름도 부분 버전) 빌드 시 `DivergenceFlow` 추출 → 나머지 슬라이드.

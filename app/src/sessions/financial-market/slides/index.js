@@ -1,5 +1,6 @@
 import '../tokens.css' // deck design tokens, scoped to [data-theme="financial-market"]
 import Slide01 from './Slide01'
+import Slide10 from './Slide10'
 
 // ─────────────────────────────────────────────────────────────
 //  SLIDE META — 발표 "같은 충격, 다른 실패" (국제시장과 금융기관).
@@ -278,7 +279,7 @@ const slides = [
     notes: '정량 근거는 폐업/이직 등 주변 지표로 보강(정직하게 제시)',
   },
   {
-    id: 10, title: '종합 — 구조가 운명을 가른다',
+    id: 10, title: '종합 — 구조가 운명을 가른다', component: Slide10,
     group: '종합', role: '종합(클라이맥스)',
     message: '같은 충격·같은 산업인데 자본 조달 구조가 실패의 형태와 인적자본의 운명을 갈랐다',
     evidence: [
