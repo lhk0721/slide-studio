@@ -196,3 +196,14 @@ financial-market의 `verify`(미검증) 8건 중 웹으로 확인 가능한 4건
 - **accent 적용**: `sessions/financial-market/tokens.css` `--accent: #7A2230`/`--accent-soft: #F1E3E5`(Oxblood). 불변 토큰 그대로. 표지 eyebrow·deckTitle·워크벤치 chrome에 반영. build 통과.
 - **레지스트리 갱신**: `deck-workflow.md`(Phase 4 행·요약·관계를 `deck-design.md`로), `agent-workflow/README.md`(child docs + read order에 `deck-content.md`·`deck-design.md` 등록), `docs/sessions/README.md`(financial-market 상태), `docs/sessions/financial-market/README.md`(stale placeholder → 현재 상태: 콘텐츠 완료·디자인 진행).
 - **남은 단계**: 패턴 카탈로그 확정(2단 대조·타임라인·출처 캡션) → `design.md` 패턴/계약 마감 → Phase 5 개별 슬라이드.
+
+### 2026-06-14 — Phase 4 패턴 카탈로그 확정 (design.md D3)
+
+step 4(이 덱 반복 패턴 + shared 승격 여부 결정)를 `design.md`에 D3로 잠금. 12장 메타에서 반복 빈도를 도출해 거처를 결정.
+
+- **2단 대조(US/KR, s3·s6·s9·s10·s11)** → 기존 `col-grid g2` + `col-cat` 재사용(새 클래스 X).
+- **분기 흐름도(s2 부분·s10 풀)** → 세션-로컬 컴포넌트 `DivergenceFlow`(app-wide X, bespoke 도식).
+- **출처 캡션(대부분)** → app-wide `shared.css` 신규 `.s-source` 1개(기존 토큰만 → 변수 계약 변화 0).
+- metric/차트+캡션 → 기존 `.metric` + 아키타입 조합.
+- **승격 결론**: app-wide 신규는 `.s-source` 1개뿐(시스템에도 "보더보다 여백" — 클래스 남발 금지). **구현은 build-first**: s10(종합)부터 톤 확립 후 승격, speculative 선작성 금지.
+- `design.md` status `tokens-locked`→`patterns-locked`. 승인 게이트 통과 → Phase 5 착수(s10부터).

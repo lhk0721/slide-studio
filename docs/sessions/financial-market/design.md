@@ -1,7 +1,7 @@
 ---
 session_id: financial-market
 phase: design
-status: tokens-locked
+status: patterns-locked
 ---
 
 # Design Spec: 같은 충격, 다른 실패 — 미·한 피트니스 시장 비교
@@ -42,6 +42,22 @@ Phase 4(Design) 결정 기록. 규칙은 `docs/agent-workflow/deck-design.md`. �
 - **결정**: **4 (Oxblood `#7A2230` / soft `#F1E3E5`)**. 진중한 학술 인상 우선. 적색 계열 근접은 인지하고 채택(InBody Red와는 의도적으로 다른 깊은 oxblood로 구분).
 - **구현**: `sessions/financial-market/tokens.css`의 `--accent`/`--accent-soft`만 변경. 불변 토큰(타이포·여백·그리드·radius·잉크·surface) 그대로. 표지 eyebrow(`Slide01.module.css`)·Deck deckTitle·개요/콘텐츠 chrome에 반영.
 
+### D3 — 반복 패턴 카탈로그 & shared 승격 (2026-06-14)
+
+- **질문**: 이 비교 덱이 필요한 반복 패턴과 그 거처(app-wide `shared.css` 승격 / 세션-로컬 컴포넌트 / 기존 재사용)를 정한다.
+- **분석** (12장 메타에서 반복 빈도 도출):
+  - **2단 대조(US/KR)**: s3(2×2 아이콘)·s6↔s9(자산 vs 비용, 짝)·s10(좌/우 대칭)·s11(미국형/한국형 처방) — 이 덱의 **구조적 정체성**.
+  - **분기 흐름도(공통 충격 → 조달 구조 분기 → 서로 다른 시장실패)**: s2(상단 부분)·s10(풀버전) — bespoke SVG 도식.
+  - **출처 캡션(각주)**: 근거 있는 슬라이드 대부분(s2·s4·s5·s6·s7·s8 …)에 슬라이드 하단 출처 1줄.
+  - metric/big-number: s2·s4·s5 / 차트: s4·s5·s7·s8.
+- **결정 (거처)**:
+  - **2단 대조 → 기존 `col-grid g2` + `col-cat`(US/KR eyebrow) 재사용.** 새 shared 클래스 만들지 않음. 중앙 분기 마커가 실제로 2장+ 반복되면 그때 소형 shared 요소 추가.
+  - **분기 흐름도 → 세션-로컬 컴포넌트**(예: `financial-market/components/DivergenceFlow`)로 s2/s10 공유. bespoke 도식이라 app-wide `shared.css` 아님.
+  - **출처 캡션 → app-wide `shared.css` 신규 `.s-source` 1개.** 슬라이드 하단 각주 1줄, `--fs-caption`·`--muted`·`--gx`만 사용 → **변수 계약 변화 없음**. 어느 덱에도 유용해 app-wide 승격.
+  - metric/차트+캡션 → 기존 `.metric` 재사용 + 아키타입 조합(새 클래스 X).
+- **shared 승격 결론**: app-wide 신규는 **`.s-source` 1개뿐**. 시스템에도 "보더보다 여백"을 적용 — 클래스 남발 금지, 검소하게.
+- **구현 시점**: build-first 규율(`deck-workflow.md` #5) — 가장 정의적인 **s10(종합: 2단 대조 + 풀 분기 흐름도)**부터 만들어 톤·패턴을 확립한 뒤 `.s-source`·흐름도 컴포넌트를 승격한다. 이 단계에서는 카탈로그만 잠근다(speculative CSS 선작성 금지).
+
 ---
 
 ## 잠근 토큰 (base 대비 델타)
@@ -57,16 +73,26 @@ Phase 4(Design) 결정 기록. 규칙은 `docs/agent-workflow/deck-design.md`. �
 
 표준 계약 준수 — `deck-design.md` §2의 변수 목록을 모두 정의한다(`tokens.css`가 base 전체 세트를 갖고 있어 누락 없음).
 
-## 패턴 카탈로그
+## 패턴 카탈로그 (확정 — D3)
 
-- **재사용(shared.css)**: `s-hd` 헤더 · `col-grid g2/g3` · `metric` · `blist` · `chip` · `s-foot`.
-- **이 덱 고유 (후보, 미확정)**: 2단 대조 블록(미국/한국) · 충격→조달구조→실패 타임라인/흐름 · 출처 캡션. → 2개 이상 슬라이드 반복 시 `shared.css` 승격 판단.
-- **레이아웃 아키타입 (후보)**: cover · 섹션 디바이더 · 2단 비교 · metric 쇼케이스 · 차트+캡션 · 클로징.
+**재사용 (기존 `shared.css`, 승격 불필요)**: `s-hd` 헤더 · `s-rule` · `col-grid g2/g3` · `s-col`/`col-cat` · `metric` · `blist` · `chip` · `s-foot`.
+
+| 이 덱 패턴 | 반복 슬라이드 | 거처 |
+| --- | --- | --- |
+| 2단 대조 (US/KR) | s3·s6·s9·s10·s11 | 기존 `col-grid g2` + 컬럼 eyebrow(`col-cat`) 라벨. 새 클래스 X |
+| 분기 흐름도 (충격→구조→실패) | s2(부분)·s10(풀) | 세션-로컬 컴포넌트(`DivergenceFlow`), s2/s10 공유. app-wide X |
+| 출처 캡션 (각주) | 대부분 | **app-wide `shared.css` 신규 `.s-source`** (하단 1줄; 기존 토큰만 → 계약 변화 없음) |
+| metric / big-number | s2·s4·s5 | 기존 `.metric` 재사용 |
+| 차트+캡션 | s4·s5·s7·s8 | 아키타입 조합(차트영역 + `.metric` + `.s-source`). 새 클래스 X |
+
+**레이아웃 아키타입** (각 슬라이드 = 이 중 한 인스턴스): cover · 섹션 디바이더(미국/한국 블록 전환) · 2단 대조 · metric 쇼케이스 · 차트+캡션 · 분기 흐름도(풀) · 클로징/참고자료.
+
+**구현 시점**: build-first — s10(종합)부터 톤 확립 후 `.s-source`·`DivergenceFlow` 승격(speculative 선작성 금지).
 
 ## 상태
 
 - override 아키텍처: ✅ 확정 (D1, `e895db7`)
 - 단일 accent: ✅ 확정 (D2)
 - 불변 토큰 유지: ✅
-- 패턴 카탈로그: ⬜ 진행 예정
-- 개별 슬라이드 (Phase 5 Build): ⬜ (현재 Slide01 표지만 존재)
+- 패턴 카탈로그: ✅ 확정 (D3) — app-wide 신규 `.s-source` 1개 + 세션-로컬 `DivergenceFlow`, 나머지 재사용. 구현은 build-first.
+- 개별 슬라이드 (Phase 5 Build): ⬜ (현재 Slide01 표지만 존재) — **사용자 승인 후 착수**. 첫 슬라이드 권장: s10(종합).
