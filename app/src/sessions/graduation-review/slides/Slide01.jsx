@@ -18,7 +18,7 @@ export default function Slide01() {
         <div className={styles.rule} />
         <div className={styles.sub}>
           <span>
-            <span className={styles.accent}>RackTracker</span>, 파워랙에 붙여 운동 동작을 3D 로 재는 리그
+            <span className={styles.accent}>RackTracker</span>, 3D 골격을 실시간 측량하는 리그(Rig)
           </span>
         </div>
         <div className={styles.meta}>
@@ -28,11 +28,11 @@ export default function Slide01() {
           </div>
           <div className={styles.metaItem}>
             <span className={styles.metaLbl}>Members</span>
-            <span className={styles.metaVal}>(팀원 이름)</span>
+            <span className={styles.metaVal}>이현규, 이지원, 신은수, 장효인, 전효원</span>
           </div>
           <div className={styles.metaItem}>
             <span className={styles.metaLbl}>Advisor</span>
-            <span className={styles.metaVal}>(지도교수)</span>
+            <span className={styles.metaVal}>윤희남 교수님</span>
           </div>
         </div>
       </div>
