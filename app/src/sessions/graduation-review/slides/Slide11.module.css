@@ -1,0 +1,14 @@
+.body {
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.figs {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 2rem;
+}
+.chart {
+  width: 30rem;
+  flex-shrink: 0;
+}

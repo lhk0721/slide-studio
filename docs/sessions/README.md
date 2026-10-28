@@ -17,3 +17,4 @@
 | --- | --- | --- | --- |
 | `inbody-u300` | InBody · U+300 피치덱 | 이식 완료 (rack-tracker 출처) | `docs/sessions/inbody-u300/README.md` |
 | `financial-market` | 같은 충격, 다른 실패 (미·한 피트니스 비교) | Phase 3 완료 · Phase 4(디자인) 진행 | `docs/sessions/financial-market/README.md` |
+| `graduation-review` | 졸업작품 심사 발표 덱 (3분 + 질의응답) | 작성 중 (#4, inbody-u300 디자인 시스템 재사용) | `docs/sessions/graduation-review/README.md` |

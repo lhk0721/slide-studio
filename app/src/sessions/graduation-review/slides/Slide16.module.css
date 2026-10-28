@@ -1,0 +1,16 @@
+.body {
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+.table {
+  font-size: 1.125rem;
+}
+.table td { padding: 1rem 0.75rem; }
+.table th.rig,
+.table td.rig {
+  color: var(--text);
+  font-weight: var(--fw-semibold);
+  background: var(--accent-soft);
+}
+.table th.rig { color: var(--accent); }

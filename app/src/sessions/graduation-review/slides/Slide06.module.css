@@ -1,0 +1,58 @@
+.body {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.figWrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+}
+.fig {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: calc(var(--radius) * 0.5);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  flex-shrink: 0;
+  padding-bottom: 0.25rem;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.stepHd {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.num {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-extrabold);
+  color: var(--accent);
+  letter-spacing: 0.03rem;
+}
+.name {
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-bold);
+  color: var(--text);
+}
+.when {
+  font-size: var(--fs-caption);
+  color: var(--accent);
+  font-weight: var(--fw-semibold);
+}
+.what {
+  font-size: calc(var(--fs-body) * 0.95);
+  line-height: 1.45;
+  color: var(--sub);
+  word-break: keep-all;
+}

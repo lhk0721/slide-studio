@@ -1,0 +1,102 @@
+.slide {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, var(--bg) 0%, var(--bg2) 60%, var(--bg3) 100%);
+}
+
+.deco {
+  width: 26rem;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 그림 5 는 왼쪽 개념도 + 오른쪽 설치 사진이라 오른쪽 부분만 보이게 */
+  object-position: right center;
+  filter: grayscale(100%) brightness(0.92) contrast(1.06);
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 4.5rem 4rem 3.5rem;
+}
+
+.eyebrow {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.1875rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: var(--fw-semibold);
+  margin-bottom: 1.5rem;
+}
+
+.main {
+  font-size: 2.5rem;
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  letter-spacing: -0.05rem;
+  color: var(--text);
+  word-break: keep-all;
+}
+
+.rule {
+  width: 3rem;
+  height: 3px;
+  background: var(--accent);
+  margin: 1.75rem 0;
+}
+
+.sub {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 1.25rem;
+  font-weight: var(--fw-regular);
+  color: var(--muted);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.accent {
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+}
+
+.meta {
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  font-weight: var(--fw-light);
+  display: flex;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.metaLbl {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.0625rem;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.metaVal {
+  font-size: var(--fs-caption);
+  color: var(--sub);
+}

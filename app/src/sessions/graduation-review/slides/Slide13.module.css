@@ -1,0 +1,5 @@
+.figs {
+  width: 30rem;
+  flex-shrink: 0;
+  gap: 0.75rem;
+}
