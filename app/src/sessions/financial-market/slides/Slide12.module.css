@@ -1,0 +1,49 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+.layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.refs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.05rem 3rem;
+}
+.ref {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--rule);
+}
+.refCat {
+  font-size: calc(var(--fs-caption) * 0.98);
+  font-weight: var(--fw-bold);
+  color: var(--text);
+}
+.refSrc {
+  font-size: calc(var(--fs-caption) * 0.92);
+  line-height: 1.4;
+  color: var(--muted);
+  word-break: keep-all;
+}
+
+.note {
+  font-size: calc(var(--fs-caption) * 0.95);
+  line-height: 1.5;
+  color: var(--sub);
+  word-break: keep-all;
+  white-space: pre-line;
+}
+.note strong { color: var(--accent); font-weight: var(--fw-bold); }

@@ -5,6 +5,10 @@ node_modules/
 dist/
 .vite/
 
+# headless slide-capture artifacts (npm run shot)
+shot-*.png
+app/shot-*.png
+
 # logs
 npm-debug.log*
 *.log

@@ -118,11 +118,15 @@ function inlineSvgStyles(root) {
  * its content off the SVG canvas and yield a blank image — keeping the offset
  * one level up avoids that.
  */
-async function withOffscreenSlide(SlideComponent, fn) {
+async function withOffscreenSlide(SlideComponent, fn, theme) {
   const wrapper = document.createElement('div')
   wrapper.style.cssText = 'position:fixed;left:-99999px;top:0;pointer-events:none;z-index:-1;'
   const stage = document.createElement('div')
   stage.style.cssText = `width:${W}px;height:${H}px;overflow:hidden;background:var(--bg);`
+  // The deck's design tokens are scoped to [data-theme="<id>"]; the off-screen
+  // stage has no .deck ancestor, so carry the attribute here or var(--…) would
+  // fall back to the app-shell defaults and the export would mis-theme.
+  if (theme) stage.dataset.theme = theme
   wrapper.appendChild(stage)
   document.body.appendChild(wrapper)
   const root = createRoot(stage)
@@ -144,18 +148,21 @@ async function withOffscreenSlide(SlideComponent, fn) {
  * Renders the slide off-screen at the native 1280×720 frame, so the result is
  * a clean full-bleed image with no deck chrome.
  */
-export async function slideToPngBlob(slides, index, { pixelRatio = 3 } = {}) {
+export async function slideToPngBlob(slides, index, { pixelRatio = 3, theme } = {}) {
   const fontEmbedCSS = await getFontEmbedCSS()
   const SlideComponent = slides[index].component
-  return withOffscreenSlide(SlideComponent, (host) =>
-    toBlob(host, {
-      pixelRatio,
-      width: W,
-      height: H,
-      backgroundColor: '#ffffff',
-      cacheBust: true,
-      fontEmbedCSS,
-    })
+  return withOffscreenSlide(
+    SlideComponent,
+    (host) =>
+      toBlob(host, {
+        pixelRatio,
+        width: W,
+        height: H,
+        backgroundColor: '#ffffff',
+        cacheBust: true,
+        fontEmbedCSS,
+      }),
+    theme
   )
 }
 
@@ -174,8 +181,8 @@ function saveBlob(blob, filename) {
 }
 
 /** Download a single slide (0-based index) as `slide-NN.png`. */
-export async function downloadSlide(slides, index, { pixelRatio = 3 } = {}) {
-  const blob = await slideToPngBlob(slides, index, { pixelRatio })
+export async function downloadSlide(slides, index, { pixelRatio = 3, theme } = {}) {
+  const blob = await slideToPngBlob(slides, index, { pixelRatio, theme })
   saveBlob(blob, `slide-${pad2(index + 1)}.png`)
 }
 
@@ -183,21 +190,24 @@ export async function downloadSlide(slides, index, { pixelRatio = 3 } = {}) {
  * Download every slide as `slide-NN.png` bundled into a single ZIP.
  * `onProgress(done, total)` fires after each slide is rendered.
  */
-export async function downloadAllSlides(slides, { pixelRatio = 3, onProgress, zipName = 'slides.zip' } = {}) {
+export async function downloadAllSlides(slides, { pixelRatio = 3, onProgress, zipName = 'slides.zip', theme } = {}) {
   const fontEmbedCSS = await getFontEmbedCSS()
   const zip = new JSZip()
   const total = slides.length
   for (let i = 0; i < total; i++) {
     const SlideComponent = slides[i].component
-    const blob = await withOffscreenSlide(SlideComponent, (host) =>
-      toBlob(host, {
-        pixelRatio,
-        width: W,
-        height: H,
-        backgroundColor: '#ffffff',
-        cacheBust: true,
-        fontEmbedCSS,
-      })
+    const blob = await withOffscreenSlide(
+      SlideComponent,
+      (host) =>
+        toBlob(host, {
+          pixelRatio,
+          width: W,
+          height: H,
+          backgroundColor: '#ffffff',
+          cacheBust: true,
+          fontEmbedCSS,
+        }),
+      theme
     )
     zip.file(`slide-${pad2(i + 1)}.png`, blob)
     if (onProgress) onProgress(i + 1, total)

@@ -1,0 +1,9 @@
+.left {
+  width: 27rem;
+  flex-shrink: 0;
+}
+
+.stats {
+  margin-top: 2rem;
+  flex-shrink: 0;
+}

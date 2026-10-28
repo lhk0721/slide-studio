@@ -1,0 +1,222 @@
+/* ═══════════════════════════════════════════
+   graduation-review — session layout helpers
+   Global classes with a `gr-` prefix (no other deck uses them). Imported
+   once from `slides/index.js` next to the session tokens. Only layouts
+   that repeat across this deck live here; one-off styling stays in the
+   slide's own module.css. Tokens come from `tokens.css` (inbody-u300 copy).
+═══════════════════════════════════════════ */
+
+/* ── slide root + body ── */
+.gr-slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+.gr-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 2.5rem;
+  padding: 1.5rem var(--gx) 0;
+}
+.gr-body.tight { padding-top: 1rem; }
+.gr-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.gr-col.center { justify-content: center; }
+.gr-grow { flex: 1; }
+
+/* ── figure (report image) ── */
+.gr-fig {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gr-fig img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: calc(var(--radius) * 0.5);
+}
+.gr-fig.photo img { width: 100%; height: 100%; object-fit: cover; }
+.gr-fig.gray img { filter: grayscale(100%) brightness(0.95) contrast(1.05); }
+.gr-cap {
+  margin-top: 0.6rem;
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  text-align: center;
+  white-space: pre-line;
+  word-break: keep-all;
+  flex-shrink: 0;
+}
+
+/* ── eyebrow / tag ── */
+.gr-tag {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.094rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+}
+.gr-tag.accent { color: var(--accent); }
+
+/* ── bullet points (slide body copy) ── */
+.gr-points {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.gr-points li {
+  position: relative;
+  padding-left: 1.125rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--sub);
+  word-break: keep-all;
+  white-space: pre-line;
+}
+.gr-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.66rem;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.gr-points li strong { color: var(--text); font-weight: var(--fw-bold); }
+.gr-points li em { font-style: normal; color: var(--accent); font-weight: var(--fw-bold); }
+.gr-points.compact { gap: 0.6rem; }
+.gr-points.compact li { font-size: var(--fs-body); line-height: 1.45; }
+
+/* ── key numbers ── */
+.gr-stats {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 2rem;
+}
+.gr-stat { display: flex; flex-direction: column; gap: 0.35rem; }
+.gr-stat-val {
+  font-size: 2.75rem;
+  font-weight: var(--fw-extrabold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+.gr-stat-val small { font-size: 1.25rem; font-weight: var(--fw-bold); letter-spacing: 0; }
+.gr-stat-lbl {
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  white-space: pre-line;
+  word-break: keep-all;
+  line-height: 1.4;
+}
+
+/* ── bottom convergence bar (one claim per slide) ── */
+.gr-converge {
+  flex-shrink: 0;
+  margin: 0 var(--gx);
+  padding: 1rem 0 1.6rem;
+  font-size: var(--fs-heading);
+  color: var(--muted);
+  text-align: center;
+  font-weight: var(--fw-semibold);
+  word-break: keep-all;
+}
+.gr-converge strong { color: var(--accent); font-weight: var(--fw-black); }
+
+/* ── media pair: animation (left) + rig demo video (right) ── */
+.gr-media {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.gr-media-item { display: flex; flex-direction: column; gap: 0.5rem; }
+.gr-video {
+  display: block;
+  height: 22.5rem;               /* 360px */
+  border-radius: calc(var(--radius) * 0.5);
+  background: var(--bg2);
+  object-fit: cover;
+}
+.gr-video.wide { width: 36rem; }    /* 576px — 16:10 animation frame */
+.gr-video.tall { width: 14rem; }    /* 224px — 474×760 tablet recording */
+.gr-ph {
+  height: 22.5rem;
+  width: 14rem;
+  border-radius: calc(var(--radius) * 0.5);
+  background: var(--bg2);
+  border: 1px dashed var(--ghost);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.gr-ph span:first-child { font-size: 1.75rem; color: var(--ghost); }
+
+/* ── comparison table ── */
+.gr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+}
+.gr-table th {
+  text-align: left;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+.gr-table td {
+  padding: 0.7rem 0.75rem;
+  color: var(--sub);
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.45;
+  word-break: keep-all;
+}
+.gr-table td:first-child { color: var(--text); font-weight: var(--fw-semibold); white-space: nowrap; }
+.gr-table tr.hl td { background: var(--accent-soft); color: var(--text); font-weight: var(--fw-semibold); }
+.gr-table tr.hl td:first-child { color: var(--accent); }
+
+/* ── reserve (Q&A) slides: two-column text + one figure ── */
+.gr-reserve-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.0625rem;
+  text-transform: uppercase;
+  padding: 0.3125rem 0.875rem;
+  border-radius: 61.25rem;
+  color: var(--muted);
+  background: var(--bg2);
+  margin-bottom: 0.75rem;
+}

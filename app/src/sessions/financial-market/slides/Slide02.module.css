@@ -1,0 +1,71 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+}
+
+/* 본문: 분기 흐름도(부분) → 두 결말 → "왜?" 훅 (세로 중앙 정렬) */
+.layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* 두 결말 — DivergenceFlow 헤드와 같은 1fr 1fr 그리드라 컬럼 정렬.
+   각 결말 위 accent 틱이 헤드와 결말을 잇는다. */
+.outcomes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3.5rem;
+}
+.outcome {
+  position: relative;
+  padding-top: 1.5rem;
+  text-align: center;
+  font-size: calc(var(--fs-body) * 1.15);
+  font-weight: var(--fw-semibold);
+  line-height: 1.4;
+  color: var(--text);
+  word-break: keep-all;
+}
+.outcome::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 1rem;
+  border-radius: 1px;
+  background: var(--accent);
+  opacity: 0.55;
+}
+
+/* "왜?" 훅 — 이 슬라이드의 단일 강조 (두 줄 포컬) */
+.ask {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+.askLead {
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-semibold);
+  color: var(--muted);
+}
+.askBig {
+  font-size: calc(var(--fs-title) * 0.95);
+  font-weight: var(--fw-black);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--accent);
+  word-break: keep-all;
+  white-space: pre-line;
+}

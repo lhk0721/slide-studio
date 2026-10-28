@@ -1,0 +1,58 @@
+/* 분기 흐름도 헤더 — 공통 충격 → accent 분기선 → 두 컬럼 중심의 헤드.
+   s2(부분)·s10(풀)이 공유. 헤드 아래 본문은 각 슬라이드가 동일한
+   2단(1fr 1fr, column-gap 3.5rem) 그리드로 이어 붙여 컬럼을 정렬한다. */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* 공통 충격 (상단 중앙 노드) */
+.shock {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-align: center;
+}
+.shockK {
+  font-size: calc(var(--fs-caption) * 0.9);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.14rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.shockT {
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -0.01em;
+  color: var(--text);
+  word-break: keep-all;
+}
+.shockSub {
+  margin-top: 0.1rem;
+  font-size: calc(var(--fs-caption) * 0.95);
+  color: var(--muted);
+  word-break: keep-all;
+}
+
+/* 분기 커넥터 (중앙 충격 → 두 컬럼 중심 240·760/1000, 단일 accent 스파인) */
+.fork { width: 100%; }
+.fork svg { display: block; width: 100%; height: auto; }
+.forkPath {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.forkDot { fill: var(--accent); }
+
+/* 두 컬럼 헤드 — 컬럼 중심에 정렬되어 분기선 끝과 만난다 (col-cat accent 재사용) */
+.heads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3.5rem;
+}
+.head { text-align: center; }

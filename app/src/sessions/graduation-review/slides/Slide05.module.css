@@ -1,0 +1,60 @@
+.left {
+  flex: 1;
+  gap: 0.75rem;
+}
+.figTop { flex: 3; }
+.figBottom { flex: 2; }
+
+.right {
+  width: 27rem;
+  flex-shrink: 0;
+  gap: 1.25rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 0;
+}
+.item {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+.item dt {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.item dd {
+  margin: 0;
+  font-size: calc(var(--fs-body) * 0.95);
+  line-height: 1.45;
+  color: var(--sub);
+  word-break: keep-all;
+}
+
+.shutter {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.shutterVideo {
+  width: 100%;
+  aspect-ratio: 2080 / 1162;
+  display: block;
+  border-radius: calc(var(--radius) * 0.5);
+  background: var(--bg2);
+  object-fit: cover;
+}
+.shutterCap {
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  color: var(--muted);
+  word-break: keep-all;
+}
+.shutterCap strong { color: var(--text); }

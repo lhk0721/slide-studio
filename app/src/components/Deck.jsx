@@ -38,10 +38,11 @@ export default function Deck() {
   const SlideComponent = slides[cur - 1]?.component
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-theme={sessionId}>
       <div className={styles.topbar}>
         <Link to="/" className={styles.back}>← 세션 목록</Link>
         <span className={styles.deckTitle}>{session.title}</span>
+        <Link to={`/${sessionId}/overview`} className={styles.back}>개요 ▦</Link>
       </div>
 
       <div className={styles.navWrap}>
@@ -53,7 +54,7 @@ export default function Deck() {
           &#8249;
         </button>
 
-        <div className={styles.deck}>
+        <div className={styles.deck} data-deck-frame>
           {SlideComponent && <SlideComponent />}
         </div>
 
@@ -73,6 +74,7 @@ export default function Deck() {
         cur={cur}
         total={N}
         zipName={`${sessionId}-slides.zip`}
+        theme={sessionId}
       />
     </div>
   )
