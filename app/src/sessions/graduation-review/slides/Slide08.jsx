@@ -13,9 +13,9 @@ export default function Slide08() {
       <div className={`gr-body tight ${styles.body}`}>
         <MediaPair
           anim="/graduation-review/anim_ext_anchor.mp4"
-          animCap="산출 원리 · 바닥 앵커, 랙 앵커, 검산 코너"
+          animCap="산출 원리 · 바닥 앵커, 랙 앵커, 검산 코너, 표본 18칸, C1·C2 상대 위치"
           demo="/graduation-review/demo_ext.mp4"
-          demoCap="리그 화면 · 바닥 앵커, 랙 앵커, 검산 코너, 표본 촬영, 리포트"
+          demoCap="리그 화면 · 바닥·랙 앵커, 검산 코너, 표본 8배속, 리포트"
         >
           <ul className={`gr-points compact ${styles.points}`}>
             <li><strong>바닥에 눕힌 보드가 바닥 좌표계.</strong> 보드 모서리가 원점, 두 변이 x 축과 z 축, 위쪽이 y 축</li>
