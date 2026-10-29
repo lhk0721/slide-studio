@@ -1,11 +1,16 @@
 """Draw slide 2's load-path figure: one squat bottom frame, four joints, four moment arms.
 
 A slide variant of figure 24 from rack-tracker's report (#635 `make_figures.py`,
-`fig24_load_path`). Same frame and drawing, with three changes for the slide: the
-floor tick numbers are gone, each joint label carries its distance to the
-centre-of-mass line in cm, and the labels are larger. The data file is a copy of
+`fig24_load_path`). Same frame, view and drawing, with four changes for the
+slide: the floor tick numbers and the joint labels are gone; each joint's arrow to
+the centre-of-mass line is drawn left-right on the page (in this view the
+front-back arm runs into the page, so the figure's 3D arrow is only a few points
+long and its two heads merge into a blob); and the floor frame's x, y, z axes are
+drawn at the floor origin and, thin, at both shoulders, elbows, hips, knees and
+ankles, to show the figure is 3D.
+The data file is a copy of
 the report's `data/fig24_squat_bottom.json` (session 20261012-115120, set 1, rep 3,
-bar 100kg); the distances are its `arm_cm`, rounded.
+bar 100kg).
 
     python make_load_path.py
 """
@@ -43,11 +48,18 @@ BONES = [("left_shoulder", "right_shoulder"), ("left_shoulder", "left_elbow"), (
          ("right_hip", "right_knee"), ("right_knee", "right_ankle"), ("left_ankle", "left_heel"),
          ("left_heel", "left_foot_index"), ("right_ankle", "right_heel"), ("right_heel", "right_foot_index"),
          ("nose", "left_eye"), ("nose", "right_eye"), ("left_eye", "left_ear"), ("right_eye", "right_ear")]
-# joint key -> (label, label offset in pt, which side of the dot the label sits). The labels left of the line
-# sit past the near leg so their white plates do not cut it; the ankle label goes below the line's foot, away from
-# the near knee dot
-JOINTS = {"ankle": ("발목", (12, -16), "left"), "knee": ("무릎", (8, 8), "left"), "hip": ("골반", (-20, -6), "right"),
-          "lumbar": ("허리", (-20, 4), "right")}
+# joints whose moment arm is drawn: a dot, and a two-headed arrow from it to the centre-of-mass line
+JOINTS = ("ankle", "knee", "hip", "lumbar")
+ARM_HEAD = 3.0         # longest arrow head (pt); a short arrow gets smaller heads so its shaft still shows
+ARM_SHRINK = 2.4       # pt, just past the dot's edge so the near head is not hidden under it
+ARM_LW = 1.0
+JOINT_MS = 4.5         # joint dot size (pt); ARM_SHRINK is just past its radius
+# floor frame axes as plot directions (y is up, z comes toward the viewer), coloured x red, y green, z blue as in
+# 3D tools; z is a light blue so it is not read as the centre-of-mass accent
+AXES = (("x", (1, 0, 0), "#D55E00"), ("y", (0, 0, 1), "#009E73"), ("z", (0, -1, 0), "#56B4E9"))
+ORIGIN_AXIS = 20       # cm, axes at the floor origin (the floor board's corner)
+JOINT_AXIS = 8         # cm, thin axes at each joint below, both sides
+AXIS_JOINTS = tuple(f"{s}_{k}" for s in ("right", "left") for k in ("shoulder", "elbow", "hip", "knee", "ankle"))
 
 
 class Arrow3D(FancyArrowPatch):
@@ -128,6 +140,16 @@ def main():
     for v in range(y0, y1 + 1, FLOOR_STEP):
         line((x0, v, 0), (x1, v, 0), color=MID if v in (y0, y1) else LIGHT, lw=0.8 if v in (y0, y1) else 0.5)
 
+    def axes_at(p, size, lw, scale, names=False):
+        for name, d, color in AXES:
+            ax.add_artist(Arrow3D(p, tuple(a + size * b for a, b in zip(p, d)), arrowstyle="-|>", mutation_scale=scale,
+                                  shrinkA=0, shrinkB=0, color=color, lw=lw))
+            if names:
+                ax.text(*(a + (size + 6) * b for a, b in zip(p, d)), name, fontsize=9, color=color, ha="center",
+                        va="center", fontweight="bold", fontstyle="italic")
+
+    axes_at((0, 0, 0), ORIGIN_AXIS, 1.6, 10, names=True)
+
     # body: far (left) limbs light, near (right) limbs and trunk dark, face thin
     for a, b in BONES:
         if a not in J or b not in J:
@@ -138,6 +160,8 @@ def main():
     for side, color in (("left", MID), ("right", DARK)):
         for k in ("elbow", "knee", "ankle"):
             dot(J[f"{side}_{k}"], ms=3.5, color=color)
+    for n in AXIS_JOINTS:
+        axes_at(J[n], JOINT_AXIS, 0.6, 4)
     tip = lambda s: tuple(c + s * BAR_HALF * m for c, m in zip(bar, ml))      # noqa: E731
     line(tip(-1), tip(1), color=MID, lw=3.0, solid_capstyle="round")
     tag(tip(1), "바", -14, 12)
@@ -149,15 +173,27 @@ def main():
                           shrinkB=0, color=ACCENT, lw=1.4))
     tag(com, "무게중심", 10, 2, color=ACCENT, ha="left")
 
-    # joint points and their distance to the line
+    # joint points, and a left-right arrow on the page from each to the line at the dot's height
     for side in ("knee", "ankle"):
         line(J[f"left_{side}"], J[f"right_{side}"], color=MID, lw=0.8, ls=DOTTED)
-    for k, (name, (dx, dy), ha) in JOINTS.items():
+    from mpl_toolkits.mplot3d import proj3d
+    M = ax.get_proj()
+    page = lambda p: proj3d.proj_transform(*p, M)[:2]                       # noqa: E731
+    (cx0, cy0), (cx1, cy1) = page(com), page((com[0], com[1], 0))
+    for k in JOINTS:
         p = pts[k]
-        dot(p, ms=5.5, color=DARK)
-        tag(p, f"{name} {abs(D['arm_cm'][k]):.0f}cm", dx, dy, ha=ha)
-        ax.add_artist(Arrow3D(p, (com[0], com[1], p[2]), arrowstyle="<|-|>", mutation_scale=8, shrinkA=3, shrinkB=0,
-                              color=ACCENT, lw=1.2))
+        dot(p, ms=JOINT_MS, color=DARK)
+        x, y = page(p)
+        lx = cx0 + (cx1 - cx0) * (y - cy0) / (cy1 - cy0)
+        span = abs(ax.transData.transform((lx, y))[0] - ax.transData.transform((x, y))[0]) * 72 / fig.dpi
+        head = min(ARM_HEAD, (span - ARM_SHRINK) / 3.5)
+        # heads filled with no outline (an outline swells them by about its width and two heads on a 7pt arrow
+        # merge), then the shaft as its own line, ending inside the heads
+        at = dict(xy=(lx, y), xytext=(x, y), xycoords="data")
+        ax.annotate("", **at, arrowprops=dict(arrowstyle=f"<|-|>,head_length={head:.2f},head_width={0.5 * head:.2f}",
+                                              mutation_scale=1, shrinkA=ARM_SHRINK, shrinkB=0, color=ACCENT, lw=0))
+        ax.annotate("", **at, arrowprops=dict(arrowstyle="-", shrinkA=ARM_SHRINK + head / 2, shrinkB=head / 2,
+                                              color=ACCENT, lw=ARM_LW))
 
     fig.savefig(OUT, dpi=300, facecolor="white", bbox_inches=drawn_bbox(fig))
     plt.close(fig)
