@@ -7,7 +7,7 @@ export default function Slide07() {
     <Frame
       title="렌즈 보정"
       sub="여러 자리에서 찍은 보드로 카메라마다 아홉 값 산출"
-      section="04 · 네 절차 ①"
+      section="05 · 네 절차 ①"
       converge={<>재투영 오차 <strong>0.29~0.45px</strong>, 기준 1.5px</>}
     >
       <div className={`gr-body tight ${styles.body}`}>

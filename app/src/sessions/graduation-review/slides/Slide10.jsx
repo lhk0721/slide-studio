@@ -7,7 +7,7 @@ export default function Slide10() {
     <Frame
       title="측정 ② 하중 경로"
       sub="3D 관절에 체중, 성별, 바 무게를 더한 하중 계산"
-      section="04 · 네 절차 ④"
+      section="05 · 네 절차 ④"
       converge={<><strong>무게가 어디로 갔는가</strong>. 무게중심, 관절 하중, 근육까지</>}
     >
       <div className={`gr-body tight ${styles.body}`}>

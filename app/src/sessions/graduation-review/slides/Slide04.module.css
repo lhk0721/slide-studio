@@ -1,37 +1,17 @@
-.body {
-  flex-direction: column;
-  gap: 1.25rem;
+.left {
+  width: 27rem;
+  flex-shrink: 0;
 }
 
-.monoWrap {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
+.stats {
+  margin-top: 2rem;
+  flex-shrink: 0;
 }
-.monoRow {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  flex: 1;
-  min-height: 0;
-}
-.mono {
-  height: 100%;
-  max-height: 11.5rem;
-  width: auto;
-  max-width: 62%;
-  object-fit: contain;
-  border-radius: calc(var(--radius) * 0.5);
-}
-.monoText {
-  font-size: var(--fs-body);
-  line-height: 1.6;
-  color: var(--sub);
-  word-break: keep-all;
-}
-.monoText em {
-  font-style: normal;
-  color: var(--accent);
-  font-weight: var(--fw-bold);
+
+/* source under each stat's label: same caption size, lighter so it reads after the label */
+.src {
+  margin-top: 0.25rem;
+  font-size: var(--fs-caption);
+  color: var(--muted);
+  opacity: 0.75;
 }

@@ -15,7 +15,7 @@ export default function Slide11() {
     <Frame
       title="검증과 마무리"
       sub="마커 모션캡처 정답(Fit3D)과의 비교, 단안 모델과의 비교"
-      section="05 · 검증"
+      section="06 · 검증"
       converge={<>부스 <strong>9번</strong>, 리그 실물 측정 체험</>}
     >
       <div className={`gr-body tight ${styles.body}`}>

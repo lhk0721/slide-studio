@@ -26,7 +26,7 @@ export default function Slide05() {
     <Frame
       title="리그 하드웨어"
       sub="파워랙에 붙이는 카메라 3대, 결과는 태블릿"
-      section="03 · 리그"
+      section="04 · 리그"
       converge={<>펄스 하나에 <strong>같은 순간의 세 사진</strong>. 계산은 전부 리그 안에서</>}
     >
       <div className="gr-body tight">

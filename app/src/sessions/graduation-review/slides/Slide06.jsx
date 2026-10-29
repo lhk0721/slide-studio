@@ -14,7 +14,7 @@ export default function Slide06() {
     <Frame
       title="네 절차"
       sub="태블릿 앱 하나에 이어지는 진단, 렌즈 보정, 위치 보정, 측정"
-      section="03 · 리그"
+      section="04 · 리그"
       converge={<>진단 통과와 두 보정 뒤에 열리는 <strong>측정</strong></>}
     >
       <div className={`gr-body tight ${styles.body}`}>
