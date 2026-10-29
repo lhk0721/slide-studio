@@ -31,7 +31,7 @@ export default function Slide04() {
               트레이너 간 구전 노하우와 감, 대리 지표(proxy metric)의 주객전도
             </li>
             <li>
-              <strong>잴 수 없는 품질, 남는 건 가격 경쟁</strong>
+              <strong>증명할 수 없는 지도 품질</strong>
               <br />
               사업주는 인건비 절감, 트레이너는 영업직화, 회원은 최저가 선택과 시장 이탈
             </li>
