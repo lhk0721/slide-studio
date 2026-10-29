@@ -1,12 +1,11 @@
 import styles from './Slide01.module.css'
-import rigImg from '../assets/fig05_rig.jpg'
 
 export default function Slide01() {
   return (
     <div className={styles.slide}>
-      {/* 좌: 파워랙 모형에 설치한 리그(그림 5 의 오른쪽 사진 부분) */}
+      {/* 좌: 리그 배치 설계도를 글자 없이 12초에 한 바퀴 돌린 영상(60fps). 원본과 다시 만드는 소스는 저장소 밖 Videos 의 애니메이션 폴더 */}
       <div className={styles.deco}>
-        <img src={rigImg} alt="파워랙 모형에 설치한 리그" className={styles.img} />
+        <video className={styles.media} src="/graduation-review/rig_spin.mp4" autoPlay muted loop playsInline />
       </div>
 
       {/* 우: 텍스트 */}
@@ -18,7 +17,7 @@ export default function Slide01() {
         <div className={styles.rule} />
         <div className={styles.sub}>
           <span>
-            <span className={styles.accent}>RackTracker</span>, 파워랙에 붙여 운동 동작을 3D 로 재는 리그
+            <span className={styles.accent}>RackTracker</span>, 3D 골격을 실시간 측량하는 리그(Rig)
           </span>
         </div>
         <div className={styles.meta}>
@@ -28,11 +27,11 @@ export default function Slide01() {
           </div>
           <div className={styles.metaItem}>
             <span className={styles.metaLbl}>Members</span>
-            <span className={styles.metaVal}>(팀원 이름)</span>
+            <span className={styles.metaVal}>이현규, 이지원, 신은수, 장효인, 전효원</span>
           </div>
           <div className={styles.metaItem}>
             <span className={styles.metaLbl}>Advisor</span>
-            <span className={styles.metaVal}>(지도교수)</span>
+            <span className={styles.metaVal}>윤희남 교수님</span>
           </div>
         </div>
       </div>

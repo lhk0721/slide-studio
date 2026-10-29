@@ -1,9 +1,36 @@
+/* left: the dome photo over the table · right: the monocular depth animation at the body's full height.
+   Photo height is fixed (the frame is 1280×720) so `width: auto` keeps the aspect ratio. */
+.body {
+  gap: 2rem;
+}
 .left {
-  width: 27rem;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.photo {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.photo img {
+  height: 14.5rem;
+  width: auto;
+  object-fit: contain;
+  border-radius: calc(var(--radius) * 0.5);
 }
 
-.stats {
-  margin-top: 2rem;
-  flex-shrink: 0;
+/* the video is square on white like the slide, so it needs no frame */
+.mono {
+  flex: none;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: contain;
 }
+
+/* rows a little tighter than the shared table so the photo keeps its height */
+.body :global(.gr-table) td { padding: 0.5rem 0.75rem; }

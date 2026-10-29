@@ -1,50 +1,50 @@
 import Frame from '../components/Frame'
 import styles from './Slide04.module.css'
-import mono from '../assets/fig04_monocular.jpg'
+import cycle from '../assets/fig02_cycle.png'
 
-const rows = [
-  ['연구실 모션캡처', '전신 3D 관절', '가장 높음', '불가. 카메라 수십 대, 전용 공간'],
-  ['단안 카메라 앱과 장치', '관절, 횟수, 성공 여부', '낮음(깊이 추정)', '가능. 촬영 환경 표준화 불가'],
-  ['기계식 측정 기구', '정해진 궤적의 토크', '높음', '기구별 설치. 프리웨이트 불가'],
-  ['리그', '전신 3D 관절, 하중 경로', 'MPJPE 3.63cm', '파워랙 부착(카메라 3대)'],
+const stats = [
+  { val: '81.6%', lbl: '5년 안에 문을 닫는\n국내 헬스장', src: '중소벤처기업부, 2020' },
+  { val: '80%', lbl: '해마다 자리를 옮기는\n미국 트레이너', src: 'American Spa, 업계 추정' },
+  { val: '50%', lbl: '6개월 안에 그만두는\n신규 회원', src: 'IHRSA, 2020' },
 ]
 
 export default function Slide04() {
   return (
     <Frame
-      title="기존 솔루션의 한계"
-      sub="헬스장에 못 들이는 모션캡처, 깊이가 없는 단안 앱, 프리웨이트가 아닌 기계식 기구"
-      section="02 · 기존 솔루션"
-      converge={<>하중 경로를 재면서 헬스장에 들어가는 것은 <strong>리그</strong>뿐</>}
+      title="시장 실패로 이어진 정량 분석 수단 부재"
+      sub="세 시장 참여자의 lose-lose 루프"
+      section="03 · 시장실패"
+      converge={<>품질을 가릴 수 없는 시장에 남는 것은 <strong>질 낮은 쪽</strong>, 전형적인 레몬시장</>}
     >
-      <div className={`gr-body tight ${styles.body}`}>
-        <table className="gr-table">
-          <thead>
-            <tr>
-              <th>솔루션</th>
-              <th>측정 항목</th>
-              <th>정확도</th>
-              <th>헬스장 설치</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, i) => (
-              <tr key={r[0]} className={i === rows.length - 1 ? 'hl' : undefined}>
-                {r.map((c) => <td key={c}>{c}</td>)}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="gr-body">
+        <div className={`gr-col ${styles.left}`}>
+          <div className="gr-fig">
+            <img src={cycle} alt="세 참여자의 악순환 도식" />
+          </div>
+        </div>
 
-        <div className={styles.monoWrap}>
-          <div className="gr-tag">단안 카메라 앱과 장치의 한계</div>
-          <div className={styles.monoRow}>
-            <img src={mono} alt="단안 카메라 앱의 한계 패널 넷" className={styles.mono} />
-            <div className={styles.monoText}>
-              사진 한 장에 깊이는 없음. 3D 자세는 인체 비율로 채운 추정값이라
-              무게중심이 관절에서 몇 cm 벗어났는지 알 수 없음. 결과는 횟수 세기와 각도 판정까지,{' '}
-              <em>하중 경로 산출 불가</em>
-            </div>
+        <div className="gr-col center gr-grow">
+          <ul className="gr-points">
+            <li>
+              <strong>80년째 그대로인 지도 방식</strong>
+              <br />
+              트레이너 간 구전 노하우와 감, 대리 지표(proxy metric)의 주객전도
+            </li>
+            <li>
+              <strong>증명할 수 없는 지도 품질</strong>
+              <br />
+              사업주는 인건비 절감, 트레이너는 영업직화, 회원은 최저가 선택과 시장 이탈
+            </li>
+            <li>회원(소비자)에게 전가되는 시장실패의 비용과 부상 위험</li>
+          </ul>
+          <div className={`gr-stats ${styles.stats}`}>
+            {stats.map((s) => (
+              <div key={s.lbl} className="gr-stat">
+                <span className="gr-stat-val">{s.val}</span>
+                <span className="gr-stat-lbl">{s.lbl}</span>
+                <span className={styles.src}>{s.src}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

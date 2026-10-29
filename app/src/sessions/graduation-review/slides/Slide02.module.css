@@ -1,32 +1,4 @@
-.left {
-  width: 22rem;
+.fig {
+  width: 32rem;
   flex-shrink: 0;
-}
-
-.lever {
-  width: 100%;
-  max-width: 35rem;
-  height: auto;
-  margin-top: 1.75rem;
-  flex-shrink: 0;
-}
-.joint { fill: var(--text); }
-.arm { stroke: var(--text); stroke-width: 3; stroke-linecap: round; }
-.weight { fill: var(--ghost); }
-.gravity { stroke: var(--muted); stroke-width: 2; }
-.gravityHead { fill: var(--muted); }
-.lbl {
-  font-size: 13px;
-  fill: var(--muted);
-  font-weight: 600;
-}
-.moment {
-  font-size: 18px;
-  fill: var(--sub);
-  font-weight: 600;
-}
-.momentStrong {
-  font-size: 22px;
-  fill: var(--accent);
-  font-weight: 800;
 }

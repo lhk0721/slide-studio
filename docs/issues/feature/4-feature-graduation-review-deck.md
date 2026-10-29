@@ -57,11 +57,25 @@ Parent: #4
 - 영상 9개는 `ffprobe` 로 길이와 크기를 확인했다. 위치 보정 세 토막은 녹화가 가변 프레임이라 처음 10.9초로 짧게 나와 `fps=30` 을 넣어 13.7초로 맞췄다.
 - 9장 오른쪽은 측정 중 화면 녹화가 없어 자리표시다.
 
+### feat: 1장 팀원과 지도교수, 2장을 대리 지표 문제 정의와 관절별 모멘트 암 그림으로 (#4)
+
+> 1장 빈칸을 졸업 전시 배너 2차 시안대로 채우고, 2장을 "기존 KPI 는 대리 지표" 문제 정의로 다시 쓴다. 2장 그림은 X-ray 와 지렛대 도식 대신 실제 세트의 관절별 모멘트 암이다.
+
+#### Changes
+- `slides/Slide01.jsx`: 팀원(이현규, 이지원, 신은수, 장효인, 전효원)과 지도교수(윤희남 교수님)를 배너 2차 시안대로 채움. 부제를 "3D 골격을 실시간 측량하는 리그(Rig)"로. 같은 파일의 왼쪽 영상 교체는 다른 작업이라 이 commit 에 넣지 않았다.
+- `slides/Slide02.jsx`, `Slide02.module.css`: 제목 "대리 지표에 머문 KPI". 글 넷(진짜 목표, 대리 지표, '정답 자세'는 없다, 3차원 하중 경로의 시계열 동역학 분석 수단 필요)을 소제목 한 줄과 설명 한 줄로 쓴다. 결론 띠는 질문형. X-ray 와 지렛대 SVG 를 빼고 하중 경로 그림을 왼쪽 큰 칸에 둔다.
+- `assets/make_load_path.py`, `assets/data/fig24_squat_bottom.json`, `assets/load_path_arms.png`: 보고서 그림 24(rack-tracker #635 `make_figures.py`)의 슬라이드판. 같은 프레임(세션 20261012-115120 반복 3, 바 100kg)에서 바닥 눈금 숫자를 빼고, 관절 이름 옆에 무게중심선까지의 거리(`arm_cm` 반올림, 허리 10, 골반 13, 무릎 16, 발목 10cm)를 적고, 글자를 키웠다. 데이터 파일은 보고서 것의 사본이다.
+- `docs/sessions/graduation-review/README.md`: Notes 에서 1장 빈칸을 지움.
+
+#### Verification
+- `npm run shot graduation-review/1`, `graduation-review/2` 캡처로 줄바꿈과 겹침을 봤다. 그림 라벨이 앞쪽 다리 선을 가려, 라벨을 다리 바깥과 무게중심선 아래로 옮겼다.
+
 ## Management Notes
 
 ### Follow-up Candidates
 - 9장 시연 영상(측정 중 화면)을 리그 녹화로 바꾸기.
 - 영상 자막 없는 판이 필요하면 애니메이션 아티팩트에서 다시 뽑기.
+- 2장: "3차원"과 "3D" 표기 통일, 화면에 "모멘트 암"의 정의가 없음(글 4 와 캡션만 씀). `fig01_xray.jpg` 는 이제 어느 장도 쓰지 않는다.
 
 ### Notes
 - 영상 원본은 저장소 밖이다. 애니메이션은 `C:\Users\neighbor\Videos\애니메이션_영상_2026-10-27\`, 시연 녹화는 rack-tracker `docs/etc/graduation-review/raw/videos/`(commit 하지 않는 폴더). 여기에는 다시 인코딩한 사본만 둔다.

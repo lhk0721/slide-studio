@@ -140,27 +140,36 @@
 }
 .gr-converge strong { color: var(--accent); font-weight: var(--fw-black); }
 
-/* ── media pair: animation (left) + rig demo video (right) ── */
+/* ── media pair: animation + points (left, grows) · rig demo video (right, full body height) ── */
 .gr-media {
+  flex: 1;
+  min-width: 0;
   display: flex;
   gap: 2rem;
-  align-items: flex-start;
-  justify-content: center;
-  flex-shrink: 0;
 }
-.gr-media-item { display: flex; flex-direction: column; gap: 0.5rem; }
+.gr-media-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.gr-media-item { display: flex; flex-direction: column; gap: 0.5rem; min-height: 0; }
+.gr-media-item.grow { flex: 1; }
+/* body is ~500px tall → video ~472px; 472 × 474/760 ≈ 296px wide */
+.gr-media-item.side { width: 18.5rem; flex-shrink: 0; }
 .gr-video {
   display: block;
-  height: 22.5rem;               /* 360px */
   border-radius: calc(var(--radius) * 0.5);
   background: var(--bg2);
   object-fit: cover;
 }
-.gr-video.wide { width: 36rem; }    /* 576px — 16:10 animation frame */
-.gr-video.tall { width: 14rem; }    /* 224px — 474×760 tablet recording */
+/* the animation is shot at this box's own aspect ratio, so it fills without cropping */
+.gr-video.wide { flex: 1; min-height: 0; width: 100%; }
+/* 474×760 tablet recording: fills the side column top to bottom */
+.gr-video.tall,
+.gr-ph { flex: 1; min-height: 0; width: 100%; }
 .gr-ph {
-  height: 22.5rem;
-  width: 14rem;
   border-radius: calc(var(--radius) * 0.5);
   background: var(--bg2);
   border: 1px dashed var(--ghost);
