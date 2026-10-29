@@ -1,7 +1,18 @@
 import Frame from '../components/Frame'
 import styles from './Slide05.module.css'
-import rig from '../assets/fig05_rig.jpg'
-import parts from '../assets/fig06_parts.jpg'
+import rigPhoto from '../assets/fig05_rig_photo.jpg'
+import partCamera from '../assets/fig06_part_camera.jpg'
+import partTrigger from '../assets/fig06_part_trigger.jpg'
+import partJetson from '../assets/fig06_part_jetson.jpg'
+import partCables from '../assets/fig06_part_cables.jpg'
+
+// report fig. 6, one photo per part, captions as in the report
+const parts = [
+  [partCamera, '카메라와 하우징'],
+  [partTrigger, '트리거 보드'],
+  [partJetson, '연산 장비\n(Jetson Orin NX)'],
+  [partCables, '노출 신호 선과\nUSB 선'],
+]
 
 const items = [
   { k: '카메라 3대', v: '글로벌 셔터, 1920×1200, 초당 30장. 파워랙 기둥에 세로 장착' },
@@ -19,12 +30,17 @@ export default function Slide05() {
       converge={<>펄스 하나에 <strong>같은 순간의 세 사진</strong>. 계산은 전부 리그 안에서</>}
     >
       <div className="gr-body tight">
-        <div className={`gr-col ${styles.left}`}>
-          <div className={`gr-fig ${styles.figTop}`}>
-            <img src={rig} alt="리그의 개념도와 설치 모습" />
+        <div className={styles.figs}>
+          <div className={`gr-fig ${styles.photo}`}>
+            <img src={rigPhoto} alt="파워랙 모형에 설치한 리그" />
           </div>
-          <div className={`gr-fig ${styles.figBottom}`}>
-            <img src={parts} alt="리그의 부품" />
+          <div className={styles.parts}>
+            {parts.map(([src, cap]) => (
+              <figure key={cap} className={styles.part}>
+                <img src={src} alt={cap} />
+                <figcaption>{cap}</figcaption>
+              </figure>
+            ))}
           </div>
         </div>
 

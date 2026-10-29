@@ -16,6 +16,7 @@ Parent: #6
 - 7~10장 애니메이션이 칸을 채우고, 움직이는 곳이 화면에서 크게 보인다.
 - 8장 두 영상에 바닥 앵커, 랙 앵커, 검산 코너가 나온다.
 - 2장 하중 경로 그림에서 관절마다 무게중심선까지의 거리가 화살표로 보이고, 3D 좌표라는 것이 드러난다.
+- 5장 왼쪽에 리그 실물 사진이 본문 높이 전체로, 그 오른쪽에 부품 사진 넷이 세로 한 줄로 놓인다.
 
 ## Scope
 - `slides/Slide01.jsx`, `Slide01.module.css`: 왼쪽 칸 영상.
@@ -23,9 +24,10 @@ Parent: #6
 - `slides/Slide07.jsx`~`Slide10.jsx`: `MediaPair` 부분.
 - `app/public/graduation-review/`: mp4.
 - `assets/make_load_path.py`, `assets/load_path_arms.png`: 2장 그림.
+- `slides/Slide05.jsx`, `Slide05.module.css`, `assets/fig05_rig_photo.jpg`, `assets/fig06_part_*.jpg`: 5장 사진 배치.
 
 ## Out Of Scope
-- 7~10장의 단계 번호("05 · 네 절차"), 3~6장, 11장, `slides/index.js`, 세션 문서의 장 순서. 같은 working tree 에서 다른 작업이 고치는 중이라 이 issue 에 넣지 않는다.
+- 5장과 7~10장의 단계 번호("04 · 리그", "05 · 네 절차"), 3, 4, 6, 11장, `slides/index.js`, 세션 문서의 장 순서. 같은 working tree 에서 다른 작업이 고치는 중이라 이 issue 에 넣지 않는다.
 - 8장 글 세 줄과 결론 띠 문구.
 - 9장 오른쪽 측정 중 화면 녹화(리그 실기).
 
@@ -35,6 +37,7 @@ Parent: #6
 - [x] 애니메이션 넷을 카메라 이동판으로 교체, 8장 시연 영상 다시 자르기.
 - [x] 1장, 7~10장 캡처 확인.
 - [x] 2장 그림의 좌우 화살표와 xyz 축, 캡처 확인.
+- [x] 5장 리그 실물 사진과 부품 사진 세로 한 줄, 캡처 확인.
 
 ---
 
@@ -77,6 +80,21 @@ Parent: #6
 #### Verification
 - 개발 서버에서 2장을 캡처해 봤다. 화살표 넷이 슬라이드 크기에서 ↔ 로 보이고, 관절 축 10곳과 바닥 축이 몸통, 화살표와 겹치지 않는다.
 - 옆에 가까운 시점(앙각 15°, 15°)이면 화살표가 길게 눕지만, 사용자가 사선 위 시점을 골라 원래 시점으로 되돌렸다.
+
+### feat: 5장 리그 실물 사진을 본문 높이 전체로, 부품 사진 넷은 세로 한 줄로 (#6)
+
+> 5장 왼쪽 위의 개념도와 실물 사진을 붙인 그림을 빼고, 리그 실물 사진을 맨 왼쪽에 본문 높이 전체로 둔다. 그 오른쪽에 부품 사진 넷을 세로 한 줄로 놓는다.
+
+#### Changes
+- `slides/Slide05.jsx`, `Slide05.module.css`: 왼쪽 열(위 `fig05_rig.jpg`, 아래 `fig06_parts.jpg`)을 세 칸으로 바꿨다. 맨 왼쪽은 리그 실물 사진이고 높이가 본문 전체다. 그 오른쪽은 부품 사진 넷이 grid 네 줄로 서고, 넷을 합친 높이가 실물 사진과 같다. 이름표는 사진 오른쪽에 화면 글자로 달고, 줄바꿈 자리는 문자열의 `\n` 으로 정했다. 오른쪽 설명 목록과 셔터 영상은 그대로다.
+- `assets/fig05_rig_photo.jpg`(1050×1400): rack-tracker 의 공용 그림 `docs/etc/graduation-review/figures/하드웨어/g3_rig_photos_b_hero_48cm.jpg` 에서 리그 사진 칸(보고서 `make_figures.py` 의 `HERO_RIG`)만 잘랐다. 원본 바깥의 2px 회색 테두리는 뺐다.
+- `assets/fig06_part_camera.jpg`, `fig06_part_trigger.jpg`, `fig06_part_jetson.jpg`, `fig06_part_cables.jpg`(각 900×599): `fig06_parts.jpg`(보고서 그림 6)의 네 칸에서 사진만 잘랐다. 이름표는 보고서 캡션을 그대로 쓴다. 연산 장비 사진은 Orin NX 한 대라 오른쪽 설명 "Jetson Orin NX 16GB 한 대"와 맞는다.
+- `fig05_rig.jpg` 와 `fig06_parts.jpg` 는 이제 어느 장도 쓰지 않는다. 되돌릴 때를 위해 지우지 않았다.
+- 같은 파일의 단계 번호("03 · 리그" → "04 · 리그")는 다른 작업이라 넣지 않았다.
+
+#### Verification
+- `npm run shot graduation-review/5` 로 캡처해 봤다. 실물 사진이 본문 위아래 끝에 닿고, 부품 사진 넷의 위 끝과 아래 끝이 실물 사진과 맞는다. 이름표 넷은 두 줄 안에 들어간다.
+- 세로 조합판(`g3_rig_photos_d_column_13cm.jpg`)의 부품 2×2 를 잘라 넣은 판도 만들어 봤지만, 사용자가 넷을 세로 한 줄로 두자고 해 바꿨다.
 
 ## Management Notes
 
