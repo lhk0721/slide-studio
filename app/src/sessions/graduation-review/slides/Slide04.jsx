@@ -14,7 +14,7 @@ export default function Slide04() {
       title="시장 실패로 이어진 정량 분석 수단 부재"
       sub="세 시장 참여자의 lose-lose 루프"
       section="03 · 시장실패"
-      converge={<>품질을 가릴 수 없는 시장에 남는 것은 <strong>질 낮은 쪽</strong>. 경제학적 레몬시장</>}
+      converge={<>품질을 가릴 수 없는 시장에 남는 것은 <strong>질 낮은 쪽</strong>, 전형적인 레몬시장</>}
     >
       <div className="gr-body">
         <div className={`gr-col ${styles.left}`}>
