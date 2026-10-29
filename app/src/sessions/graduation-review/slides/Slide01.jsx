@@ -1,12 +1,11 @@
 import styles from './Slide01.module.css'
-import rigImg from '../assets/fig05_rig.jpg'
 
 export default function Slide01() {
   return (
     <div className={styles.slide}>
-      {/* 좌: 파워랙 모형에 설치한 리그(그림 5 의 오른쪽 사진 부분) */}
+      {/* 좌: 리그 배치 설계도를 글자 없이 12초에 한 바퀴 돌린 영상(60fps). 원본과 다시 만드는 소스는 저장소 밖 Videos 의 애니메이션 폴더 */}
       <div className={styles.deco}>
-        <img src={rigImg} alt="파워랙 모형에 설치한 리그" className={styles.img} />
+        <video className={styles.media} src="/graduation-review/rig_spin.mp4" autoPlay muted loop playsInline />
       </div>
 
       {/* 우: 텍스트 */}

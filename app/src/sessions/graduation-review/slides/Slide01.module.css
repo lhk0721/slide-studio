@@ -13,15 +13,15 @@
   overflow: hidden;
 }
 
-.img {
+.media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  /* 그림 5 는 왼쪽 개념도 + 오른쪽 설치 사진이라 오른쪽 부분만 보이게 */
-  object-position: right center;
-  filter: grayscale(100%) brightness(0.92) contrast(1.06);
+  /* 영상은 이 칸(416×720)과 같은 비율로 찍었다 */
+  object-fit: contain;
+  /* 흰 바탕을 곱하기로 섞어 슬라이드 그라디언트가 그대로 비치게 */
+  mix-blend-mode: multiply;
 }
 
 .body {
