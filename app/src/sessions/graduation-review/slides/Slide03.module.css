@@ -1,9 +1,45 @@
-.left {
-  width: 27rem;
-  flex-shrink: 0;
+.body {
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-.stats {
-  margin-top: 2rem;
+/* photo row: the monocular group at the right edge, the dome centred in the width that is left of it.
+   Each group is a tag + photos + captions; the tag spans the photos (.block keeps them one column).
+   Photo height is fixed (the frame is 1280×720) so `width: auto` keeps every aspect ratio. */
+.photoRow {
+  display: flex;
+  gap: 2.5rem;
   flex-shrink: 0;
 }
+.group {
+  display: flex;
+  flex-direction: column;
+}
+.group.grow {
+  flex: 1;
+  align-items: center;
+}
+.block {
+  display: flex;
+  flex-direction: column;
+}
+.pair {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.photo {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.photo img {
+  height: 14.5rem;
+  width: auto;
+  object-fit: contain;
+  border-radius: calc(var(--radius) * 0.5);
+}
+
+/* rows a little tighter than the shared table so the photos keep their height */
+.body :global(.gr-table) td { padding: 0.5rem 0.75rem; }
