@@ -1,32 +1,14 @@
+/* left: the dome photo over the table · right: the monocular depth animation at the body's full height.
+   Photo height is fixed (the frame is 1280×720) so `width: auto` keeps the aspect ratio. */
 .body {
-  flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
 }
-
-/* photo row: the monocular group at the right edge, the dome centred in the width that is left of it.
-   Each group is a tag + photos + captions; the tag spans the photos (.block keeps them one column).
-   Photo height is fixed (the frame is 1280×720) so `width: auto` keeps every aspect ratio. */
-.photoRow {
-  display: flex;
-  gap: 2.5rem;
-  flex-shrink: 0;
-}
-.group {
-  display: flex;
-  flex-direction: column;
-}
-.group.grow {
+.left {
   flex: 1;
-  align-items: center;
-}
-.block {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-}
-.pair {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+  gap: 3rem;
 }
 .photo {
   margin: 0;
@@ -41,5 +23,14 @@
   border-radius: calc(var(--radius) * 0.5);
 }
 
-/* rows a little tighter than the shared table so the photos keep their height */
+/* the video is square on white like the slide, so it needs no frame */
+.mono {
+  flex: none;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: contain;
+}
+
+/* rows a little tighter than the shared table so the photo keeps its height */
 .body :global(.gr-table) td { padding: 0.5rem 0.75rem; }
