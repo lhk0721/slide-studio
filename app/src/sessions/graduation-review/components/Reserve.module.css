@@ -1,8 +1,0 @@
-.fig {
-  flex-shrink: 0;
-  justify-content: center;
-}
-/* 그림이 세로로 가운데 오고, 캡션이 그림 바로 아래 붙는다 */
-.fig > :global(.gr-fig) {
-  flex: 0 1 auto;
-}

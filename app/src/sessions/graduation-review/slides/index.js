@@ -11,19 +11,10 @@ import Slide08 from './Slide08'
 import Slide09 from './Slide09'
 import Slide10 from './Slide10'
 import Slide11 from './Slide11'
-import Slide12 from './Slide12'
-import Slide13 from './Slide13'
-import Slide14 from './Slide14'
-import Slide15 from './Slide15'
-import Slide16 from './Slide16'
-import Slide17 from './Slide17'
-import Slide18 from './Slide18'
-import Slide19 from './Slide19'
-import Slide20 from './Slide20'
 
 // ─────────────────────────────────────────────────────────────
 //  SLIDE META — same schema as inbody-u300 (see that deck's index.js).
-//  본편 1~11 = 180초. 예비 12~20 은 질의응답용이라 발표에서는 넘기지 않는다.
+//  본편 1~11 = 180초.
 //  글·그림의 원고는 rack-tracker `docs/etc/graduation-review/slides/slides.md`.
 // ─────────────────────────────────────────────────────────────
 const slides = [
@@ -162,60 +153,6 @@ const slides = [
     ],
     visual: '정확도 막대(보고서 그림 28) + 지난 세션 보기 화면(그림 25)',
     notes: '15초.',
-  },
-  {
-    id: 12, title: '예비 1 카메라 3대의 이유', component: Slide12,
-    group: '예비', role: '질의응답',
-    message: '2대로는 가려진 관절이 빠지고, 빠진 관절은 계산으로 못 채운다',
-    visual: 'Panoptic 돔에서 고른 카메라 3대(보고서 그림 27)',
-  },
-  {
-    id: 13, title: '예비 2 확정값 지연의 이유', component: Slide13,
-    group: '예비', role: '질의응답',
-    message: '20초 구간을 한꺼번에 다시 산출한다. 학습 모델 초기값으로 2차례면 된다',
-    visual: '두 경로 도식(그림 22) + 다듬기 방식별 MPJPE(그림 23)',
-  },
-  {
-    id: 14, title: '예비 3 리그 실물의 정확도', component: Slide14,
-    group: '예비', role: '질의응답',
-    message: '보드 540mm와 카메라 쌍 거리 103cm가 줄자와 맞았다',
-    visual: '캘리브레이션 보드 도안과 실물(그림 14)',
-  },
-  {
-    id: 15, title: '예비 4 근육군 규칙', component: Slide15,
-    group: '예비', role: '질의응답',
-    message: '관절 하중은 그 관절을 펴는 근육군이 버틴다',
-    visual: '세션 보기 화면의 메쉬 근육군 색(그림 25)',
-  },
-  {
-    id: 16, title: '예비 5 단안 앱과의 차이', component: Slide16,
-    group: '예비', role: '질의응답',
-    message: '깊이, 촬영 환경, 재는 것이 다르다',
-    visual: '비교표(표 1)',
-  },
-  {
-    id: 17, title: '예비 6 비용', component: Slide17,
-    group: '예비', role: '질의응답',
-    message: '연산 장비 모듈 Orin NX 999달러(Orin Nano 399달러)',
-    visual: 'Orin Nano 와 Orin NX 사양표(표 4)',
-  },
-  {
-    id: 18, title: '예비 7 리그 OS 와 lease', component: Slide18,
-    group: '예비', role: '질의응답',
-    message: '카메라와 트리거 보드는 lease 로 한 번에 한 곳에만',
-    visual: '리그 OS 계층 도식(그림 16)',
-  },
-  {
-    id: 19, title: '예비 8 피험자와 종목', component: Slide19,
-    group: '예비', role: '질의응답',
-    message: '평가는 학습에 쓰지 않은 피험자 2명 8샘플, 네 동작',
-    visual: 'Fit3D 카메라 4대 사진(그림 26 오른쪽)',
-  },
-  {
-    id: 20, title: '예비 9 수식 모음', component: Slide20,
-    group: '예비', role: '질의응답',
-    message: '렌즈 보정, 위치 보정, 삼각측량, 하중 경로의 식 넷',
-    visual: '식 넷(KaTeX)',
   },
 ]
 
