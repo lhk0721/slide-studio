@@ -27,7 +27,7 @@ export default function Slide05() {
       title="리그 하드웨어"
       sub="파워랙에 붙이는 카메라 3대, 결과는 태블릿"
       section="04 · 리그"
-      converge={<>펄스 하나에 <strong>같은 순간의 세 사진</strong>. 계산은 전부 리그 안에서</>}
+      converge={<>카메라 3대 동기 촬영 · MediaPipe-PL-heavy 3개 병렬 추론 · <strong>90 inferences/s</strong> · 실시간 삼각측량 · 후처리</>}
     >
       <div className="gr-body tight">
         <div className={styles.figs}>
@@ -59,9 +59,6 @@ export default function Slide05() {
               src="/graduation-review/anim_shutter_prop.mp4"
               autoPlay muted loop playsInline
             />
-            <div className={styles.shutterCap}>
-              왼쪽 롤링 셔터는 휘어 찍힌 날개, 오른쪽 <strong>글로벌 셔터</strong>는 곧은 날개
-            </div>
           </div>
         </div>
       </div>
