@@ -14,9 +14,9 @@ export default function Slide02() {
         {/* 실제 세트의 한 프레임. 그림은 assets/make_load_path.py 가 그린다 */}
         <div className={`gr-col ${styles.fig}`}>
           <div className="gr-fig">
-            <img src={loadPath} alt="스쿼트 바닥 자세에서 네 관절의 모멘트 암" />
+            <img src={loadPath} alt="스쿼트 바닥 자세에서 두 발이 받는 몫과 다리별 관절의 모멘트 암" />
           </div>
-          <div className="gr-cap">리그로 잰 관절별 모멘트 암(스쿼트 바닥 자세, 바 100kg)</div>
+          <div className="gr-cap">리그로 잰 다리별 모멘트 암과 두 발 몫(스쿼트 바닥 자세, 바 100kg)</div>
         </div>
 
         <div className="gr-col center gr-grow">
