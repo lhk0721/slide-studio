@@ -28,7 +28,7 @@ const sessions = [
   {
     id: 'graduation-review',
     title: 'RackTracker · 졸업작품 심사 발표',
-    description: '다시점 삼각측량과 소형 연산 장비를 이용한 파워랙의 모션캡처 스튜디오화 — 3분 발표 11장 + 질의응답 예비 9장.',
+    description: '다시점 삼각측량과 소형 연산 장비를 이용한 파워랙의 모션캡처 스튜디오화 — 3분 발표 11장.',
     slides: graduationSlides,
   },
 ]
