@@ -86,10 +86,3 @@
   background: var(--bg2);
   object-fit: cover;
 }
-.shutterCap {
-  font-size: var(--fs-caption);
-  line-height: 1.4;
-  color: var(--muted);
-  word-break: keep-all;
-}
-.shutterCap strong { color: var(--text); }
