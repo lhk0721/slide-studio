@@ -7,7 +7,7 @@ export default function Slide08() {
     <Frame
       title="위치 보정"
       sub="기준 카메라에 C1 과 C2 를 이어 세 대를 바닥 좌표계에 배치"
-      section="05 · 네 절차 ②"
+      section="05 · 운용절차 ②"
       converge={<>검산 차이 <strong>0.18°, 0.35cm</strong>. 기준 0.5°, 2.0cm</>}
     >
       <div className={`gr-body tight ${styles.body}`}>
