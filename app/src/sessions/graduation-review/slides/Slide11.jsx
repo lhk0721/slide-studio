@@ -36,7 +36,7 @@ export default function Slide11() {
       title="검증과 마무리"
       sub="마커 모션캡처 정답(Fit3D)과의 비교, 단안 모델과의 비교"
       section="06 · 검증"
-      converge={<>부스 <strong>9번</strong>, 리그 실물 측정 체험</>}
+      converge={<>단안 모델이 못 하는 <strong>표준화된 공간 좌표계 위 3D 관절</strong>, 관절 하중 산출의 바탕</>}
     >
       <div className={`gr-body tight ${styles.body}`}>
         <div className="gr-stats">
