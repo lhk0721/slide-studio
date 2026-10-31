@@ -11,10 +11,11 @@ import Slide08 from './Slide08'
 import Slide09 from './Slide09'
 import Slide10 from './Slide10'
 import Slide11 from './Slide11'
+import Slide12 from './Slide12'
 
 // ─────────────────────────────────────────────────────────────
 //  SLIDE META — same schema as inbody-u300 (see that deck's index.js).
-//  본편 1~11 = 180초.
+//  본편 1~11 = 180초. 12 = 질의응답 동안 띄워 두는 QR.
 //  글·그림의 원고는 rack-tracker `docs/etc/graduation-review/slides/slides.md`.
 // ─────────────────────────────────────────────────────────────
 const slides = [
@@ -153,6 +154,14 @@ const slides = [
     ],
     visual: '정확도 막대(보고서 그림 28) + 지난 세션 보기 화면(그림 25)',
     notes: '15초.',
+  },
+  {
+    id: 12, title: 'QR', component: Slide12,
+    group: '마무리', role: 'QR',
+    message: 'racktracker.dev QR',
+    body: [],
+    visual: '배너와 같은 QR(가운데 로고) + 주소',
+    notes: '발표가 끝나고 질의응답 동안 띄워 둔다.',
   },
 ]
 
