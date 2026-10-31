@@ -78,7 +78,7 @@ const slides = [
     notes: '25초.',
   },
   {
-    id: 6, title: '네 절차', component: Slide06,
+    id: 6, title: '운용절차', component: Slide06,
     group: '리그', role: '절차 개요',
     message: '진단, 렌즈 보정, 위치 보정, 측정이 태블릿 앱 하나에 이어진다',
     body: [
@@ -86,12 +86,12 @@ const slides = [
       '렌즈 보정: 카메라를 달거나 바꿨을 때. 위치 보정: 설치 직후와 카메라가 움직인 뒤',
       '측정: 진단을 통과하고 두 보정이 있어야 열린다',
     ],
-    visual: '네 절차의 태블릿 화면(보고서 그림 7)',
+    visual: '운용절차 네 단계의 태블릿 화면(보고서 그림 7)',
     notes: '10초.',
   },
   {
     id: 7, title: '렌즈 보정', component: Slide07,
-    group: '네 절차', role: '원리 + 시연 ①',
+    group: '운용절차', role: '원리 + 시연 ①',
     message: '보드를 여러 자리에서 찍어 카메라마다 아홉 값을 산출한다',
     body: [
       '캘리브레이션 보드(ChArUco, A2, 90mm 칸)를 거리와 기울기를 바꿔 8장 이상 찍는다',
@@ -104,7 +104,7 @@ const slides = [
   },
   {
     id: 8, title: '위치 보정', component: Slide08,
-    group: '네 절차', role: '원리 + 시연 ②',
+    group: '운용절차', role: '원리 + 시연 ②',
     message: '기준 카메라에 C1 과 C2 를 이어 세 대를 바닥 좌표계에 놓는다',
     body: [
       '바닥에 눕힌 보드가 바닥 좌표계다. 보드 모서리가 원점, 두 변이 x 축과 z 축, 위쪽이 y 축',
@@ -117,7 +117,7 @@ const slides = [
   },
   {
     id: 9, title: '측정 ① 삼각측량', component: Slide09,
-    group: '네 절차', role: '원리 + 시연 ③',
+    group: '운용절차', role: '원리 + 시연 ③',
     message: '세 광선이 만나는 점이 3D 관절이고, 관절마다 두 대만 보여도 산출한다',
     body: [
       '카메라마다 사진에서 2D 관절 33개를 찾는다(BlazePose heavy)',
@@ -130,7 +130,7 @@ const slides = [
   },
   {
     id: 10, title: '측정 ② 하중 경로', component: Slide10,
-    group: '네 절차', role: '원리 + 시연 ④ · 결론',
+    group: '운용절차', role: '원리 + 시연 ④ · 결론',
     message: '수직 저항 무게중심에서 담당 근육군까지, 관절별 하중 분배를 산출한다',
     body: [
       '3D 관절에 체중, 성별, 바 무게를 넣는다. 분절 표(de Leva)로 몸의 무게중심과 바를 더한 무게중심을 구한다',

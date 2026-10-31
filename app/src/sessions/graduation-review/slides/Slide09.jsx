@@ -7,7 +7,7 @@ export default function Slide09() {
     <Frame
       title="측정 ① 삼각측량"
       sub="세 광선이 만나는 점이 3D 관절"
-      section="05 · 네 절차 ③"
+      section="05 · 운용절차 ③"
       converge={<>관절마다 <strong>두 대</strong>만 보여도 3D 관절 산출</>}
     >
       <div className={`gr-body tight ${styles.body}`}>
