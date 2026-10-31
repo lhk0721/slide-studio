@@ -6,9 +6,39 @@
   flex: 1;
   min-height: 0;
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 .chart {
   width: 30rem;
   flex-shrink: 0;
+}
+
+/* 오른쪽: 랙 트래커와 InstantHMR 의 할 수 있다/없다 비교 표 */
+.right { gap: 0.9rem; }
+.table th { text-transform: none; letter-spacing: 0; }
+.table th:not(:first-child),
+.table td:not(:first-child) { text-align: center; }
+.table td { vertical-align: middle; padding-top: 0.85rem; padding-bottom: 0.85rem; }
+.ours { color: var(--accent) !important; font-weight: var(--fw-bold); font-size: 1.25rem; }
+.ihmr { color: var(--muted) !important; font-size: 1.25rem; }
+.yes, .no {
+  width: 1.75rem;
+  height: 1.75rem;
+  vertical-align: middle;
+}
+.yes circle { fill: var(--accent); }
+.no circle { fill: #C5CAD1; }
+.yes path, .no path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.note {
+  margin: 0;
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: var(--muted);
+  word-break: keep-all;
 }
