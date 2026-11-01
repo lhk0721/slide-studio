@@ -160,7 +160,7 @@ const slides = [
     group: '마무리', role: 'QR',
     message: 'racktracker.dev QR',
     body: [],
-    visual: '배너와 같은 QR(가운데 로고) + 주소',
+    visual: '배너와 같은 QR(가운데 로고) + 주소 + 이름표 「Project Report, PT slide」',
     notes: '발표가 끝나고 질의응답 동안 띄워 둔다.',
   },
 ]

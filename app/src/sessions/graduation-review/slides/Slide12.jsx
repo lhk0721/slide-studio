@@ -8,6 +8,8 @@ export default function Slide12() {
           흰 여백도 QR 의 일부라 자르거나 겹치지 않는다 */}
       <img className={styles.qr} src={qr} alt="racktracker.dev QR 코드" />
       <div className={styles.url}>racktracker.dev</div>
+      {/* 배너 QR 아래 이름표와 같은 말 */}
+      <div className={styles.label}>Project Report, PT slide</div>
     </div>
   )
 }
