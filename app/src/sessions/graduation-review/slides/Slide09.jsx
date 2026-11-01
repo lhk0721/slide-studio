@@ -14,7 +14,7 @@ export default function Slide09() {
         <MediaPair
           anim="/graduation-review/anim_measure_tri.mp4"
           animCap="산출 원리 · 삼각측량"
-          placeholder="측정 중 화면 녹화 예정"
+          demo="/graduation-review/demo_measure.mp4"
           demoCap="리그 화면 · 측정 중"
         >
           <ul className={`gr-points compact ${styles.points}`}>
