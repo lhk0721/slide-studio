@@ -35,7 +35,7 @@ export default function Slide04() {
               <br />
               사업주는 인건비 절감, 트레이너는 영업직화, 회원은 최저가 선택과 시장 이탈
             </li>
-            <li>회원(소비자)에게 전가되는 시장실패의 비용과 부상 위험</li>
+            <li><em>회원(소비자)에게 전가되는 시장실패의 비용과 부상 위험</em></li>
           </ul>
           <div className={`gr-stats ${styles.stats}`}>
             {stats.map((s) => (

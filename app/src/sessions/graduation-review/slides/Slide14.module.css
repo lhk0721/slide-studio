@@ -1,0 +1,17 @@
+.body { align-items: center; }
+.table { width: 100%; }
+.table th { text-transform: none; letter-spacing: 0; }
+.table th:first-child { width: 16%; }
+.table th:not(:first-child) { width: 42%; }
+.table td {
+  vertical-align: middle;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+  white-space: pre-line;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+.opencap { color: var(--muted) !important; }
+.ours { color: var(--text) !important; font-weight: var(--fw-semibold); }
+/* 실증실험에서 따져야 하는 차이: 글자는 그대로, 행 배경만 */
+.key td { background: var(--accent-soft); }

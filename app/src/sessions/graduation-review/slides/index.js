@@ -12,17 +12,20 @@ import Slide09 from './Slide09'
 import Slide10 from './Slide10'
 import Slide11 from './Slide11'
 import Slide12 from './Slide12'
+import Slide13 from './Slide13'
+import Slide14 from './Slide14'
+import Slide15 from './Slide15'
 
 // ─────────────────────────────────────────────────────────────
 //  SLIDE META — same schema as inbody-u300 (see that deck's index.js).
-//  본편 1~11 = 180초. 12 = 질의응답 동안 띄워 두는 QR.
+//  본편 1~14(13·14 = ICG 실증연구). 15 = 질의응답 동안 띄워 두는 QR.
 //  글·그림의 원고는 rack-tracker `docs/etc/graduation-review/slides/slides.md`.
 // ─────────────────────────────────────────────────────────────
 const slides = [
   {
     id: 1, title: '타이틀', component: Slide01,
     group: '도입', role: '표지',
-    message: '다시점 삼각측량과 소형 연산 장비를 이용한 파워랙의 모션캡처 스튜디오화',
+    message: '파워랙 다시점 카메라 리그의 스쿼트 하중 경로 정확도 검증(ICG 분야 실증기반 연구 프로그램)',
     visual: '파워랙 모형에 설치한 리그 사진(보고서 그림 5 오른쪽)',
     notes: '5초. 과제명과 팀만 말한다.',
   },
@@ -143,20 +146,58 @@ const slides = [
     notes: '20초.',
   },
   {
-    id: 11, title: '검증과 마무리', component: Slide11,
+    id: 11, title: '단안 카메라 앱과의 비교검증', component: Slide11,
+    group: '검증', role: 'gold standard 와 두 방식(13장과 같은 틀)',
+    message: '같은 마커 모션캡처 정답으로 다시점 삼각측량과 단안 추정의 오차를 비교한다',
+    body: [
+      '정답: Fit3D 데이터셋. 몸에 붙인 반사 마커를 적외선 카메라로 추적해 잰 3D 관절, 바벨 스쿼트 8샘플',
+      'RackTracker: 다시점 삼각측량. 동기 촬영한 카메라 3대의 2D 관절을 광선으로 이어 실제 공간의 3D 관절을 산출',
+      'InstantHMR: 단안 추정. 카메라 한 대의 사진에서 학습 모델이 3D 관절을 추정, 깊이와 실제 크기는 추정값',
+    ],
+    visual: 'Fit3D 스쿼트 사진 | 삼각측량 애니메이션 장면 | InstantHMR 시연 장면',
+    notes: '10초.',
+  },
+  {
+    id: 12, title: '비교검증 결과', component: Slide12,
     group: '검증', role: '정확도 · 마무리',
     message: '카메라 3대의 삼각측량은 단안 모델보다 오차가 2배 작다',
     body: [
       'Fit3D(마커 모션캡처 정답) 8샘플, 관절 위치 오차 MPJPE 3.63cm',
       '단안 모델 InstantHMR 대비 관절 위치 오차 2.0배, 무릎 각도 오차 2.1배 작다',
-      '화면값 251ms, 노출 시각 차 0.12ms, 동기 적중률 100%',
       '단안 모델이 못 하는 표준화된 공간 좌표계 위 3D 관절이 관절 하중 산출의 바탕이다',
     ],
     visual: '정확도 막대(보고서 그림 28) + 지난 세션 보기 화면(그림 25)',
     notes: '15초.',
   },
   {
-    id: 12, title: 'QR', component: Slide12,
+    id: 13, title: 'OpenCap 도구와의 비교검증', component: Slide13,
+    group: '실증연구', role: 'gold standard 와 두 방식(11장과 같은 틀)',
+    message: '지면반력판이 있는 gold standard 로 관절 위치에 더해 역동역학 분석까지 검증한다',
+    body: [
+      'gold standard: OpenCap 검증 데이터. 마커 모션캡처와 지면반력판을 함께 기록한 스쿼트',
+      'RackTracker: 파워랙에 고정한 글로벌 셔터 카메라 3대, 트리거 신호 하나로 동기 촬영',
+      'OpenCap 도구: 삼각대에 세운 아이폰 여러 대, 촬영 뒤 계산으로 동기',
+      '공통점은 다시점 삼각측량',
+    ],
+    visual: 'OpenCap 검증 데이터 스쿼트 영상 | RackTracker 설계도 | OpenCap 도구 사진',
+    notes: 'ICG 실증연구.',
+  },
+  {
+    id: 14, title: 'OpenCap 도구와 RackTracker의 차이', component: Slide14,
+    group: '실증연구', role: '차이 표',
+    message: '같은 삼각측량 위에서 하드웨어 동기와 빠른 계산이 RackTracker의 차이다',
+    body: [
+      '카메라: 아이폰 여러 대(롤링 셔터) / 산업용 카메라 3대(글로벌 셔터)',
+      '동기: 촬영 뒤 계산, 최대 약 8ms / 트리거 신호 하나, 0.2ms 미만',
+      '연산 환경: 영상을 클라우드 서버로 올려 후처리 / 리그 안 소형 연산 장비 한 대, 폐쇄망에서 실시간',
+      '힘 계산: 근육 구동 시뮬레이션, 스쿼트 하나에 약 35분 / 프레임마다 직접 계산, 90초 세트에 5.4초',
+      '지면반력판 검증: 있음(10명) / 이번 실증연구에서 수행',
+    ],
+    visual: '비교 표(rack-tracker opencap-racktracker-comparison.md 의 비교 요약에서 추림)',
+    notes: 'ICG 실증연구.',
+  },
+  {
+    id: 15, title: 'QR', component: Slide15,
     group: '마무리', role: 'QR',
     message: 'racktracker.dev QR',
     body: [],

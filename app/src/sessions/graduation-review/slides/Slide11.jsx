@@ -1,84 +1,71 @@
 import Frame from '../components/Frame'
 import styles from './Slide11.module.css'
-import acc from '../assets/fig28_instanthmr.png'
+import pair from './Slide13.module.css'
+import fit3d from '../assets/fig29_fit3d_squat.jpg'
+import tri from '../assets/fig30_triangulation.jpg'
+import ihmr from '../assets/fig31_instanthmr_demo.jpg'
 
-const stats = [
-  { val: '3.63', unit: 'cm', lbl: '관절 위치 오차 MPJPE\nFit3D 8샘플' },
-  { val: '49', unit: '%', lbl: 'InstantHMR 보다 작은\n자세 모양 오차 PA-MPJPE' },
-  { val: '53', unit: '%', lbl: 'InstantHMR 보다 작은\n무릎 각도 오차' },
-  { val: '251', unit: 'ms', lbl: '화면값 지연' },
+// 13장과 짝을 이루는 틀: 왼쪽은 gold standard, 오른쪽 둘은 그 정답에 견준 두 방식.
+// 여기서는 두 방식이 다르고(차이점), 13장에서는 같다(공통점)
+const methods = [
+  {
+    tag: 'RackTracker',
+    img: tri,
+    alt: '카메라 세 대에서 나온 광선이 관절마다 만나 골격이 되는 장면',
+    name: '다시점 삼각측량',
+    desc: '동기 촬영한 카메라 3대의 2D 관절을 광선으로 이어,\n광선이 만나는 점을 실제 공간의 3D 관절로 산출',
+    accent: true,
+  },
+  {
+    tag: 'InstantHMR',
+    img: ihmr,
+    alt: 'InstantHMR 시연 화면. 사진 한 장 위에 겹친 2D 관절',
+    name: '단안 추정',
+    desc: '카메라 한 대의 사진에서 학습 모델이 3D 관절을 추정.\n깊이와 실제 크기는 추정값',
+  },
 ]
-
-// 랙 트래커는 할 수 있고 InstantHMR 은 못 하는 것. true/false 는 할 수 있다/없다 표시
-const compare = [
-  { item: '표준화된 공간 좌표계 위 3D 관절', ours: true, ihmr: false, hl: true },
-  { item: '관절 위치 오차 MPJPE', ours: '3.63cm', ihmr: '잴 수 없음' },
-  { item: '자세 모양 오차 PA-MPJPE', ours: '3.65cm', ihmr: '7.19cm' },
-  { item: '무릎 각도 오차', ours: '4.76°', ihmr: '10.07°' },
-]
-
-function Mark({ ok }) {
-  return (
-    <svg className={ok ? styles.yes : styles.no} viewBox="0 0 24 24" role="img" aria-label={ok ? '가능' : '불가'}>
-      <circle cx="12" cy="12" r="12" />
-      {ok
-        ? <path d="M6.5 12.5l3.6 3.6 7.4-7.6" />
-        : <path d="M8 8l8 8M16 8l-8 8" />}
-    </svg>
-  )
-}
-
-const cell = (v) => (typeof v === 'boolean' ? <Mark ok={v} /> : v)
 
 export default function Slide11() {
   return (
     <Frame
-      title="검증과 마무리"
-      sub="마커 모션캡처 정답(Fit3D)과의 비교, 단안 모델과의 비교"
+      title="단안 카메라 앱과의 비교검증"
+      sub="gold standard(마커 모션캡처)에 견준 두 방식 · 졸업작품 검증"
       section="06 · 검증"
-      converge={<>단안 모델은 자세 모양까지, 랙 트래커는 <strong>실제 공간의 3D 관절</strong>과 관절 하중까지</>}
+      converge={<>정답은 <strong>마커 모션캡처</strong>, 3D 관절 위치의 정확도 검증</>}
     >
       <div className={`gr-body tight ${styles.body}`}>
-        <div className="gr-stats">
-          {stats.map((s) => (
-            <div key={s.lbl} className="gr-stat">
-              <span className="gr-stat-val">{s.val}<small>{s.unit}</small></span>
-              <span className="gr-stat-lbl">{s.lbl}</span>
-            </div>
-          ))}
-        </div>
-        <div className={styles.figs}>
-          <div className={`gr-col ${styles.chart}`}>
-            <div className="gr-fig">
-              <img src={acc} alt="삼각측량만, L-BFGS 다듬기, InstantHMR 의 자세 모양 오차와 무릎 각도 오차 막대" />
-            </div>
-            <div className="gr-cap">자세 모양 오차 PA-MPJPE(cm)와 무릎 각도 오차(°)</div>
+        <div className={`gr-col ${styles.truth}`}>
+          <div className="gr-tag">Gold standard</div>
+          <div className={styles.photo}>
+            <img src={fit3d} alt="몸에 반사 마커를 붙이고 바벨 스쿼트를 하는 Fit3D 데이터셋의 피험자" />
           </div>
-          <div className={`gr-col gr-grow center ${styles.right}`}>
-            <table className={`gr-table ${styles.table}`}>
-              <thead>
-                <tr>
-                  <th>항목</th>
-                  <th>랙 트래커(카메라 3대)</th>
-                  <th>InstantHMR(카메라 한 대)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {compare.map((r) => (
-                  <tr key={r.item} className={r.hl ? 'hl' : undefined}>
-                    <td>{r.item}</td>
-                    <td className={styles.ours}>{cell(r.ours)}</td>
-                    <td className={styles.ihmr}>{cell(r.ihmr)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p className={styles.note}>
-              PA-MPJPE: 관절끼리의 상대 위치, 곧 자세 모양의 오차.<br />
-              InstantHMR 은 표준화된 공간 좌표계에 3D 관절을 복원하지 못해 이 값으로만 비교
-            </p>
+          <div className={styles.name}>마커 모션캡처</div>
+          <p className={styles.desc}>
+            Fit3D 데이터셋.<br />
+            마커와 적외선 카메라로 잰 스쿼트 기록.<br />
+            마커로 잰 3D 관절을<br />
+            관절 위치의 정답으로 사용
+          </p>
+        </div>
+        <div className={styles.vs} aria-hidden="true" />
+        <div className={`gr-grow ${pair.pair}`}>
+          <div className={pair.common}><span>차이점 · 다시점 삼각측량과 단안 추정</span></div>
+          <div className={pair.cols}>
+            {methods.map((m) => (
+              <div key={m.tag} className={`gr-col gr-grow ${styles.method}`}>
+                <div className={`gr-tag${m.accent ? ' accent' : ''}`}>{m.tag}</div>
+                <div className={styles.photo}>
+                  <img src={m.img} alt={m.alt} />
+                </div>
+                <div className={`${styles.name}${m.accent ? ` ${styles.ours}` : ''}`}>{m.name}</div>
+                <p className={styles.desc}>{m.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
+      </div>
+      <div className={styles.credit}>
+        사진: Fit3D 데이터셋 · InstantHMR 시연 영상(github.com/Naturalpad-studio/InstantHMR, Apache-2.0)
       </div>
     </Frame>
   )

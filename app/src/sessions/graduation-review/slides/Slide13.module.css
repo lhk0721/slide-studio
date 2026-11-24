@@ -1,0 +1,44 @@
+/* 11장 틀(Slide11.module.css) 위에 얹는 것: 세로 영상, 두 방식을 묶는 공통점 이름표 */
+/* 세로 영상(9:16)이라 칸보다 좁게 */
+.tall.tall.tall { width: 9.85rem; align-self: center; }
+.tall video {
+  border-radius: calc(var(--radius) * 0.5); /* pptx 판이 영상 모서리를 이 값으로 읽는다 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pair {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+/* 두 방식 위를 가로지르는 금과 가운데 이름표 */
+.common {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 1.3rem;
+  margin-bottom: 0.9rem;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  color: var(--text);
+  white-space: nowrap;
+}
+.common::before,
+.common::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ghost);
+}
+.cols {
+  display: flex;
+  gap: 2rem;
+  min-width: 0;
+}
+/* 공통점 이름표만큼 사진을 줄여 왼쪽 칸과 아래 끝을 맞춘다 */
+.cols :global(.gr-tag) { margin-bottom: 0.6rem; }
+.pair .cols > div > div:nth-child(2) { height: 15.45rem; }
+.contain { background: #fff; border: 1px solid var(--ghost); }
+.contain img { object-fit: contain; }

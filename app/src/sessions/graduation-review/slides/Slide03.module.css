@@ -34,3 +34,5 @@
 
 /* rows a little tighter than the shared table so the photo keeps its height */
 .body :global(.gr-table) td { padding: 0.5rem 0.75rem; }
+/* a cell's \n breaks the line; the first column keeps the shared nowrap */
+.body :global(.gr-table) td:not(:first-child) { white-space: pre-line; }
