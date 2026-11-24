@@ -10,9 +10,9 @@ export default function Slide01() {
 
       {/* 우: 텍스트 */}
       <div className={styles.body}>
-        <div className={styles.eyebrow}>졸업작품 심사 &nbsp;·&nbsp; 2026. 11. 03</div>
+        <div className={styles.eyebrow}>ICG 분야 실증기반 연구 프로그램 &nbsp;·&nbsp; 중간 성과공유회 2026. 11. 24</div>
         <div className={styles.main}>
-          다시점 삼각측량과<br />소형 연산 장비를 이용한<br />파워랙의 모션캡처 스튜디오화
+          파워랙 다시점 카메라 리그의<br />스쿼트 하중 경로<br />정확도 검증
         </div>
         <div className={styles.rule} />
         <div className={styles.sub}>
@@ -22,12 +22,12 @@ export default function Slide01() {
         </div>
         <div className={styles.meta}>
           <div className={styles.metaItem}>
-            <span className={styles.metaLbl}>Team</span>
-            <span className={styles.metaVal}>RackLabs</span>
+            <span className={styles.metaLbl}>Program</span>
+            <span className={styles.metaVal}>실증연구형, 바이오·헬스케어</span>
           </div>
           <div className={styles.metaItem}>
             <span className={styles.metaLbl}>Members</span>
-            <span className={styles.metaVal}>이현규, 이지원, 신은수, 장효인, 전효원</span>
+            <span className={styles.metaVal}>이현규(팀장), 허현승</span>
           </div>
           <div className={styles.metaItem}>
             <span className={styles.metaLbl}>Advisor</span>

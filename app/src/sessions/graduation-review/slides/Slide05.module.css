@@ -69,6 +69,7 @@
   font-size: calc(var(--fs-body) * 0.95);
   line-height: 1.45;
   color: var(--sub);
+  white-space: pre-line;
   word-break: keep-all;
 }
 
